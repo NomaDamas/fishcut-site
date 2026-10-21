@@ -2,7 +2,7 @@
 
 fishcut 랜딩 페이지입니다. fishcut은 AI 에이전트가 쇼츠 초안을 만들고 사람이 다듬어 YouTube에 올리는, 내 컴퓨터에서 도는 쇼츠 에디터입니다. 이 페이지는 Google OAuth 동의 화면의 홈, 개인정보처리방침, 이용약관 주소이기도 합니다.
 
-https://fishcut.nomadamas.org (게시 전)
+https://fishcut.nomadamas.org
 
 ## 주소
 
@@ -32,9 +32,9 @@ https://fishcut.nomadamas.org (게시 전)
 
 `tools/check.py`는 Google OAuth 검증과 YouTube API 정책이 요구하는 항목(방침과 약관 링크, YouTube API Services 고지, 제한적 사용(Limited Use) 문장, 권한 취소 링크, 상표 문구 등), 두 언어의 구조가 같은지, 로컬 링크와 자산이 모두 있는지를 봅니다. 외부 요청은 글꼴 CDN만 허용합니다. 디자인은 판단하지 않습니다.
 
-## 게시 전
+## 초안 메모를 지우기 전에
 
-`python3 -I tools/check.py --publish`가 통과해야 게시할 수 있습니다. 이 모드는 초안 언어와 초안 메모(`<aside class="note draft">`)가 남아 있으면 실패합니다. 지금 남은 것은 다음과 같습니다.
+사이트는 문서에 초안 메모를 단 채로 게시돼 있습니다(2026-10-21). 아래 항목을 끝내고 초안 메모를 지운 뒤 `python3 -I tools/check.py --publish`가 통과하는지 봅니다. 이 모드는 초안 언어와 초안 메모(`<aside class="note draft">`)가 남아 있으면 실패합니다.
 
 - 개인정보처리방침, 이용약관, 업로드 동작 설명의 일부 문장(연결 해제 시 토큰 취소, 30일 재확인, 업로드 직전 고지문, 토큰 암호화, 연결 전 방침 동의)은 에디터 수정이 들어간 뒤의 동작입니다. 에디터와 다시 대조한 뒤 초안 메모를 지웁니다.
 - 영어 문서는 운영 법인을 "Markr"로만 적었습니다. 등기된 영문 이름을 확인한 뒤 영어 초안 메모를 지웁니다.
@@ -44,7 +44,7 @@ https://fishcut.nomadamas.org (게시 전)
 
 ## 게시
 
-- GitHub Pages는 `main` 브랜치 루트를 배포하고, 사용자 지정 도메인 `fishcut.nomadamas.org`에 HTTPS를 강제합니다. 도메인을 걸면 GitHub이 `CNAME` 파일을 main에 커밋합니다. `.nojekyll`은 Jekyll 처리를 끄는 빈 파일입니다.
+- GitHub Pages는 `main` 브랜치 루트를 배포하고, 사용자 지정 도메인 `fishcut.nomadamas.org`에 HTTPS를 강제합니다. 도메인은 `CNAME` 파일에 적혀 있습니다. `.nojekyll`은 Jekyll 처리를 끄는 빈 파일입니다.
 - DNS는 Cloudflare에서 `fishcut` CNAME을 `nomadamas.github.io`로 두고 프록시는 끕니다. link.nomadamas.org와 같은 방식입니다.
 - 동의 화면에 이 주소를 넣으려면, Google Search Console에서 `nomadamas.org`를 Domain 속성(DNS)으로 확인한 계정이 GCP 프로젝트의 소유자나 편집자여야 합니다.
 
