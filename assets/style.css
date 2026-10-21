@@ -1646,6 +1646,13 @@ h3 {
   opacity: 1;
 }
 
+/* the hover rule above hides every video in the frame; the player must stay visible */
+.short-media .short-player {
+  opacity: 1;
+  object-fit: contain;
+  transition: none;
+}
+
 .short-title {
   display: block;
   margin-top: 20px;
