@@ -6,6 +6,9 @@
   <title>개인정보처리방침 | fishcut</title>
   <meta name="description" content="fishcut이 어떤 정보를 어디에 저장하고 어디에 쓰는지 설명합니다. fishcut은 사용자의 컴퓨터에서 실행되는 소프트웨어이고, NomaDamas는 사용자의 데이터를 받지 않습니다.">
   <link rel="canonical" href="https://fishcut.nomadamas.org/privacy/">
+  <link rel="alternate" hreflang="ko" href="https://fishcut.nomadamas.org/privacy/">
+  <link rel="alternate" hreflang="en" href="https://fishcut.nomadamas.org/en/privacy/">
+  <link rel="alternate" hreflang="x-default" href="https://fishcut.nomadamas.org/en/privacy/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="fishcut">
   <meta property="og:title" content="개인정보처리방침 | fishcut">
@@ -33,11 +36,14 @@
         <span>fishcut</span>
       </a>
       <nav class="site-nav" aria-label="주요 메뉴">
-        <ul>
+        <ul class="nav-pages">
           <li><a href="../#how">동작 방식</a></li>
           <li><a href="../#data">데이터와 개인정보</a></li>
           <li><a href="../#install">설치</a></li>
           <li><a href="../privacy/" data-nav="privacy">개인정보처리방침</a></li>
+        </ul>
+        <ul class="nav-tools">
+          <li class="nav-lang"><a href="../en/privacy/" hreflang="en" lang="en">English</a></li>
           <li class="nav-gh"><a href="https://github.com/NomaDamas" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </nav>
@@ -58,10 +64,10 @@
       <article class="doc">
 <h1>개인정보처리방침</h1>
 <p class="lede">fishcut이 어떤 정보를 어디에 저장하고 어디에 쓰는지 설명합니다. fishcut은 사용자의 컴퓨터에서 실행되는 소프트웨어이고, NomaDamas는 사용자의 데이터를 받지 않습니다.</p>
-<p class="meta">시행일 2026-10-20 (초안) / 마지막 갱신 2026-10-20</p>
+<p class="meta">시행일 <time datetime="2026-10-20">2026-10-20</time> (초안) / 마지막 갱신 <time datetime="2026-10-21">2026-10-21</time></p>
 
 <aside class="note draft">
-	<p>초안 메모: 토큰 취소, 30일 갱신, 토큰 암호화, 연결 전 방침 동의는 에디터 수정과 맞춰야 합니다. 운영 주체의 법적 이름과 문의 이메일은 결정 뒤 바꿉니다. 게시 전에 이 메모를 지웁니다.</p>
+	<p>초안 메모: 토큰 취소, 30일 갱신, 토큰 암호화, 연결 전 방침 동의는 에디터 수정과 맞춰야 합니다. 게시 전에 이 메모를 지웁니다.</p>
 </aside>
 
 <nav class="toc" aria-label="이 페이지의 목차">
@@ -84,7 +90,7 @@
 </nav>
 
 <h2 id="scope">1. 이 방침이 적용되는 곳</h2>
-<p>이 방침은 NomaDamas가 오픈소스로 배포하는 쇼츠 제작 도구 fishcut(명령줄 도구와 로컬 에디터)과 이 웹사이트에 적용됩니다.</p>
+<p>이 방침은 NomaDamas가 오픈소스로 배포하는 쇼츠 제작 도구 fishcut(명령줄 도구와 로컬 에디터)과 이 웹사이트에 적용됩니다. NomaDamas는 (주)Markr가 운영하는 AI 오픈소스 해커하우스입니다.</p>
 <ul>
 	<li>fishcut은 사용자의 컴퓨터에서 실행됩니다. NomaDamas는 fishcut을 위한 서버를 운영하지 않으며, fishcut이 다루는 정보를 받거나 보관하지 않습니다.</li>
 	<li>NomaDamas가 등록한 Google Cloud 프로젝트로 연결하면 Google 동의 화면에 앱 이름 fishcut이 표시되고 이 방침이 적용됩니다.</li>
@@ -116,6 +122,7 @@
 	<li>업로드할 채널의 이름과 ID를 화면에 보여 주어 사용자가 맞는 채널인지 확인하게 합니다.</li>
 	<li>사용자가 확인 버튼을 누른 영상을 사용자가 정한 설정으로 연결한 채널에 올립니다.</li>
 	<li>업로드 뒤 영상의 공개 상태와 예약 시각이 요청한 값과 같은지 확인해 보여 줍니다.</li>
+	<li>사용자가 MCP로 연결한 AI 에이전트가 영상 기획과 업로드 준비를 도울 수 있도록, 연결한 채널의 이름과 업로드 기록을 에이전트가 읽게 합니다(5절).</li>
 </ul>
 <p>fishcut은 이 정보를 광고, 프로필 작성, 판매, 신용 평가에 쓰지 않습니다.</p>
 
@@ -123,7 +130,7 @@
 <ul>
 	<li>fishcut은 위 정보를 NomaDamas나 다른 회사로 보내지 않습니다.</li>
 	<li>채널 확인과 업로드 요청은 사용자의 컴퓨터에서 Google로 HTTPS를 거쳐 바로 갑니다. 중간 서버는 없습니다.</li>
-	<li>사용자가 MCP로 연결한 AI 에이전트(Claude Code, Codex 등)는 에디터에 열린 프로젝트와 채널 설정의 이름을 읽을 수 있습니다. 어떤 에이전트를 연결할지는 사용자가 정하며, 그 에이전트 제공자의 방침이 함께 적용됩니다. fishcut은 Google 토큰을 MCP로 넘기지 않습니다.</li>
+	<li>사용자가 MCP로 연결한 AI 에이전트(Claude Code, Codex 등)는 에디터가 이 컴퓨터에 저장한 정보 가운데 영상 프로젝트, 채널 설정(채널 이름, 기획 설정, 업로드 기본값, 기본 목소리, 게시 일정, 연결한 YouTube 채널의 이름), 업로드 기록(채널 이름, 시각, 공개 범위나 예약, 영상 주소, 보낸 제목, 고정 댓글)을 읽을 수 있습니다. 어떤 에이전트를 연결할지는 사용자가 정하며, 그 에이전트 제공자의 방침이 함께 적용됩니다. fishcut은 Google 토큰과 YouTube 채널 ID를 MCP로 넘기지 않습니다.</li>
 	<li>사용자가 유료 음성 공급자(Typecast, ElevenLabs 등)를 고르고 승인하면, 음성을 만들 문장이 사용자의 API 키로 그 공급자에게 전송됩니다. 이때 그 공급자의 방침이 적용됩니다. 이 전송에 Google 사용자 데이터는 들어가지 않습니다.</li>
 </ul>
 
@@ -180,7 +187,7 @@
 <p>이 방침을 바꾸면 이 페이지의 갱신일을 고칩니다. fishcut이 이 방침에 없던 방식이나 목적으로 정보를 다루게 되면, fishcut 안에서 바뀐 방침에 다시 동의를 받습니다.</p>
 
 <h2 id="contact">14. 문의</h2>
-<p>개인정보 처리에 대한 질문이나 불만은 <a href="mailto:hello@nomadamas.org">hello@nomadamas.org</a>로 보내 주세요. 운영: NomaDamas.</p>
+<p>개인정보 처리에 대한 질문이나 불만은 <a href="mailto:nmdms.mkt@gmail.com">nmdms.mkt@gmail.com</a>으로 보내 주세요. 운영자: NomaDamas, 법인 (주)Markr.</p>
       </article>
     </div>
   </main>
@@ -204,8 +211,8 @@
         </ul>
       </nav>
       <div class="footer-meta">
-        <p>문의 <a href="mailto:hello@nomadamas.org">hello@nomadamas.org</a></p>
-        <p>운영: NomaDamas. MIT License.</p>
+        <p>문의 <a href="mailto:nmdms.mkt@gmail.com">nmdms.mkt@gmail.com</a></p>
+        <p>운영: NomaDamas, 법인 (주)Markr. MIT License.</p>
       </div>
     </div>
     <div class="wrap footer-legal">

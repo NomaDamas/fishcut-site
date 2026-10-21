@@ -40,6 +40,18 @@ PHRASES = {
         "data_table": "저장하는 데이터",
         "revoke_steps": "권한 취소와 삭제",
     },
+    "en": {
+        "trademark": "a trademark of Google LLC",
+        "no_affiliation": "not affiliated with",
+        "limited_use": "including the Limited Use requirements",
+        "human_upload": "person presses the final upload button",
+        "cookies": "cookies",
+        "no_ads": "do not show ads",
+        "retention": ("Retention period", "7 days", "30 days"),
+        "diagram": "Architecture diagram",
+        "data_table": "Data fishcut stores",
+        "revoke_steps": "Revoking access and deleting data",
+    },
 }
 
 

@@ -487,7 +487,30 @@
     for (const a of document.querySelectorAll(`[data-nav="${page}"]`)) a.setAttribute("aria-current", "page");
   }
 
+  // Rows that scroll sideways (the phone header links, the how-it-works diagram) fade a cut
+  // edge while more lies past it. The current page's link scrolls into view first.
+  function initScrollFade() {
+    for (const row of document.querySelectorAll(".nav-pages, .doc .diagram")) {
+      const update = () => {
+        const max = row.scrollWidth - row.clientWidth;
+        row.classList.toggle("fade-start", max > 1 && row.scrollLeft > 1);
+        row.classList.toggle("fade-end", max > 1 && row.scrollLeft < max - 1);
+      };
+      // the current link stops clear of the 40px fade, or at the end of the row
+      const showCurrent = () => {
+        const current = row.querySelector("[aria-current]");
+        if (current) row.scrollLeft += Math.max(0, current.getBoundingClientRect().right - row.getBoundingClientRect().right + 40);
+        update();
+      };
+      row.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      showCurrent();
+      if (document.fonts) document.fonts.ready.then(showCurrent);
+    }
+  }
+
   markCurrent();
+  initScrollFade();
   initWall();
   initTyping();
   initPhone();

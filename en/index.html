@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fishcut | The shorts editor where AI agents draft and people finish</title>
+  <meta name="description" content="Give Claude Code or Codex a topic in one sentence and get a draft with script, voice, captions, and render. You fix it in the editor and upload to YouTube only the videos you have checked yourself. fishcut is an MIT-licensed open source shorts editor that runs on your computer.">
+  <link rel="canonical" href="https://fishcut.nomadamas.org/en/">
+  <link rel="alternate" hreflang="ko" href="https://fishcut.nomadamas.org/">
+  <link rel="alternate" hreflang="en" href="https://fishcut.nomadamas.org/en/">
+  <link rel="alternate" hreflang="x-default" href="https://fishcut.nomadamas.org/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="fishcut">
+  <meta property="og:title" content="fishcut | The shorts editor where AI agents draft and people finish">
+  <meta property="og:description" content="Give Claude Code or Codex a topic in one sentence and get a draft with script, voice, captions, and render. You fix it in the editor and upload to YouTube only the videos you have checked yourself. fishcut is an MIT-licensed open source shorts editor that runs on your computer.">
+  <meta property="og:url" content="https://fishcut.nomadamas.org/en/">
+  <meta property="og:locale" content="en_US">
+  <meta name="color-scheme" content="dark">
+  <meta name="darkreader-lock">
+  <meta name="theme-color" content="#0b0b0f">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="../assets/main.js" defer></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <p class="top-band">Open source shorts editor that runs locally</p>
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top" aria-label="fishcut home">
+        <svg class="mark" viewBox="0 0 16 28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="14" height="26" rx="4.5" fill="currentColor"/><path d="M-2 21.5 18 9" stroke="#0b0b0f" stroke-width="2.8"/></svg>
+        <span>fishcut</span>
+      </a>
+      <nav class="site-nav" aria-label="Main menu">
+        <ul class="nav-pages">
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#data">Your data</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="privacy/" data-nav="privacy">Privacy Policy</a></li>
+        </ul>
+        <ul class="nav-tools">
+          <li class="nav-lang"><a href="../" hreflang="ko" lang="ko">한국어</a></li>
+          <li class="nav-gh"><a href="https://github.com/NomaDamas" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero: shorts wall with the one-sentence composer in the middle -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-head">
+        <h1 id="hero-title">
+          <span class="l1"><span class="nowrap">AI agents</span> <span class="nowrap">draft shorts.</span></span>
+          <span class="l2"><em class="key nowrap">You finish them.</em></span>
+        </h1>
+        <p class="hero-en" lang="en">Agentic Shorts editor for Claude Code and Codex</p>
+        <p class="hero-body">Give Claude Code or Codex a topic in one sentence, and it drafts the script, voice, captions, and render with a template drawn from shorts that took off. You fix the draft in the editor and upload to YouTube only the videos you have checked yourself.</p>
+      </div>
+
+      <div class="stage" data-wall>
+        <div class="wall-row row-a" aria-hidden="true">
+          <div class="track">
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/codex-widget-01.jpg" tabindex="-1"><source src="../assets/shorts/codex-widget-01.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: Make your own MS Paint doodle YouTube channel"></div>
+            <div class="tile tile-s"><span class="ts-k">Agent</span><span class="ts-big">Draft</span><span class="ts-s">Script, voice, captions, render</span></div>
+            <div class="tile"><img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: Open source that turns one photo into a 3D space"></div>
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/faceless-paint-channel.jpg" tabindex="-1"><source src="../assets/shorts/faceless-paint-channel.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/codex-widget-01.jpg" width="720" height="1280" alt="Shorts poster: The must-have widget for Codex users"></div>
+            <div class="tile tile-s"><span class="ts-k">Human</span><span class="ts-big">OK</span><span class="ts-s">Upload only videos you checked</span></div>
+            <div class="tile"><img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: Open source that turns one photo into a 3D space"></div>
+            <!-- second copy for a seamless loop -->
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/codex-widget-01.jpg" tabindex="-1"><source src="../assets/shorts/codex-widget-01.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: Make your own MS Paint doodle YouTube channel"></div>
+            <div class="tile tile-s"><span class="ts-k">Agent</span><span class="ts-big">Draft</span><span class="ts-s">Script, voice, captions, render</span></div>
+            <div class="tile"><img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: Open source that turns one photo into a 3D space"></div>
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/faceless-paint-channel.jpg" tabindex="-1"><source src="../assets/shorts/faceless-paint-channel.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/codex-widget-01.jpg" width="720" height="1280" alt="Shorts poster: The must-have widget for Codex users"></div>
+            <div class="tile tile-s"><span class="ts-k">Human</span><span class="ts-big">OK</span><span class="ts-s">Upload only videos you checked</span></div>
+            <div class="tile"><img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: Open source that turns one photo into a 3D space"></div>
+          </div>
+        </div>
+
+        <figure class="composer" aria-labelledby="composer-label">
+          <div class="composer-head">
+            <p class="composer-label" id="composer-label"><span class="prompt-ico" aria-hidden="true">&gt;_</span> One-sentence request <span class="tag-ex">Example</span></p>
+            <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span></p>
+          </div>
+          <p class="composer-text">
+            <span class="ghost" aria-hidden="true">Use the <span class="tpl">explainer</span> template to make a short on <span class="nowrap">"A tiny paper garden."</span> Channel: <span class="nowrap">Small Garden Lab.<span class="caret"></span></span></span>
+            <span class="typed" aria-hidden="true" data-typing>Use the <span class="tpl">explainer</span> template to make a short on <span class="nowrap">"A tiny paper garden."</span> Channel: <span class="nowrap">Small Garden Lab.<span class="caret"></span></span></span>
+            <span class="sr-only">Use the explainer template to make a short on "A tiny paper garden." Channel: Small Garden Lab.</span>
+          </p>
+          <div class="composer-foot">
+            <a class="btn btn-ghost" href="#how">See how it works</a>
+            <a class="btn btn-primary" href="https://github.com/NomaDamas" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+        </figure>
+
+        <div class="wall-row row-b" aria-hidden="true">
+          <div class="track">
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/image-blaster-3d.jpg" tabindex="-1"><source src="../assets/shorts/image-blaster-3d.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/codex-widget-01.jpg" width="720" height="1280" alt="Shorts poster: The must-have widget for Codex users"></div>
+            <div class="tile tile-s"><span class="ts-k">One sentence</span><span class="ts-big">Ask</span><span class="ts-s">Claude Code, Codex</span></div>
+            <div class="tile"><img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: Make your own MS Paint doodle YouTube channel"></div>
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/codex-widget-01.jpg" tabindex="-1"><source src="../assets/shorts/codex-widget-01.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: Open source that turns one photo into a 3D space"></div>
+            <div class="tile tile-s"><span class="ts-k">1080x1920 MP4</span><span class="ts-big">9:16</span><span class="ts-s">Render and automatic checks</span></div>
+            <div class="tile"><img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: Make your own MS Paint doodle YouTube channel"></div>
+            <!-- second copy for a seamless loop -->
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/image-blaster-3d.jpg" tabindex="-1"><source src="../assets/shorts/image-blaster-3d.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/codex-widget-01.jpg" width="720" height="1280" alt="Shorts poster: The must-have widget for Codex users"></div>
+            <div class="tile tile-s"><span class="ts-k">One sentence</span><span class="ts-big">Ask</span><span class="ts-s">Claude Code, Codex</span></div>
+            <div class="tile"><img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: Make your own MS Paint doodle YouTube channel"></div>
+            <div class="tile"><video muted loop playsinline preload="none" poster="../assets/shorts/codex-widget-01.jpg" tabindex="-1"><source src="../assets/shorts/codex-widget-01.mp4" type="video/mp4"></video></div>
+            <div class="tile"><img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: Open source that turns one photo into a 3D space"></div>
+            <div class="tile tile-s"><span class="ts-k">1080x1920 MP4</span><span class="ts-big">9:16</span><span class="ts-s">Render and automatic checks</span></div>
+            <div class="tile"><img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: Make your own MS Paint doodle YouTube channel"></div>
+          </div>
+        </div>
+
+        <label class="motion-toggle">
+          <input class="motion-input" type="checkbox">
+          <span class="mt-ico" aria-hidden="true"><svg viewBox="0 0 16 16"><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/><path class="i-play" d="M4.5 2.8v10.4L13 8z"/></svg></span>
+          <span>Pause motion</span>
+        </label>
+      </div>
+
+      <ul class="hero-facts">
+        <li><span>A local editor that runs on your computer (<code>127.0.0.1</code>)</span></li>
+        <li>You approve saves, paid voices, and uploads</li>
+        <li>MIT-licensed open source, coming soon</li>
+      </ul>
+    </section>
+
+    <!-- Demo: the editor window and the finished short side by side, same height -->
+    <section class="demo" aria-label="The editor and a finished short">
+      <div class="wrap">
+        <figure class="demo-figure" data-phone>
+          <div class="demo-visual">
+            <div class="window">
+              <div class="window-bar" aria-hidden="true">
+                <span class="dots"><i></i><i></i><i></i></span>
+                <span class="url">127.0.0.1:4318</span>
+              </div>
+              <img src="../assets/shots/studio-editor-dark.webp" width="2000" height="1250" loading="lazy" alt="The fishcut editor. A list of project assets on the left, a vertical video preview in the center, a text properties panel on the right, and a timeline with source and text layers at the bottom.">
+            </div>
+            <div class="phone">
+              <div class="phone-screen">
+                <img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" loading="lazy" alt="A frame from the finished short: the inside of a wooden cabin under the title 'Open source that turns one photo into a 3D space'.">
+                <video muted loop playsinline preload="none" poster="../assets/shorts/image-blaster-3d.jpg" aria-hidden="true" tabindex="-1"><source src="../assets/shorts/image-blaster-3d.mp4" type="video/mp4"></video>
+              </div>
+              <button class="phone-play" type="button" data-phone-play hidden aria-label="Play the finished short">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-play" d="M4.5 2.8v10.4L13 8z"/><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/></svg>
+                <span>Play</span>
+              </button>
+            </div>
+          </div>
+          <figcaption class="demo-caps">
+            <p class="cap-editor"><strong>Editor.</strong> Assets on the left, preview in the center, properties on the right, layer timeline at the bottom. A draft becomes the master copy only when a person presses Save.</p>
+            <p class="cap-phone"><strong>Finished short.</strong> One photo becomes a 3D space you can walk through. Made with the <span class="nowrap">dev-demo</span> template and uploaded to the NomaDamas channel.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- How it works: story reel (side panel + horizontal track) -->
+    <section class="section how" id="how" aria-labelledby="how-title" data-reel>
+      <div class="how-layout">
+        <div class="how-side">
+          <div class="section-head">
+            <h2 id="how-title"><em class="key">From one sentence</em> to upload</h2>
+            <p class="section-desc">The agent makes the draft, and you fix and check it. The 8 steps fall into three groups.</p>
+          </div>
+          <div class="reel-progress" role="group" aria-label="Jump to a step" data-reel-ui hidden>
+            <div class="seg-group g1" style="--n: 3">
+              <span class="seg-label">Group 1. Hand off</span>
+              <div class="segs">
+                <button class="seg" type="button" aria-label="Step 1: Set channel guidelines"><i></i></button>
+                <button class="seg" type="button" aria-label="Step 2: Choose a template"><i></i></button>
+                <button class="seg" type="button" aria-label="Step 3: Ask in one sentence"><i></i></button>
+              </div>
+            </div>
+            <div class="seg-group g2" style="--n: 3">
+              <span class="seg-label">Group 2. Draft (agent)</span>
+              <div class="segs">
+                <button class="seg" type="button" aria-label="Step 4: Script and voice"><i></i></button>
+                <button class="seg" type="button" aria-label="Step 5: Caption timing and sound effects"><i></i></button>
+                <button class="seg" type="button" aria-label="Step 6: Render and automatic checks"><i></i></button>
+              </div>
+            </div>
+            <div class="seg-group g3" style="--n: 2">
+              <span class="seg-label">Group 3. Refine and upload (human)</span>
+              <div class="segs">
+                <button class="seg" type="button" aria-label="Step 7: Fix it in the editor"><i></i></button>
+                <button class="seg" type="button" aria-label="Step 8: Check and upload to YouTube"><i></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="reel-ctrl" data-reel-ui hidden>
+            <button class="icon-btn" type="button" data-reel-prev aria-label="Previous step"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+            <button class="pill-btn" type="button" data-reel-play>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/><path class="i-play" d="M4.5 2.8v10.4L13 8z"/></svg>
+              <span data-reel-play-label>Pause auto-advance</span>
+            </button>
+            <button class="icon-btn" type="button" data-reel-next aria-label="Next step"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
+            <span class="reel-count" data-reel-count aria-hidden="true">1 / 8</span>
+          </div>
+        </div>
+        <div class="reel">
+          <ol class="reel-track" tabindex="0" aria-label="How it works in 8 steps. Use the left and right arrow keys to move between steps.">
+          <li class="story g1" id="step-1">
+            <span class="story-num" aria-hidden="true">01</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 320; --cy: 125"><img src="../assets/shots/channel-settings-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the channel settings screen, with fields for the channel name 'Small Garden Lab (example)', content language, channel purpose, and tone and wording."></div>
+              <figcaption>Channel settings. Saved guidelines become the defaults for this channel's new videos. They do not change the voice of existing videos.</figcaption>
+            </figure>
+            <p class="story-group">Group 1. Hand off</p>
+            <h3>Set channel guidelines</h3>
+            <p class="story-text">Save each channel's purpose, audience, tone, voice, scheduled publish time, and upload defaults. The agent reads these guidelines when it writes a script.</p>
+          </li>
+          <li class="story g1" id="step-2">
+            <span class="story-num" aria-hidden="true">02</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 322; --cy: 283"><img src="../assets/shots/templates-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the shared templates screen, with template cards for dev-demo, explainer, tips, and twist-tale, and a 'New video from this template' button."></div>
+              <figcaption>Shared templates. Press "이 템플릿으로 새 영상" (New video from this template), or tell the agent the template name.</figcaption>
+            </figure>
+            <p class="story-group">Group 1. Hand off</p>
+            <h3>Choose a template</h3>
+            <p class="story-text">A template pairs a script style (tone, order, voice) with a frame (layout, render engine), made by analyzing shorts that took off. Styles include tip lists, product explainers, knowledge narration, stories from posts, and hands-on demos.</p>
+          </li>
+          <li class="story g1" id="step-3">
+            <span class="story-num" aria-hidden="true">03</span>
+            <figure class="story-media">
+              <div class="chat">
+                <p class="chat-req"><span class="tag-ex">Example</span> Use the explainer template to make a short on "A tiny paper garden." Channel: Small Garden Lab.</p>
+                <dl class="chat-log">
+                  <div><dt>Read channel guidelines</dt><dd>Small Garden Lab (example)</dd></div>
+                  <div><dt>Template</dt><dd>explainer, HyperFrames frame</dd></div>
+                  <div><dt>Script</dt><dd>9 lines</dd></div>
+                  <div class="by-human"><dt>Script approval request</dt><dd>A person approves it in the editor</dd></div>
+                  <div><dt>Voice</dt><dd>Free default voice M1, 36.5 seconds</dd></div>
+                  <div><dt>Caption timing</dt><dd>Aligned word by word</dd></div>
+                  <div><dt>Render</dt><dd>1080x1920 MP4</dd></div>
+                  <div><dt>Automatic checks</dt><dd>Blank frames, short cuts, personal info in text</dd></div>
+                  <div><dt>Open in the editor</dt><dd class="mono">http://127.0.0.1:4318/</dd></div>
+                </dl>
+              </div>
+              <figcaption>An example of the agent's progress. This is not a real screen; the conversation is shortened.</figcaption>
+            </figure>
+            <p class="story-group">Group 1. Hand off</p>
+            <h3>Ask in one sentence</h3>
+            <p class="story-text">Tell Claude Code or Codex the topic and the template in one sentence.</p>
+          </li>
+          <li class="story g2" id="step-4">
+            <span class="story-num" aria-hidden="true">04</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 7; --cy: 120"><img src="../assets/shots/studio-script-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the Script / Voice tab, with the on-screen text field for sentence 1, 'Plant a small seed.', and a 'Read the on-screen text as is' checkbox."></div>
+              <figcaption>Script / Voice tab. Edit the on-screen text and the sentence to be read, then check the generation plan first with "실행하지 않고 계획 보기" (View the plan without running).</figcaption>
+            </figure>
+            <p class="story-group">Group 2. Draft (agent)</p>
+            <h3>Script and voice</h3>
+            <p class="story-text">The agent writes the script with the template's few-shot source scripts as a reference, then makes voice for each sentence. You can choose a free local voice, a clone of your own voice, or a paid voice such as Typecast or ElevenLabs. Once the script is written, a person approves it before production, and voices that cost money are generated only after a separate approval.</p>
+          </li>
+          <li class="story g2" id="step-5">
+            <span class="story-num" aria-hidden="true">05</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 0; --cy: 650"><img src="../assets/shots/hf-timeline-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the motion video editor. Below the length 0:36.50, scene, line, word, cue, and sound effect tracks sit on one timeline."></div>
+              <figcaption>Motion video editor. Scene, line, word, cue, and sound effect tracks share one timeline. Drag a cue, and its sound effect moves with it.</figcaption>
+            </figure>
+            <p class="story-group">Group 2. Draft (agent)</p>
+            <h3>Caption timing and sound effects</h3>
+            <p class="story-text">The generated voice is transcribed back to text so that every word gets a timestamp. Scenes, captions, highlights, and sound effects move in time with those timestamps.</p>
+          </li>
+          <li class="story g2" id="step-6">
+            <span class="story-num" aria-hidden="true">06</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 208; --cy: 267"><img src="../assets/shots/studio-export-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the export screen. A card comparing the saved version and the draft shows frame size, length, and frames, with a 'Make a before-and-after video' button."></div>
+              <figcaption>Export. Watch the saved version and the current draft in a before-and-after video, and make the final MP4 from the saved version.</figcaption>
+            </figure>
+            <p class="story-group">Group 2. Draft (agent)</p>
+            <h3>Render and automatic checks</h3>
+            <p class="story-text">The short is rendered as a 9:16 MP4, and the result is inspected. The checks confirm size, codec, and length. They also find blank frames and cuts that flash by in under a second, and on-screen text such as email addresses or account IDs, and report when each one appears.</p>
+          </li>
+          <li class="story g3" id="step-7">
+            <span class="story-num" aria-hidden="true">07</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 467; --cy: 80"><img src="../assets/shots/short-layout-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the card-style video layout editor. The preview card has the white title 'A small forest by the library window', the yellow highlight line 'One seed called the neighbors', and a picture layer below."></div>
+              <figcaption>In card-style videos, you drag the title, highlight line, and picture layers into place for each scene.</figcaption>
+            </figure>
+            <p class="story-group">Group 3. Refine and upload (human)</p>
+            <h3>Fix it in the editor</h3>
+            <p class="story-text">Change text, position, and size on the canvas, and move and trim clips on the layer timeline. Your edits go straight into the draft on the local editor server, and you can undo them. While the editor is open, Claude Code and Codex also read and edit the same draft over MCP.</p>
+          </li>
+          <li class="story g3" id="step-8">
+            <span class="story-num" aria-hidden="true">08</span>
+            <figure class="story-media">
+              <div class="crop" style="--cx: 1000; --cy: 325"><img src="../assets/shots/upload-settings-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the YouTube upload window, with fields for video title, description, tags, visibility, category, made for kids, and synthetic content."></div>
+              <figcaption>YouTube upload. Check the channel, the final video, and the upload settings on one screen. If you leave the scheduled time empty, the video goes up with the visibility you chose.</figcaption>
+            </figure>
+            <p class="story-group">Group 3. Refine and upload (human)</p>
+            <h3>Check and upload to YouTube</h3>
+            <p class="story-text">Connect the channel with your Google account, then review the title, description, tags, visibility (public, unlisted, private), made for kids, synthetic content, and scheduled time. A person presses the final upload button. The agent only prepares things up to the upload settings review.</p>
+          </li>
+          </ol>
+        </div>
+      </div>
+      <p class="sr-only" aria-live="polite" data-reel-status></p>
+    </section>
+
+    <!-- Human approval points -->
+    <section class="section approve" aria-labelledby="approve-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="approve-title">AI drafts, <em class="key">people decide</em></h2>
+        </div>
+        <ol class="ok-grid">
+          <li class="ok-card">
+            <div class="ok-visual" aria-hidden="true"><span class="mock-btn">Approve script</span><svg class="cursor" viewBox="0 0 24 24"><path d="M5 3.5v15.2l4.1-3.9 2.7 6.1 2.9-1.3-2.7-6h5.7z"/></svg></div>
+            <h3>Script approval</h3>
+            <p>Production work such as voice and render starts after a person approves the current script.</p>
+          </li>
+          <li class="ok-card">
+            <div class="ok-visual" aria-hidden="true"><span class="mock-btn">Approve cost</span><svg class="cursor" viewBox="0 0 24 24"><path d="M5 3.5v15.2l4.1-3.9 2.7 6.1 2.9-1.3-2.7-6h5.7z"/></svg></div>
+            <h3>Cost approval</h3>
+            <p>Calls that cost money, such as paid voices, get a separate approval from a person.</p>
+          </li>
+          <li class="ok-card">
+            <div class="ok-visual" aria-hidden="true"><span class="mock-btn">Save</span><svg class="cursor" viewBox="0 0 24 24"><path d="M5 3.5v15.2l4.1-3.9 2.7 6.1 2.9-1.3-2.7-6h5.7z"/></svg></div>
+            <h3>Save</h3>
+            <p>The agent only edits and compares drafts. A person presses Save to keep the master copy.</p>
+          </li>
+          <li class="ok-card">
+            <div class="ok-visual" aria-hidden="true"><span class="mock-btn">Checked, upload to YouTube</span><svg class="cursor" viewBox="0 0 24 24"><path d="M5 3.5v15.2l4.1-3.9 2.7 6.1 2.9-1.3-2.7-6h5.7z"/></svg></div>
+            <h3>Upload</h3>
+            <p>A person presses the final button of a YouTube upload.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Real shorts made with fishcut -->
+    <section class="section examples" id="examples" aria-labelledby="examples-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="examples-title">Shorts made <em class="key">with fishcut</em></h2>
+          <p class="section-desc">Shorts uploaded to the NomaDamas channel. All of them were made with the <span class="nowrap">dev-demo</span> template.</p>
+        </div>
+        <ul class="shorts-grid">
+          <li class="short-card" data-hover-play>
+            <a href="https://www.youtube.com/shorts/39esmK-P7Rc" target="_blank" rel="noopener">
+              <span class="short-num" aria-hidden="true">01</span>
+              <span class="short-media">
+                <img src="../assets/shorts/codex-widget-01.jpg" width="720" height="1280" loading="lazy" alt="Poster: the title 'The must-have widget for Codex users' on a black screen, with two Codex usage widgets.">
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="../assets/shorts/codex-widget-01.mp4" type="video/mp4"></video>
+              </span>
+              <span class="short-title">The iPhone widget every Codex user should install</span>
+              <span class="short-meta">Watch on <span class="yt-badge">YouTube</span> Shorts<span class="sr-only"> (opens in a new window)</span></span>
+            </a>
+          </li>
+          <li class="short-card" data-hover-play>
+            <a href="https://www.youtube.com/shorts/_6vvqPky7mo" target="_blank" rel="noopener">
+              <span class="short-num" aria-hidden="true">02</span>
+              <span class="short-media">
+                <img src="../assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" loading="lazy" alt="Poster: under the title 'Make your own MS Paint doodle YouTube channel', a doodle of a light switch that looks drawn in MS Paint.">
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="../assets/shorts/faceless-paint-channel.mp4" type="video/mp4"></video>
+              </span>
+              <span class="short-title">8 million views with MS Paint doodles, and how to copy it with Claude Code</span>
+              <span class="short-meta">Watch on <span class="yt-badge">YouTube</span> Shorts<span class="sr-only"> (opens in a new window)</span></span>
+            </a>
+          </li>
+          <li class="short-card" data-hover-play>
+            <a href="https://www.youtube.com/shorts/aVKhdvOWElU" target="_blank" rel="noopener">
+              <span class="short-num" aria-hidden="true">03</span>
+              <span class="short-media">
+                <img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" loading="lazy" alt="Poster: under the title 'Open source that turns one photo into a 3D space', a photo of the inside of a wooden cabin.">
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="../assets/shorts/image-blaster-3d.mp4" type="video/mp4"></video>
+              </span>
+              <span class="short-title">One photo becomes a 3D space you can walk through</span>
+              <span class="short-meta">Watch on <span class="yt-badge">YouTube</span> Shorts<span class="sr-only"> (opens in a new window)</span></span>
+            </a>
+          </li>
+        </ul>
+        <p class="channel-line">
+          <a class="channel-link" href="https://www.youtube.com/@nomadamas_korea" target="_blank" rel="noopener"><span class="yt-badge">YouTube</span> NomaDamas | AI Hacker House<span class="sr-only"> channel (opens in a new window)</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Behind the scenes: other editor screens -->
+    <section class="section behind" aria-labelledby="behind-title" data-carousel>
+      <div class="wrap behind-head">
+        <div class="section-head">
+          <h2 id="behind-title"><em class="key">Editor screens</em> behind the shorts</h2>
+          <p class="section-desc">All screens were captured from a demo install with the public synthetic examples open. The example channel is "작은 정원 연구소 (예시)", which means Small Garden Lab (example). "Shorts Studio" in the app header is from before the app was renamed.</p>
+        </div>
+        <div class="carousel-btns" data-carousel-ui hidden>
+          <button class="icon-btn" type="button" data-carousel-prev aria-label="Previous screen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+          <button class="icon-btn" type="button" data-carousel-next aria-label="Next screen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
+        </div>
+      </div>
+      <div class="behind-track" data-carousel-track tabindex="0" role="region" aria-label="Four editor screens. Use the left and right arrow keys to move between them.">
+        <figure class="behind-card">
+          <div class="shot"><img src="../assets/shots/channels-dark.webp" width="2000" height="1250" loading="lazy" draggable="false" alt="The channel list. The card for the example channel 'Small Garden Lab (example)' shows the channel purpose and 4 videos, with an add channel button at the top right."></div>
+          <figcaption><strong>Channel list.</strong> Manage videos and production guidelines for each channel.</figcaption>
+        </figure>
+        <figure class="behind-card">
+          <div class="shot"><img src="../assets/shots/videos-dark.webp" width="2000" height="1250" loading="lazy" draggable="false" alt="The all videos screen. Each of the four video cards, canonical, hf, post, and short, has a channel selector and a continue editing button."></div>
+          <figcaption><strong>All videos.</strong> Assign a channel to each video, and open a video from the work folder to keep editing.</figcaption>
+        </figure>
+        <figure class="behind-card">
+          <div class="shot"><img src="../assets/shots/studio-editor-light.webp" width="2000" height="1250" loading="lazy" draggable="false" alt="The editor in light mode. The same layout of assets, preview, properties, and layer timeline as in dark mode, with a dark mode button at the right of the header."></div>
+          <figcaption><strong>Editor in light mode.</strong> Switch between dark and light with the button at the right of the header.</figcaption>
+        </figure>
+        <figure class="behind-card">
+          <div class="shot"><img src="../assets/shots/channel-connect-dark.webp" width="2000" height="1250" loading="lazy" draggable="false" alt="The channel management window. Below the scheduled publishing defaults and upload settings, the Google connection section has 'Connect with Google' and 'Refresh connection status' buttons and a note to add an OAuth client first."></div>
+          <figcaption><strong>Google connection in channel management.</strong> Add the Google Cloud OAuth client you created, then press "Google로 연결" (Connect with Google).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- YouTube connection and data: calm, review-friendly -->
+    <section class="section data" id="data" aria-labelledby="data-title">
+      <div class="wrap">
+        <div class="data-grid">
+          <div class="data-intro">
+            <p class="calm-label"><span class="yt-badge">YouTube</span> Data and privacy</p>
+            <h2 id="data-title">YouTube connection and <em class="key">data</em></h2>
+            <p>fishcut uses YouTube API Services. YouTube upload is optional, and you can use all production and editing features without connecting.</p>
+            <p class="yt-note">fishcut is a tool that can upload videos to YouTube. It is not affiliated with or endorsed by YouTube or Google.</p>
+          </div>
+          <div class="table-box">
+            <table class="scope-table">
+              <caption>Permissions fishcut requests</caption>
+              <thead>
+                <tr><th scope="col">Permission</th><th scope="col">Used for</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><code>youtube.upload</code></th><td>Used only to upload the final video a person has checked to the connected channel, with the title, description, and visibility that person set.</td></tr>
+                <tr><th scope="row"><code>youtube.readonly</code></th><td>Used to show the name and ID of the channel you will upload to, and to check the visibility status and scheduled time again after an upload.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <ul class="data-cards">
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M2 19.5h20"/><rect x="9.5" y="9.5" width="5" height="3.8" rx=".8"/><path d="M10.6 9.5V8.3a1.4 1.4 0 0 1 2.8 0v1.2"/></svg>
+            <h3>Stored only on this computer</h3>
+            <p>Google tokens, the connected channel's name and ID, and upload history are stored only in the state folder on this computer. They are not sent to a NomaDamas server. NomaDamas does not receive this data.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.2l7.4 2.9L13.3 21z"/><path d="m10.4 13.1 4.4-4.4"/></svg>
+            <h3>Sent only to Google</h3>
+            <p>Upload and channel check requests go directly from this computer to Google and YouTube. There is no server in between.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="14" height="7" rx="3.5"/><path d="M12 9.5v11l3-2.8 1.8 4 1.9-.9-1.8-3.9h3.9z"/></svg>
+            <h3>No upload until a person presses</h3>
+            <p>A person reviews visibility, made for kids, synthetic content, and scheduled time, then presses the final button.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="13" width="10" height="6" rx="3" transform="rotate(-45 8 16)"/><rect x="11" y="5" width="10" height="6" rx="3" transform="rotate(-45 16 8)"/><path d="m14.4 14.4 1.6 1.6M8 8l1.6 1.6"/></svg>
+            <h3>Disconnect anytime</h3>
+            <p>When you disconnect in the editor, fishcut asks Google to revoke the token and deletes it from this computer. You can also revoke access in <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a>.</p>
+          </li>
+        </ul>
+
+        <div class="limited">
+          <div class="limited-text">
+            <p>When fishcut uses information it receives from Google APIs, or transfers that information to another app, it follows the Google API Services User Data Policy, including the Limited Use requirements.</p>
+            <p lang="en">fishcut's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+          </div>
+          <nav class="doc-links" aria-label="Detailed documents">
+            <p>Details</p>
+            <ul>
+              <li><a href="privacy/">Privacy Policy</a></li>
+              <li><a href="terms/">Terms of Service</a></li>
+              <li><a href="how-it-works/">How uploads work</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section class="section install" id="install" aria-labelledby="install-title">
+      <div class="wrap install-grid">
+        <div class="install-main">
+          <div class="section-head">
+            <h2 id="install-title">Coming soon</h2>
+            <p class="section-desc">fishcut is getting ready for its public release. When the repository goes public, install steps will appear here. We will announce the release on GitHub and our YouTube channel.</p>
+          </div>
+          <a class="btn btn-band" href="https://github.com/NomaDamas" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <div class="yt-steps">
+          <h3>To use YouTube upload</h3>
+          <ol>
+            <li><span>Create your own project in Google Cloud and turn on YouTube Data API v3.</span></li>
+            <li><span>Create an OAuth client for a desktop app and download its JSON file.</span></li>
+            <li><span>Ask your agent to add that file, or run <span class="unit keep"><code>fishcut youtube import <span class="keep">&lt;file&gt;</span></code>&#x2060;.</span></span></li>
+            <li><span>In the editor's channel management, press "Google로 연결" (Connect with Google).</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="faq-title">Frequently asked <em class="key">questions</em></h2>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Where do my videos and tokens go?</h3>
+            <p>They stay on this computer. When you upload, the video file and settings go directly from this computer to YouTube. NomaDamas does not receive any data.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Will the agent upload on its own?</h3>
+            <p>No. The agent prepares everything up to the upload settings review, and a person presses the final upload button.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Is it free?</h3>
+            <p>fishcut will be released as MIT-licensed open source. You can make a short from start to finish with free local voices, and paid voice APIs are used only when you add your own key and approve.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Which agents does it work with?</h3>
+            <p>Claude Code and Codex. While the editor is open, they read and edit the same draft over MCP.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What computers does it run on?</h3>
+            <p>It is developed and tested on macOS with Apple Silicon. You can also run it with Docker.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark" href="#top" aria-label="fishcut home">
+          <svg class="mark" viewBox="0 0 16 28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="14" height="26" rx="4.5" fill="currentColor"/><path d="M-2 21.5 18 9" stroke="#0b0b0f" stroke-width="2.8"/></svg>
+          <span>fishcut</span>
+        </a>
+        <p>The shorts editor where AI agents draft and people finish</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer links">
+        <ul>
+          <li><a href="privacy/" data-nav="privacy">Privacy Policy</a></li>
+          <li><a href="terms/" data-nav="terms">Terms of Service</a></li>
+          <li><a href="how-it-works/" data-nav="how-it-works">How uploads work</a></li>
+          <li><a href="https://github.com/NomaDamas" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.youtube.com/@nomadamas_korea" target="_blank" rel="noopener">YouTube channel</a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>Contact <a href="mailto:nmdms.mkt@gmail.com">nmdms.mkt@gmail.com</a></p>
+        <p>Operator: NomaDamas (legal entity: Markr). MIT License.</p>
+      </div>
+    </div>
+    <div class="wrap footer-legal">
+      <p>YouTube is a trademark of Google LLC. fishcut is not affiliated with or endorsed by YouTube or Google.</p>
+      <p>Updated 2026-10-21</p>
+    </div>
+  </footer>
+</body>
+</html>

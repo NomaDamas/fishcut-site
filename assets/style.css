@@ -209,6 +209,7 @@ h3 {
   font-weight: 600;
   line-height: 1.3;
   text-align: center;
+  text-wrap: balance;
 }
 
 /* Header */
@@ -249,6 +250,9 @@ h3 {
 }
 
 .site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   margin-left: auto;
 }
 
@@ -290,6 +294,36 @@ h3 {
 
 .nav-gh a:hover {
   border-color: var(--ink);
+}
+
+/* the language switch stands after a short hairline, apart from the page links */
+.nav-lang {
+  display: flex;
+  align-items: center;
+}
+
+.nav-lang::before {
+  content: "";
+  width: 1px;
+  height: 18px;
+  margin: 0 8px 0 6px;
+  background: var(--line-2);
+}
+
+/* a row that scrolls sideways fades a cut edge while more of it lies past that edge (main.js) */
+.fade-start {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px);
+  mask-image: linear-gradient(90deg, transparent, #000 40px);
+}
+
+.fade-end {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
+}
+
+.fade-start.fade-end {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
 }
 
 /* Buttons and small labels */
@@ -382,6 +416,7 @@ h3 {
 
 .icon-btn {
   display: grid;
+  flex: none;
   place-items: center;
   width: 44px;
   height: 44px;
@@ -423,6 +458,7 @@ h3 {
   background: transparent;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -598,18 +634,25 @@ h3 {
   display: none !important;
 }
 
+/* the composer covers the lower part of the top row and the upper part of the bottom row,
+   so a text tile keeps its words in the part that stays in view */
 .tile-s {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 14px 13px 15px;
+  gap: calc(var(--tile-w) * 0.06);
+  padding: 12px 12px 14px;
   color: var(--ink);
+}
+
+.row-b .tile-s {
+  justify-content: flex-end;
 }
 
 .ts-k {
   color: var(--ink-3);
   font-size: 12.5px;
   font-weight: 600;
+  line-height: 1.35;
 }
 
 .ts-big {
@@ -728,15 +771,16 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+/* under the wall at the right edge of the content, so it never covers a tile's words */
 .motion-toggle {
-  position: absolute;
-  z-index: 3;
-  right: var(--gutter);
-  bottom: 8px;
+  position: relative;
   display: inline-flex;
+  align-self: flex-end;
   align-items: center;
   gap: 8px;
-  padding: 7px 14px 7px 11px;
+  min-height: 44px;
+  margin: 14px max(var(--gutter), (100% - var(--wrap)) / 2) 0 0;
+  padding: 0 16px 0 13px;
   border: 1px solid var(--line-2);
   border-radius: var(--r-pill);
   background: var(--bg);
@@ -776,7 +820,7 @@ h3 {
 .hero-facts {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: min(100% - 2 * var(--gutter), var(--wrap));
-  margin: clamp(40px, 5vw, 64px) auto 0;
+  margin: clamp(24px, 3vw, 40px) auto 0;
 }
 
 .hero-facts > li {
@@ -903,7 +947,7 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 16px 0 13px;
   border: 0;
   border-radius: var(--r-pill);
@@ -1029,6 +1073,7 @@ h3 {
 
 .reel-ctrl {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   margin-top: 18px;
@@ -1720,6 +1765,17 @@ h3 {
   color: var(--accent-ink);
 }
 
+/* the band's own call to action: an accent-ink button that shows the band color in its words */
+.btn-band {
+  margin-top: 28px;
+  background: var(--accent-ink);
+  color: var(--accent);
+}
+
+.btn-band:hover {
+  transform: translateY(-1px);
+}
+
 .install-grid {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -2032,6 +2088,10 @@ h3 {
   font-variant-numeric: tabular-nums;
 }
 
+.doc .meta time {
+  white-space: nowrap;
+}
+
 .doc .toc {
   margin-top: 32px;
   padding: 18px 22px;
@@ -2047,6 +2107,10 @@ h3 {
   color: var(--ink-3);
   font-size: 13px;
   font-weight: 600;
+}
+
+.doc .toc:lang(en)::before {
+  content: "Contents";
 }
 
 .doc .toc ol {
@@ -2281,6 +2345,16 @@ h3 {
   .data-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* keeps the one-row header, language switch included, down to 761px */
+  .site-nav a {
+    padding: 0 10px;
+  }
+
+  /* narrower tiles wrap their captions to three lines; the composer covers less of the top row */
+  .composer {
+    margin-top: calc(var(--tile-h) * -0.3);
+  }
 }
 
 @media (max-width: 900px) {
@@ -2320,7 +2394,10 @@ h3 {
   }
 
   .doc-side a {
-    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
     border: 1px solid var(--line);
     border-radius: var(--r-pill);
     font-size: 14px;
@@ -2345,37 +2422,63 @@ h3 {
     position: relative;
   }
 
+  /* two rows: the wordmark with the language switch and GitHub, then the page links on one line */
   .header-inner {
     flex-wrap: wrap;
-    row-gap: 4px;
-    padding-block: 12px 8px;
+    row-gap: 0;
+    padding-block: 6px 4px;
+  }
+
+  .wordmark {
+    min-height: 44px;
   }
 
   .site-nav {
-    order: 2;
-    width: 100%;
-    margin-left: -8px;
+    width: calc(100% + 6px + var(--gutter));
+    margin: 0 calc(var(--gutter) * -1) 0 -6px;
   }
 
   .site-nav ul {
-    flex-wrap: wrap;
     gap: 0;
   }
 
-  .site-nav a {
-    min-height: 36px;
-    padding: 0 8px;
-    font-size: 14.5px;
+  /* a longer translation scrolls sideways out to the screen edge instead of adding a row */
+  .nav-pages {
+    min-width: 0;
+    padding-right: calc(var(--gutter) - 6px);
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
-  .nav-gh {
+  .nav-pages::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav a {
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 6px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .nav-pages a:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .nav-tools {
     position: absolute;
-    top: 10px;
+    top: 6px;
     right: 0;
   }
 
+  .nav-lang::before {
+    display: none;
+  }
+
   .nav-gh a {
-    margin-left: 0;
+    margin-left: 4px;
     padding: 0 14px;
   }
 
@@ -2397,6 +2500,16 @@ h3 {
     padding: 16px;
   }
 
+  /* the smallest tiles hold a two-line label and a three-line caption clear of the composer */
+  .tile-s {
+    padding: 11px 10px 12px;
+  }
+
+  .ts-k,
+  .ts-s {
+    font-size: 12px;
+  }
+
   .composer-foot {
     justify-content: stretch;
   }
@@ -2407,11 +2520,6 @@ h3 {
 
   .composer-foot .btn-primary {
     order: -1;
-  }
-
-  .motion-toggle {
-    bottom: 0;
-    padding: 6px 12px 6px 10px;
   }
 
   .hero-facts {
@@ -2435,6 +2543,11 @@ h3 {
 
   .window {
     grid-column: 1 / -1;
+  }
+
+  /* a longer caption beside it must not stretch the phone, or the play button drops below the screen */
+  .phone {
+    align-self: start;
   }
 
   .demo-caps {
@@ -2529,6 +2642,68 @@ h3 {
 
   .doc .toc ol {
     columns: 1;
+  }
+
+  /* Touch: links and buttons get a 44px target; thin bars keep their look and grow an invisible margin */
+  .seg {
+    height: 44px;
+    margin-block: -10px;
+  }
+
+  .code-head {
+    padding-block: 4px;
+  }
+
+  .copy-btn {
+    min-height: 44px;
+  }
+
+  .doc .toc li {
+    padding-block: 0;
+  }
+
+  .doc .toc li + li {
+    margin-top: 0;
+  }
+
+  .doc .toc a,
+  .footer-links a,
+  .doc-links a {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .footer-links ul,
+  .doc-links ul {
+    gap: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .code-card pre {
+    padding-inline: 16px;
+    font-size: 13.5px;
+  }
+
+  /* the longer English label of the auto-advance button stays on the row with the counter */
+  .reel-ctrl {
+    gap: 6px;
+  }
+
+  .pill-btn {
+    gap: 6px;
+    padding: 0 12px 0 11px;
+  }
+
+  .reel-count {
+    margin-left: 2px;
+  }
+
+  .channel-link {
+    padding: 0 16px 0 12px;
+    font-size: 15px;
   }
 }
 
