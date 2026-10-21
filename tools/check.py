@@ -155,6 +155,11 @@ def check_site(publish: bool) -> list[tuple[str, str, bool]]:
         drafts = [code for code in cfg["langs"] if code not in live]
         results.append(("site", f"no draft language ({', '.join(drafts) or 'none'})", not drafts))
 
+    # The privacy policy promises the privacy-enhanced player and nothing else.
+    script = (ROOT / "assets/main.js").read_text(encoding="utf-8")
+    players = re.findall(r"https://[^/\"'`]+/embed/", script)
+    results.append(("site", "script embeds only youtube-nocookie.com", players == ["https://www.youtube-nocookie.com/embed/"]))
+
     built: dict[str, dict[str, tuple[Page, str]]] = {}
     for code in live:
         lang = cfg["langs"][code]
@@ -184,7 +189,7 @@ def check_site(publish: bool) -> list[tuple[str, str, bool]]:
             add("contact mailto in footer (III.A.2.i)", has_link(page, r"^mailto:", "footer"))
             add("trademark line (brand guidance)", words.get("trademark", "\0") in text)
             add("only font hosts outside (no tracking)", all(any(h in u for h in FONT_HOSTS) for u in page.external))
-            add("no iframe or embed", page.iframes == 0)
+            add("no iframe or embed in the HTML (players load on click)", page.iframes == 0)
             add("img alt and size", all("alt" in i and "width" in i and "height" in i for i in page.imgs))
             add("no forbidden symbols in visible text", not FORBIDDEN.search(text))
             broken = []
@@ -217,6 +222,7 @@ def check_site(publish: bool) -> list[tuple[str, str, bool]]:
             add("Google privacy policy link (III.A.2.c)", has_link(page, r"google\.com/policies/privacy|policies\.google\.com/privacy"))
             add("revoke link (III.A.2.h)", has_link(page, REVOKE))
             add("cookies and device storage (III.A.2.g)", words.get("cookies", "\0") in text)
+            add("click-to-load YouTube player disclosed (III.A.2.g)", "youtube-nocookie.com" in text)
             add("ads statement (III.A.2.f)", words.get("no_ads", "\0") in text)
             add("retention and deletion", all(w in text for w in words.get("retention", ("\0",))))
             add("Limited Use statement", "Limited Use" in text)

@@ -1393,7 +1393,9 @@ h3 {
   line-height: 1.6;
 }
 
-/* Real shorts: three hairline cells, number above each poster */
+/* Real shorts: hairline cells, three per row, number above each poster.
+   "Play here" swaps the poster for the player. YouTube's player rules:
+   at least 200px wide, nothing drawn over it, one playing at a time. */
 
 .shorts-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1406,16 +1408,9 @@ h3 {
   padding: 28px 24px 30px;
 }
 
-.short-card a {
-  display: block;
+.short-inner {
   width: min(100%, 300px);
   margin-inline: auto;
-  color: inherit;
-  text-decoration: none;
-}
-
-.short-card a:focus-visible {
-  outline-offset: 8px;
 }
 
 .short-num {
@@ -1444,14 +1439,65 @@ h3 {
   pointer-events: none;
 }
 
-.short-card a:hover .short-media,
-.short-card a:focus-visible .short-media {
+.short-card:not(.is-embed) .short-media:hover,
+.short-card:not(.is-embed) .short-media:focus-within {
   transform: translateY(-6px);
 }
 
-.short-card a:hover .short-media::after,
-.short-card a:focus-visible .short-media::after {
+.short-card:not(.is-embed) .short-media:hover::after,
+.short-card:not(.is-embed) .short-media:focus-within::after {
   box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.short-play {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 16px 0 13px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.short-play svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.short-play:focus-visible {
+  outline-offset: 3px;
+}
+
+.short-player {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+/* the player owns the whole frame: no rounded clip, no ring, no lift */
+.short-card.is-embed .short-media {
+  border-radius: 0;
+  transform: none;
+}
+
+.short-card.is-embed .short-media::after {
+  display: none;
 }
 
 .short-media img,
@@ -1482,16 +1528,32 @@ h3 {
 }
 
 .short-meta {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 4px 14px;
   margin-top: 10px;
   color: var(--ink-2);
   font-size: 14px;
   font-weight: 600;
 }
 
-.short-card a:hover .short-meta {
+.short-tpl {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.short-meta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.short-meta a:hover {
   color: var(--ink);
 }
 
@@ -2355,6 +2417,11 @@ h3 {
   .composer {
     margin-top: calc(var(--tile-h) * -0.3);
   }
+
+  /* keeps each poster, and the player that replaces it, at least 200px wide down to 761px */
+  .short-card {
+    padding-inline: 16px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -2740,8 +2807,8 @@ h3 {
     transition: none;
   }
 
-  .short-card a:hover .short-media,
-  .short-card a:focus-visible .short-media {
+  .short-card:not(.is-embed) .short-media:hover,
+  .short-card:not(.is-embed) .short-media:focus-within {
     transform: none;
   }
 }

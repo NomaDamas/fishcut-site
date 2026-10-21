@@ -15,6 +15,8 @@
       step: (n, total, title) => `${total}단계 중 ${n}단계: ${title}`,
       copied: "복사했습니다",
       copyFailed: "직접 선택해 복사하세요",
+      ytPlayer: (title) => `YouTube 플레이어: ${title}`,
+      videoPlayer: (title) => `영상: ${title}`,
     },
     en: {
       play: "Play",
@@ -26,6 +28,8 @@
       step: (n, total, title) => `Step ${n} of ${total}: ${title}`,
       copied: "Copied",
       copyFailed: "Select the text and copy it",
+      ytPlayer: (title) => `YouTube player: ${title}`,
+      videoPlayer: (title) => `Video: ${title}`,
     },
   };
   const t = TEXT[document.documentElement.lang] || TEXT.ko;
@@ -144,25 +148,67 @@
     video.addEventListener("pause", render);
   }
 
-  // Real shorts: hover or keyboard focus previews the loop.
-  function initHoverPlay() {
-    for (const card of document.querySelectorAll("[data-hover-play]")) {
-      const video = card.querySelector("video");
-      if (!video) continue;
+  // Real shorts: hover or keyboard focus previews the silent loop. "Play here"
+  // puts the player in place of the poster, one card at a time. A YouTube card
+  // loads the privacy-enhanced player only after the click, so the page sends
+  // nothing to YouTube before it. Nothing is drawn over a player.
+  function initShorts() {
+    const cards = Array.from(document.querySelectorAll("[data-short]"));
+    const close = (card) => {
+      const player = card.querySelector("[data-player]");
+      if (!player) return;
+      player.remove();
+      card.classList.remove("is-embed");
+      card.querySelector("[data-short-play]").hidden = false;
+    };
+    for (const card of cards) {
+      const media = card.querySelector(".short-media");
+      const loop = media.querySelector("video");
+      const btn = card.querySelector("[data-short-play]");
+      const title = card.querySelector(".short-title").textContent;
       const start = () => {
-        if (!reduced()) play(video);
+        if (!reduced() && !card.classList.contains("is-embed")) play(loop);
       };
       const stop = () => {
-        video.pause();
+        loop.pause();
         card.classList.remove("is-playing");
       };
-      video.addEventListener("playing", () => card.classList.add("is-playing"));
+      loop.addEventListener("playing", () => card.classList.add("is-playing"));
       if (hoverMQ.matches) {
         card.addEventListener("mouseenter", start);
         card.addEventListener("mouseleave", stop);
       }
       card.addEventListener("focusin", start);
       card.addEventListener("focusout", stop);
+
+      btn.hidden = false;
+      btn.addEventListener("click", () => {
+        for (const other of cards) if (other !== card) close(other);
+        stop();
+        let player;
+        if (card.dataset.yt) {
+          player = document.createElement("iframe");
+          player.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(card.dataset.yt)}?autoplay=1&playsinline=1&rel=0`;
+          player.title = t.ytPlayer(title);
+          player.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+          player.allowFullscreen = true;
+          player.referrerPolicy = "strict-origin-when-cross-origin";
+        } else {
+          player = document.createElement("video");
+          player.src = card.dataset.src;
+          player.controls = true;
+          player.playsInline = true;
+          player.setAttribute("aria-label", t.videoPlayer(title));
+          const result = player.play();
+          if (result && result.catch) result.catch(() => {});
+        }
+        player.className = "short-player";
+        player.dataset.player = "";
+        media.append(player);
+        card.classList.add("is-embed");
+        btn.hidden = true;
+        player.focus();
+      });
     }
   }
 
@@ -514,7 +560,7 @@
   initWall();
   initTyping();
   initPhone();
-  initHoverPlay();
+  initShorts();
   initReel();
   initCarousel();
   initCopy();
