@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fishcut.nomadamas.org/sitemap.xml

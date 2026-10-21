@@ -1,0 +1,16 @@
+  <main id="main" class="doc-main">
+    <div class="wrap doc-layout">
+      <nav class="doc-side" aria-label="{{s.docs_label}}">
+        <p class="doc-side-title">{{s.docs_label}}</p>
+        <ul>
+          <li><a href="{{home}}privacy/" data-nav="privacy">{{s.privacy}}</a></li>
+          <li><a href="{{home}}terms/" data-nav="terms">{{s.terms}}</a></li>
+          <li><a href="{{home}}how-it-works/" data-nav="how-it-works">{{s.how_it_works}}</a></li>
+        </ul>
+        <a class="doc-back" href="{{home}}">{{s.doc_back}}</a>
+      </nav>
+      <article class="doc">
+{{content}}
+      </article>
+    </div>
+  </main>
