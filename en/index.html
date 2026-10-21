@@ -92,9 +92,9 @@
             <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span></p>
           </div>
           <p class="composer-text">
-            <span class="ghost" aria-hidden="true">Use the <span class="tpl">explainer</span> template to make a short on <span class="nowrap">"A tiny paper garden."</span> Channel: <span class="nowrap">Small Garden Lab.<span class="caret"></span></span></span>
-            <span class="typed" aria-hidden="true" data-typing>Use the <span class="tpl">explainer</span> template to make a short on <span class="nowrap">"A tiny paper garden."</span> Channel: <span class="nowrap">Small Garden Lab.<span class="caret"></span></span></span>
-            <span class="sr-only">Use the explainer template to make a short on "A tiny paper garden." Channel: Small Garden Lab.</span>
+            <span class="ghost" aria-hidden="true">Use the <span class="tpl">dev-demo</span> template to make a short on <span class="nowrap">"Why Anthropic swapped</span> <span class="nowrap">Git for Scion."</span> Channel: <span class="nowrap">NomaDamas.<span class="caret"></span></span></span>
+            <span class="typed" aria-hidden="true" data-typing>Use the <span class="tpl">dev-demo</span> template to make a short on <span class="nowrap">"Why Anthropic swapped</span> <span class="nowrap">Git for Scion."</span> Channel: <span class="nowrap">NomaDamas.<span class="caret"></span></span></span>
+            <span class="sr-only">Use the dev-demo template to make a short on "Why Anthropic swapped Git for Scion." Channel: NomaDamas.</span>
           </p>
           <div class="composer-foot">
             <a class="btn btn-ghost" href="#how">See how it works</a>
@@ -138,22 +138,29 @@
       </ul>
     </section>
 
-    <!-- Demo: the editor window and the finished short side by side, same height -->
-    <section class="demo" aria-label="The editor and a finished short">
+    <!-- Demo: a real editing session recorded in the editor, and the finished short, same bottom edge -->
+    <section class="demo" aria-label="A real editing recording and the finished short">
       <div class="wrap">
         <figure class="demo-figure" data-phone>
           <div class="demo-visual">
-            <div class="window">
+            <div class="window" data-edit-demo>
               <div class="window-bar" aria-hidden="true">
                 <span class="dots"><i></i><i></i><i></i></span>
                 <span class="url">127.0.0.1:4318</span>
               </div>
-              <img src="../assets/shots/studio-editor-dark.webp" width="2000" height="1250" loading="lazy" alt="The fishcut editor. A list of project assets on the left, a vertical video preview in the center, a text properties panel on the right, and a timeline with source and text layers at the bottom.">
+              <div class="window-screen">
+                <img src="../assets/shots/demo-edit-poster.webp" width="1280" height="800" loading="lazy" alt="The fishcut editor with a copy of the short 'Why the company that made Claude doesn't use Git' open. The script's sentence list is on the left, a vertical preview showing Git and Scion side by side is in the center, video details and a pre-render check are on the right, and a layer timeline with caption, number, highlight, logo, scene, sound effect, and BGM tracks is at the bottom.">
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="../assets/shots/demo-edit.mp4" type="video/mp4"></video>
+                <button class="window-play" type="button" data-edit-play hidden aria-label="Play the editing recording">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-play" d="M4.5 2.8v10.4L13 8z"/><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/></svg>
+                  <span>Play</span>
+                </button>
+              </div>
             </div>
             <div class="phone">
               <div class="phone-screen">
-                <img src="../assets/shorts/image-blaster-3d.jpg" width="720" height="1280" loading="lazy" alt="A frame from the finished short: the inside of a wooden cabin under the title 'Open source that turns one photo into a 3D space'.">
-                <video muted loop playsinline preload="none" poster="../assets/shorts/image-blaster-3d.jpg" aria-hidden="true" tabindex="-1"><source src="../assets/shorts/image-blaster-3d.mp4" type="video/mp4"></video>
+                <img src="../assets/shorts/anthropic-scion.jpg" width="720" height="1280" loading="lazy" alt="A frame from the finished short: under its Korean title, a picture labelled 'in-house large code repository' shows a Git icon and a stack of documents, with a Korean caption about Git, the code management tool.">
+                <video muted loop playsinline preload="none" poster="../assets/shorts/anthropic-scion.jpg" aria-hidden="true" tabindex="-1"><source src="../assets/shorts/anthropic-scion.mp4" type="video/mp4"></video>
               </div>
               <button class="phone-play" type="button" data-phone-play hidden aria-label="Play the finished short">
                 <svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-play" d="M4.5 2.8v10.4L13 8z"/><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/></svg>
@@ -162,8 +169,17 @@
             </div>
           </div>
           <figcaption class="demo-caps">
-            <p class="cap-editor"><strong>Editor.</strong> Assets on the left, preview in the center, properties on the right, layer timeline at the bottom. A draft becomes the master copy only when a person presses Save.</p>
-            <p class="cap-phone"><strong>Finished short.</strong> One photo becomes a 3D space you can walk through. Made with the <span class="nowrap">dev-demo</span> template and uploaded to the NomaDamas channel.</p>
+            <div class="cap-editor">
+              <p><strong>Real editing recording.</strong> We opened a copy of the finished short's project in the editor and edited it for 34 seconds. The edit was undone after recording, so the uploaded video has no such text box. The editor and the short are in Korean.</p>
+              <ol class="edit-steps" data-edit-steps>
+                <li data-t="0"><span class="es-t">0:03</span> Add a text box and type</li>
+                <li data-t="14.3"><span class="es-t">0:14</span> Drag it into place in the preview</li>
+                <li data-t="18.3"><span class="es-t">0:18</span> Snap it to a sentence on the timeline and trim the end</li>
+                <li data-t="24"><span class="es-t">0:24</span> Undo and redo</li>
+                <li data-t="28.7"><span class="es-t">0:29</span> Play it back</li>
+              </ol>
+            </div>
+            <p class="cap-phone"><strong>Finished short.</strong> Why the company that made Claude doesn't use Git. Made with the <span class="nowrap">dev-demo</span> template and uploaded to the NomaDamas channel on October 14, 2026. It had over 17,000 views as of October 22.</p>
           </figcaption>
         </figure>
       </div>
@@ -175,7 +191,7 @@
         <div class="how-side">
           <div class="section-head">
             <h2 id="how-title"><em class="key">From one sentence</em> to upload</h2>
-            <p class="section-desc">The agent makes the draft, and you fix and check it. The 8 steps fall into three groups.</p>
+            <p class="section-desc">The agent makes the draft, and you fix and check it. The 8 steps fall into three groups. The screens and conversation come from the real project and production chat behind the short above; only the channel profile values in step 1 are examples.</p>
           </div>
           <div class="reel-progress" role="group" aria-label="Jump to a step" data-reel-ui hidden>
             <div class="seg-group g1" style="--n: 3">
@@ -227,8 +243,8 @@
           <li class="story g1" id="step-2">
             <span class="story-num" aria-hidden="true">02</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 322; --cy: 283"><img src="../assets/shots/templates-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the shared templates screen, with template cards for dev-demo, explainer, tips, and twist-tale, and a 'New video from this template' button."></div>
-              <figcaption>Shared templates. Press "이 템플릿으로 새 영상" (New video from this template), or tell the agent the template name.</figcaption>
+              <div class="crop" style="--cx: 415; --cy: 225"><img src="../assets/shots/demo-templates.webp" width="2000" height="1250" loading="lazy" alt="Part of the template browser. The selected dev-demo card and the explainer and fact-narration cards are on the left. The settings tab on the right shows the Korean cloned voice name, a speaking rate of 8.5, and the render argument --sheet."></div>
+              <figcaption>Template browser. This short was made with the dev-demo template, and the template sets defaults such as the voice and speaking rate. The ./shorts command on screen is the pre-release command name.</figcaption>
             </figure>
             <p class="story-group">Group 1. Hand off</p>
             <h3>Choose a template</h3>
@@ -238,30 +254,29 @@
             <span class="story-num" aria-hidden="true">03</span>
             <figure class="story-media">
               <div class="chat">
-                <p class="chat-req"><span class="tag-ex">Example</span> Use the explainer template to make a short on "A tiny paper garden." Channel: Small Garden Lab.</p>
+                <p class="chat-req"><span class="tag-ex">Real request</span> <span class="mono">https://www.anthropic.com/engineering/<wbr>redesigning-source-control</span> I want to make this into a short. What kind should it be?</p>
                 <dl class="chat-log">
-                  <div><dt>Read channel guidelines</dt><dd>Small Garden Lab (example)</dd></div>
-                  <div><dt>Template</dt><dd>explainer, HyperFrames frame</dd></div>
-                  <div><dt>Script</dt><dd>9 lines</dd></div>
-                  <div class="by-human"><dt>Script approval request</dt><dd>A person approves it in the editor</dd></div>
-                  <div><dt>Voice</dt><dd>Free default voice M1, 36.5 seconds</dd></div>
-                  <div><dt>Caption timing</dt><dd>Aligned word by word</dd></div>
-                  <div><dt>Render</dt><dd>1080x1920 MP4</dd></div>
-                  <div><dt>Automatic checks</dt><dd>Blank frames, short cuts, personal info in text</dd></div>
-                  <div><dt>Open in the editor</dt><dd class="mono">http://127.0.0.1:4318/</dd></div>
+                  <div><dt>Suggestion</dt><dd>Read the article and suggested fact-narration</dd></div>
+                  <div class="by-human"><dt>Choice</dt><dd>A person switched to dev-demo</dd></div>
+                  <div><dt>Draft</dt><dd>About 45 seconds, review asked before voice</dd></div>
+                  <div class="by-human"><dt>Edits</dt><dd>A person wrote the opening and fixed a figure and the ending</dd></div>
+                  <div><dt>Render 1</dt><dd>50.9 seconds, blank-frame check passed</dd></div>
+                  <div class="by-human"><dt>Request</dt><dd>A person asked for visuals Korean viewers can read</dd></div>
+                  <div><dt>Render 2</dt><dd>Most English source screens replaced with Korean graphics and GIFs</dd></div>
+                  <div class="by-human"><dt>Published</dt><dd>2026-10-14 08:00 KST, 51 seconds</dd></div>
                 </dl>
               </div>
-              <figcaption>An example of the agent's progress. This is not a real screen; the conversation is shortened.</figcaption>
+              <figcaption>A real conversation, shortened and translated from Korean (Codex, 2026-10-14). Bold rows are decisions a person made.</figcaption>
             </figure>
             <p class="story-group">Group 1. Hand off</p>
             <h3>Ask in one sentence</h3>
-            <p class="story-text">Tell Claude Code or Codex the topic and the template in one sentence.</p>
+            <p class="story-text">Tell Claude Code or Codex the topic in one sentence. If you don't name a template, the agent reads the source and suggests one, and you choose.</p>
           </li>
           <li class="story g2" id="step-4">
             <span class="story-num" aria-hidden="true">04</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 7; --cy: 120"><img src="../assets/shots/studio-script-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the Script / Voice tab, with the on-screen text field for sentence 1, 'Plant a small seed.', and a 'Read the on-screen text as is' checkbox."></div>
-              <figcaption>Script / Voice tab. Edit the on-screen text and the sentence to be read, then check the generation plan first with "실행하지 않고 계획 보기" (View the plan without running).</figcaption>
+              <div class="crop" style="--cx: 0; --cy: 95"><img src="../assets/shots/demo-script.webp" width="2000" height="1250" loading="lazy" alt="Part of the Script tab. A voice card (a clone of your own voice, 8.5 syllables per second) is at the top, and sentences 00 to 02 are below with their on-screen captions and spoken text. The edit field for sentence 02 is open."></div>
+              <figcaption>Script tab. You can edit the on-screen caption and the spoken sentence separately for each sentence. The card at the top shows the local cloned voice and speaking rate used for this short.</figcaption>
             </figure>
             <p class="story-group">Group 2. Draft (agent)</p>
             <h3>Script and voice</h3>
@@ -270,8 +285,8 @@
           <li class="story g2" id="step-5">
             <span class="story-num" aria-hidden="true">05</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 0; --cy: 650"><img src="../assets/shots/hf-timeline-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the motion video editor. Below the length 0:36.50, scene, line, word, cue, and sound effect tracks sit on one timeline."></div>
-              <figcaption>Motion video editor. Scene, line, word, cue, and sound effect tracks share one timeline. Drag a cue, and its sound effect moves with it.</figcaption>
+              <div class="crop" style="--cx: 0; --cy: 650"><img src="../assets/shots/demo-timeline.webp" width="2000" height="1250" loading="lazy" alt="Part of the Sound tab and the layer timeline. A sound effect list with Insert buttons is at the top. The timeline below has caption, number, highlight, logo, scene, sound effect, and BGM tracks, and the caption track has a chip for each word."></div>
+              <figcaption>Sound tab and layer timeline. Each caption word sits on the timeline as a chip with its own time, and highlights, scenes, sound effects, and BGM share the same timeline.</figcaption>
             </figure>
             <p class="story-group">Group 2. Draft (agent)</p>
             <h3>Caption timing and sound effects</h3>
@@ -280,8 +295,8 @@
           <li class="story g2" id="step-6">
             <span class="story-num" aria-hidden="true">06</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 208; --cy: 267"><img src="../assets/shots/studio-export-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the export screen. A card comparing the saved version and the draft shows frame size, length, and frames, with a 'Make a before-and-after video' button."></div>
-              <figcaption>Export. Watch the saved version and the current draft in a before-and-after video, and make the final MP4 from the saved version.</figcaption>
+              <div class="crop" style="--cx: 661; --cy: 220"><img src="../assets/shots/demo-export.webp" width="2000" height="1250" loading="lazy" alt="Part of the screen right after export. The preview shows a diagram linking 'AI / automation' to 'Scion server', and a job card below reads 'Final render 46%, merging'."></div>
+              <figcaption>Export. You can keep editing while the final render runs.</figcaption>
             </figure>
             <p class="story-group">Group 2. Draft (agent)</p>
             <h3>Render and automatic checks</h3>
@@ -290,8 +305,11 @@
           <li class="story g3" id="step-7">
             <span class="story-num" aria-hidden="true">07</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 467; --cy: 80"><img src="../assets/shots/short-layout-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the card-style video layout editor. The preview card has the white title 'A small forest by the library window', the yellow highlight line 'One seed called the neighbors', and a picture layer below."></div>
-              <figcaption>In card-style videos, you drag the title, highlight line, and picture layers into place for each scene.</figcaption>
+              <div class="ba">
+                <p class="ba-head" aria-hidden="true"><span>Before</span><span>After</span></p>
+                <img src="../assets/shots/demo-compare.webp" width="736" height="600" loading="lazy" alt="The same scene before and after the edit. On the left, the area below the picture is empty. On the right, a text box reading 'Scion은 초대형 저장소 전용' (Scion is for very large repositories only) sits below the picture, and its clip starts at sentence 11 on the timeline's number layer.">
+              </div>
+              <figcaption>The scene edited in the recording above. A text box was added and set to show from the start of sentence 11 to the start of sentence 12.</figcaption>
             </figure>
             <p class="story-group">Group 3. Refine and upload (human)</p>
             <h3>Fix it in the editor</h3>
@@ -300,8 +318,8 @@
           <li class="story g3" id="step-8">
             <span class="story-num" aria-hidden="true">08</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 1000; --cy: 325"><img src="../assets/shots/upload-settings-dark.webp" width="2000" height="1250" loading="lazy" alt="Part of the YouTube upload window, with fields for video title, description, tags, visibility, category, made for kids, and synthetic content."></div>
-              <figcaption>YouTube upload. Check the channel, the final video, and the upload settings on one screen. If you leave the scheduled time empty, the video goes up with the visibility you chose.</figcaption>
+              <div class="crop" style="--cx: 740; --cy: 300"><img src="../assets/shots/demo-upload.webp" width="2000" height="1250" loading="lazy" alt="Part of the YouTube upload window. Next to the final video player are the Korean title 'Why the company that made Claude doesn't use Git', description, tags, and pinned comment fields, with visibility, category, made for kids, and synthetic content fields below."></div>
+              <figcaption>YouTube upload. The title, description, and pinned comment come from the project's upload copy. The visibility and category on screen are the demo install's defaults.</figcaption>
             </figure>
             <p class="story-group">Group 3. Refine and upload (human)</p>
             <h3>Check and upload to YouTube</h3>

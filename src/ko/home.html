@@ -38,9 +38,9 @@
             <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span></p>
           </div>
           <p class="composer-text">
-            <span class="ghost" aria-hidden="true"><span class="tpl">explainer</span> 템플릿으로 <span class="nowrap">"종이로 만드는 작은 정원"</span> 쇼츠 한 편 만들어 줘. 채널은 <span class="nowrap">작은 정원 연구소.<span class="caret"></span></span></span>
-            <span class="typed" aria-hidden="true" data-typing><span class="tpl">explainer</span> 템플릿으로 <span class="nowrap">"종이로 만드는 작은 정원"</span> 쇼츠 한 편 만들어 줘. 채널은 <span class="nowrap">작은 정원 연구소.<span class="caret"></span></span></span>
-            <span class="sr-only">explainer 템플릿으로 "종이로 만드는 작은 정원" 쇼츠 한 편 만들어 줘. 채널은 작은 정원 연구소.</span>
+            <span class="ghost" aria-hidden="true"><span class="tpl">dev-demo</span> 템플릿으로 <span class="nowrap">"Anthropic이 Git 대신</span> <span class="nowrap">Scion을 쓰는 이유"</span> 쇼츠 한 편 만들어 줘. 채널은 <span class="nowrap">노마다마스.<span class="caret"></span></span></span>
+            <span class="typed" aria-hidden="true" data-typing><span class="tpl">dev-demo</span> 템플릿으로 <span class="nowrap">"Anthropic이 Git 대신</span> <span class="nowrap">Scion을 쓰는 이유"</span> 쇼츠 한 편 만들어 줘. 채널은 <span class="nowrap">노마다마스.<span class="caret"></span></span></span>
+            <span class="sr-only">dev-demo 템플릿으로 "Anthropic이 Git 대신 Scion을 쓰는 이유" 쇼츠 한 편 만들어 줘. 채널은 노마다마스.</span>
           </p>
           <div class="composer-foot">
             <a class="btn btn-ghost" href="#how">동작 방식 보기</a>
@@ -84,22 +84,29 @@
       </ul>
     </section>
 
-    <!-- Demo: the editor window and the finished short side by side, same height -->
-    <section class="demo" aria-label="에디터와 완성 쇼츠">
+    <!-- Demo: a real editing session recorded in the editor, and the finished short, same bottom edge -->
+    <section class="demo" aria-label="실제 편집 녹화와 완성 쇼츠">
       <div class="wrap">
         <figure class="demo-figure" data-phone>
           <div class="demo-visual">
-            <div class="window">
+            <div class="window" data-edit-demo>
               <div class="window-bar" aria-hidden="true">
                 <span class="dots"><i></i><i></i><i></i></span>
                 <span class="url">127.0.0.1:4318</span>
               </div>
-              <img src="{{root}}assets/shots/studio-editor-dark.webp" width="2000" height="1250" loading="lazy" alt="fishcut 에디터 화면. 왼쪽에 프로젝트 소재 목록, 가운데에 세로 영상 미리보기, 오른쪽에 글자 속성 패널, 아래에 원본과 글자 레이어가 놓인 타임라인이 있습니다.">
+              <div class="window-screen">
+                <img src="{{root}}assets/shots/demo-edit-poster.webp" width="1280" height="800" loading="lazy" alt="fishcut 에디터에서 쇼츠 '클로드 만든 회사가 Git을 안 쓰는 이유'의 사본을 연 화면. 왼쪽에 대본 문장 목록, 가운데에 Git과 Scion을 나란히 놓은 세로 미리보기, 오른쪽에 영상 정보와 렌더 전 확인 항목, 아래에 자막, 숫자, 강조, 로고, 장면, 효과음, BGM 레이어 타임라인이 있습니다.">
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="{{root}}assets/shots/demo-edit.mp4" type="video/mp4"></video>
+                <button class="window-play" type="button" data-edit-play hidden aria-label="편집 녹화 재생">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-play" d="M4.5 2.8v10.4L13 8z"/><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/></svg>
+                  <span>재생</span>
+                </button>
+              </div>
             </div>
             <div class="phone">
               <div class="phone-screen">
-                <img src="{{root}}assets/shorts/image-blaster-3d.jpg" width="720" height="1280" loading="lazy" alt="완성 쇼츠의 한 장면. '사진 한 장으로 3D 공간 만드는 오픈소스'라는 제목 아래 나무 오두막 내부가 보입니다.">
-                <video muted loop playsinline preload="none" poster="{{root}}assets/shorts/image-blaster-3d.jpg" aria-hidden="true" tabindex="-1"><source src="{{root}}assets/shorts/image-blaster-3d.mp4" type="video/mp4"></video>
+                <img src="{{root}}assets/shorts/anthropic-scion.jpg" width="720" height="1280" loading="lazy" alt="완성 쇼츠의 한 장면. '클로드 만든 회사가 Git을 안 쓰는 이유' 제목 아래 '사내 대형 코드 저장소' 그림에 Git 아이콘과 문서 더미가 있고, '쓰는 코드 관리 도구 Git을' 자막이 보입니다.">
+                <video muted loop playsinline preload="none" poster="{{root}}assets/shorts/anthropic-scion.jpg" aria-hidden="true" tabindex="-1"><source src="{{root}}assets/shorts/anthropic-scion.mp4" type="video/mp4"></video>
               </div>
               <button class="phone-play" type="button" data-phone-play hidden aria-label="완성 쇼츠 재생">
                 <svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-play" d="M4.5 2.8v10.4L13 8z"/><rect class="i-pause" x="3.5" y="3" width="3" height="10" rx="1"/><rect class="i-pause" x="9.5" y="3" width="3" height="10" rx="1"/></svg>
@@ -108,8 +115,17 @@
             </div>
           </div>
           <figcaption class="demo-caps">
-            <p class="cap-editor"><strong>에디터.</strong> 왼쪽 소재, 가운데 미리보기, 오른쪽 속성, 아래 레이어 타임라인. 저장은 사람이 눌러야 정본이 됩니다.</p>
-            <p class="cap-phone"><strong>완성 쇼츠.</strong> 사진 한 장이 걸어 다니는 3D 공간이 됨. <span class="nowrap">dev-demo</span> 템플릿으로 만들어 NomaDamas 채널에 올렸습니다.</p>
+            <div class="cap-editor">
+              <p><strong>실제 편집 녹화.</strong> 완성 쇼츠의 프로젝트 사본을 에디터에서 열어 34초 동안 고쳤습니다. 녹화 뒤 되돌려서 올린 영상에는 이 설명 상자가 없습니다.</p>
+              <ol class="edit-steps" data-edit-steps>
+                <li data-t="0"><span class="es-t">0:03</span> 설명 상자를 넣고 글자 입력</li>
+                <li data-t="14.3"><span class="es-t">0:14</span> 미리보기에서 위치 옮기기</li>
+                <li data-t="18.3"><span class="es-t">0:18</span> 타임라인에서 문장 시작에 붙이고 끝 맞추기</li>
+                <li data-t="24"><span class="es-t">0:24</span> 되돌리기와 다시 하기</li>
+                <li data-t="28.7"><span class="es-t">0:29</span> 재생해서 확인</li>
+              </ol>
+            </div>
+            <p class="cap-phone"><strong>완성 쇼츠.</strong> 클로드 만든 회사가 Git을 안 쓰는 이유. <span class="nowrap">dev-demo</span> 템플릿으로 만들어 2026년 10월 14일 NomaDamas 채널에 올렸고, 10월 22일 기준 조회수는 1.7만 회입니다.</p>
           </figcaption>
         </figure>
       </div>
@@ -121,7 +137,7 @@
         <div class="how-side">
           <div class="section-head">
             <h2 id="how-title"><em class="key">한 문장에서</em> 업로드까지</h2>
-            <p class="section-desc">에이전트가 초안을 만들고, 사람은 고치고 확인합니다. 8단계를 세 묶음으로 나눴습니다.</p>
+            <p class="section-desc">에이전트가 초안을 만들고, 사람은 고치고 확인합니다. 8단계를 세 묶음으로 나눴습니다. 화면과 대화는 위 쇼츠의 실제 프로젝트와 제작 대화이고, 1단계의 채널 프로필 값만 예시로 채웠습니다.</p>
           </div>
           <div class="reel-progress" role="group" aria-label="단계 바로 가기" data-reel-ui hidden>
             <div class="seg-group g1" style="--n: 3">
@@ -173,8 +189,8 @@
           <li class="story g1" id="step-2">
             <span class="story-num" aria-hidden="true">02</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 322; --cy: 283"><img src="{{root}}assets/shots/templates-dark.webp" width="2000" height="1250" loading="lazy" alt="공용 템플릿 화면 일부. dev-demo, explainer, tips, twist-tale 템플릿 카드와 '이 템플릿으로 새 영상' 버튼이 보입니다."></div>
-              <figcaption>공용 템플릿. "이 템플릿으로 새 영상"을 누르거나, 에이전트에게 템플릿 이름을 말하면 됩니다.</figcaption>
+              <div class="crop" style="--cx: 415; --cy: 225"><img src="{{root}}assets/shots/demo-templates.webp" width="2000" height="1250" loading="lazy" alt="템플릿 둘러보기 창 일부. 왼쪽에 선택한 dev-demo 카드와 explainer, fact-narration 카드가 있고, 오른쪽 설정 탭에 한국어 복제 음성 이름, 말 속도 8.5, 렌더 인자 --sheet가 보입니다."></div>
+              <figcaption>템플릿 둘러보기. 이 쇼츠는 dev-demo 템플릿으로 만들었고, 목소리와 말 속도 같은 기본값은 템플릿이 정합니다. 화면의 ./shorts는 공개 전 명령 이름입니다.</figcaption>
             </figure>
             <p class="story-group">묶음 1. 맡기기</p>
             <h3>템플릿 고르기</h3>
@@ -184,30 +200,29 @@
             <span class="story-num" aria-hidden="true">03</span>
             <figure class="story-media">
               <div class="chat">
-                <p class="chat-req"><span class="tag-ex">예시</span> explainer 템플릿으로 "종이로 만드는 작은 정원" 쇼츠 한 편 만들어 줘. 채널은 작은 정원 연구소.</p>
+                <p class="chat-req"><span class="tag-ex">실제 요청</span> <span class="mono">https://www.anthropic.com/engineering/<wbr>redesigning-source-control</span> 이거 쇼츠로 만들고 싶어 어떤 종류로 만들까</p>
                 <dl class="chat-log">
-                  <div><dt>채널 기준 읽음</dt><dd>작은 정원 연구소 (예시)</dd></div>
-                  <div><dt>템플릿</dt><dd>explainer, 화면 틀 HyperFrames</dd></div>
-                  <div><dt>대본</dt><dd>9줄</dd></div>
-                  <div class="by-human"><dt>대본 승인 요청</dt><dd>사람이 에디터에서 승인</dd></div>
-                  <div><dt>음성</dt><dd>무료 기본 음성 M1, 36.5초</dd></div>
-                  <div><dt>자막 시각</dt><dd>단어마다 시각 정렬</dd></div>
-                  <div><dt>렌더</dt><dd>1080x1920 MP4</dd></div>
-                  <div><dt>자동 검수</dt><dd>빈 화면, 짧은 컷, 개인정보 글자</dd></div>
-                  <div><dt>에디터에서 열기</dt><dd class="mono">http://127.0.0.1:4318/</dd></div>
+                  <div><dt>템플릿 추천</dt><dd>원문을 읽고 fact-narration 추천</dd></div>
+                  <div class="by-human"><dt>템플릿 결정</dt><dd>사람이 dev-demo로 바꿈</dd></div>
+                  <div><dt>원고</dt><dd>약 45초, 음성 전에 확인 요청</dd></div>
+                  <div class="by-human"><dt>대본 수정</dt><dd>사람이 도입부를 쓰고 수치와 마무리를 고침</dd></div>
+                  <div><dt>첫 렌더</dt><dd>50.9초, 빈 화면 검사 통과</dd></div>
+                  <div class="by-human"><dt>보강 요청</dt><dd>사람이 한국 시청자가 알아볼 시각 자료를 요청</dd></div>
+                  <div><dt>다시 렌더</dt><dd>영문 원문 화면 대부분을 한국어 그래픽과 짤로 바꿈</dd></div>
+                  <div class="by-human"><dt>공개</dt><dd>2026-10-14 08:00, 51초</dd></div>
                 </dl>
               </div>
-              <figcaption>에이전트 쪽 진행 예시입니다. 실제 화면이 아니라 대화를 줄여서 표시했습니다.</figcaption>
+              <figcaption>실제 대화를 줄여 옮겼습니다(Codex, 2026-10-14). 굵은 줄은 사람이 정한 것입니다.</figcaption>
             </figure>
             <p class="story-group">묶음 1. 맡기기</p>
             <h3>한 문장으로 요청하기</h3>
-            <p class="story-text">Claude Code나 Codex에 주제와 템플릿을 한 문장으로 말합니다.</p>
+            <p class="story-text">Claude Code나 Codex에 주제를 한 문장으로 말합니다. 템플릿을 정하지 않으면 에이전트가 원문을 읽고 추천하고, 사람이 고릅니다.</p>
           </li>
           <li class="story g2" id="step-4">
             <span class="story-num" aria-hidden="true">04</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 7; --cy: 120"><img src="{{root}}assets/shots/studio-script-dark.webp" width="2000" height="1250" loading="lazy" alt="대본 / 음성 탭 일부. 문장 1의 화면 문구 '작은 씨앗을 심어요.' 입력 칸과 '화면 문구 그대로 읽기' 선택 상자가 보입니다."></div>
-              <figcaption>대본 / 음성 탭. 화면 문구와 읽을 문장을 고치고 "실행하지 않고 계획 보기"로 생성 계획부터 확인합니다.</figcaption>
+              <div class="crop" style="--cx: 0; --cy: 95"><img src="{{root}}assets/shots/demo-script.webp" width="2000" height="1250" loading="lazy" alt="대본 탭 일부. 위에 목소리 카드(내 목소리 복제, 초당 8.5음절)가 있고, 아래에 문장 00부터 02까지 화면 자막과 읽을 문장이 있으며 문장 02의 편집 칸이 열려 있습니다."></div>
+              <figcaption>대본 탭. 문장마다 화면 자막과 읽을 문장을 따로 고칠 수 있습니다. 위 카드는 이 쇼츠에 쓴 로컬 복제 음성과 말 속도입니다.</figcaption>
             </figure>
             <p class="story-group">묶음 2. 초안 만들기 (에이전트)</p>
             <h3>대본과 음성</h3>
@@ -216,8 +231,8 @@
           <li class="story g2" id="step-5">
             <span class="story-num" aria-hidden="true">05</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 0; --cy: 650"><img src="{{root}}assets/shots/hf-timeline-dark.webp" width="2000" height="1250" loading="lazy" alt="모션 영상 편집기 일부. 길이 0:36.50 아래로 장면, 줄, 단어, 큐, 효과음 트랙이 한 시간축에 놓여 있습니다."></div>
-              <figcaption>모션 영상 편집기. 장면, 줄, 단어, 큐, 효과음 트랙이 한 시간축에 있습니다. 큐를 끌어 옮기면 효과음도 함께 움직입니다.</figcaption>
+              <div class="crop" style="--cx: 0; --cy: 650"><img src="{{root}}assets/shots/demo-timeline.webp" width="2000" height="1250" loading="lazy" alt="소리 탭과 레이어 타임라인 일부. 위에 효과음 목록과 넣기 버튼이 있고, 아래 타임라인에 자막, 숫자, 강조, 로고, 장면, 효과음, BGM 트랙이 있습니다. 자막 트랙에는 단어마다 칩이 놓여 있습니다."></div>
+              <figcaption>소리 탭과 레이어 타임라인. 자막은 단어마다 시각을 가진 칩으로 놓이고, 강조, 장면, 효과음, BGM이 같은 시간축에 붙습니다.</figcaption>
             </figure>
             <p class="story-group">묶음 2. 초안 만들기 (에이전트)</p>
             <h3>자막 시각과 효과음</h3>
@@ -226,8 +241,8 @@
           <li class="story g2" id="step-6">
             <span class="story-num" aria-hidden="true">06</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 208; --cy: 267"><img src="{{root}}assets/shots/studio-export-dark.webp" width="2000" height="1250" loading="lazy" alt="내보내기 화면 일부. 저장본과 초안 비교 카드에 화면 크기, 길이, 프레임과 '전후 비교 영상 만들기' 버튼이 있습니다."></div>
-              <figcaption>내보내기. 저장본과 지금 초안을 전후 비교 영상으로 보고, 저장본으로 최종 MP4를 만듭니다.</figcaption>
+              <div class="crop" style="--cx: 661; --cy: 220"><img src="{{root}}assets/shots/demo-export.webp" width="2000" height="1250" loading="lazy" alt="내보내기 직후 화면 일부. 미리보기에 'AI / 자동화'와 'Scion 서버'를 잇는 도식이 있고, 아래에 '최종 렌더 46%, 합치는 중' 작업 카드가 있습니다."></div>
+              <figcaption>내보내기. 최종 렌더가 도는 동안에도 계속 고칠 수 있습니다.</figcaption>
             </figure>
             <p class="story-group">묶음 2. 초안 만들기 (에이전트)</p>
             <h3>렌더와 자동 검수</h3>
@@ -236,8 +251,11 @@
           <li class="story g3" id="step-7">
             <span class="story-num" aria-hidden="true">07</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 467; --cy: 80"><img src="{{root}}assets/shots/short-layout-dark.webp" width="2000" height="1250" loading="lazy" alt="카드형 영상 레이아웃 편집기 일부. 미리보기 카드에 흰 제목 '도서관 창가의 작은 숲'과 노란 강조 줄 '씨앗 하나가 이웃을 불렀다', 그 아래 그림 레이어가 있습니다."></div>
-              <figcaption>카드형 영상은 장면마다 제목, 강조 줄, 그림 레이어를 끌어 배치합니다.</figcaption>
+              <div class="ba">
+                <p class="ba-head" aria-hidden="true"><span>고치기 전</span><span>고친 뒤</span></p>
+                <img src="{{root}}assets/shots/demo-compare.webp" width="736" height="600" loading="lazy" alt="같은 장면의 고치기 전과 고친 뒤. 왼쪽은 그림 아래가 비어 있습니다. 오른쪽은 그림 아래에 'Scion은 초대형 저장소 전용' 설명 상자가 있고, 타임라인 숫자 레이어에 그 상자의 클립이 문장 11 시작부터 놓여 있습니다.">
+              </div>
+              <figcaption>위 녹화에서 고친 장면입니다. 설명 상자를 넣고 문장 11 시작부터 문장 12 시작까지 보이게 했습니다.</figcaption>
             </figure>
             <p class="story-group">묶음 3. 다듬고 올리기 (사람)</p>
             <h3>에디터에서 고치기</h3>
@@ -246,8 +264,8 @@
           <li class="story g3" id="step-8">
             <span class="story-num" aria-hidden="true">08</span>
             <figure class="story-media">
-              <div class="crop" style="--cx: 1000; --cy: 325"><img src="{{root}}assets/shots/upload-settings-dark.webp" width="2000" height="1250" loading="lazy" alt="YouTube 업로드 창 일부. 영상 제목, 설명, 태그, 공개 상태, 카테고리, 아동용 콘텐츠, 합성 콘텐츠 입력 칸이 보입니다."></div>
-              <figcaption>YouTube 업로드. 채널, 최종 영상, 업로드 설정을 한 화면에서 확인합니다. 예약 시각을 비워 두면 고른 공개 상태로 올라갑니다.</figcaption>
+              <div class="crop" style="--cx: 740; --cy: 300"><img src="{{root}}assets/shots/demo-upload.webp" width="2000" height="1250" loading="lazy" alt="YouTube 업로드 창 일부. 최종 영상 플레이어 옆에 제목 '클로드 만든 회사가 Git을 안 쓰는 이유', 설명, 태그, 고정 댓글 칸이 있고, 아래에 공개 상태, 카테고리, 아동용 콘텐츠, 합성 콘텐츠 칸이 있습니다."></div>
+              <figcaption>YouTube 업로드. 제목, 설명, 고정 댓글은 프로젝트의 업로드 문구에서 채웁니다. 화면의 공개 상태와 카테고리는 데모 설치의 기본값입니다.</figcaption>
             </figure>
             <p class="story-group">묶음 3. 다듬고 올리기 (사람)</p>
             <h3>확인하고 YouTube에 올리기</h3>

@@ -10,6 +10,8 @@
       pause: "멈춤",
       phonePlay: "완성 쇼츠 재생",
       phonePause: "완성 쇼츠 멈춤",
+      editPlay: "편집 녹화 재생",
+      editPause: "편집 녹화 멈춤",
       autoPlay: "자동 넘김 재생",
       autoPause: "자동 넘김 멈춤",
       step: (n, total, title) => `${total}단계 중 ${n}단계: ${title}`,
@@ -23,6 +25,8 @@
       pause: "Pause",
       phonePlay: "Play the finished short",
       phonePause: "Pause the finished short",
+      editPlay: "Play the editing recording",
+      editPause: "Pause the editing recording",
       autoPlay: "Resume auto-advance",
       autoPause: "Pause auto-advance",
       step: (n, total, title) => `Step ${n} of ${total}: ${title}`,
@@ -125,11 +129,78 @@
     window.setTimeout(step, 450);
   }
 
+  // Editing recording in the demo window: plays muted while the window is on
+  // screen, unless motion is reduced or the visitor paused it. The step list
+  // under it marks the step on screen once the recording has started.
+  function initEditDemo() {
+    const win = document.querySelector("[data-edit-demo]");
+    if (!win) return;
+    const video = win.querySelector("video");
+    const btn = win.querySelector("[data-edit-play]");
+    if (!video || !btn) return;
+    const label = btn.querySelector("span");
+    const list = document.querySelector("[data-edit-steps]");
+    const steps = list ? Array.from(list.children) : [];
+    let userPaused = reduced();
+    let onScreen = false;
+
+    const render = () => {
+      const on = !video.paused;
+      win.classList.toggle("is-playing", on);
+      label.textContent = on ? t.pause : t.play;
+      btn.setAttribute("aria-label", on ? t.editPause : t.editPlay);
+    };
+    const sync = () => {
+      if (onScreen && !userPaused && !document.hidden) play(video);
+      else if (!video.paused) video.pause();
+    };
+    const mark = () => {
+      let current = -1;
+      steps.forEach((li, i) => {
+        if (video.currentTime >= Number(li.dataset.t)) current = i;
+      });
+      steps.forEach((li, i) => {
+        li.classList.toggle("is-current", i === current);
+        if (i === current) li.setAttribute("aria-current", "step");
+        else li.removeAttribute("aria-current");
+      });
+    };
+
+    btn.hidden = false;
+    btn.addEventListener("click", () => {
+      userPaused = !video.paused;
+      if (userPaused) video.pause();
+      else play(video);
+    });
+    video.addEventListener("playing", () => {
+      win.classList.add("is-started");
+      if (list) list.classList.add("is-live");
+      render();
+    });
+    video.addEventListener("pause", render);
+    video.addEventListener("timeupdate", mark);
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        (entries) => {
+          onScreen = entries[entries.length - 1].isIntersecting;
+          sync();
+        },
+        { threshold: 0.4 },
+      ).observe(win);
+    }
+    document.addEventListener("visibilitychange", sync);
+    onMQChange(reduceMQ, () => {
+      if (reduced()) userPaused = true;
+      sync();
+    });
+  }
+
   // Phone in the demo: plays only when the visitor presses the button.
   function initPhone() {
     const fig = document.querySelector("[data-phone]");
     if (!fig) return;
-    const video = fig.querySelector("video");
+    const video = fig.querySelector(".phone video");
     const btn = fig.querySelector("[data-phone-play]");
     if (!video || !btn) return;
     const label = btn.querySelector("span");
@@ -559,6 +630,7 @@
   initScrollFade();
   initWall();
   initTyping();
+  initEditDemo();
   initPhone();
   initShorts();
   initReel();
