@@ -30,7 +30,7 @@ https://fishcut.nomadamas.org
 2. `python3 -I tools/build.py`로 다시 만듭니다.
 3. `python3 -I tools/build.py --check`와 `python3 -I tools/check.py`가 통과하는지 봅니다. CI(`.github/workflows/check.yml`)도 같은 두 명령을 돌립니다.
 
-`tools/check.py`는 Google OAuth 검증과 YouTube API 정책이 요구하는 항목(방침과 약관 링크, YouTube API Services 고지, 제한적 사용(Limited Use) 문장, 권한 취소 링크, 상표 문구 등), 두 언어의 구조가 같은지, 로컬 링크와 자산이 모두 있는지를 봅니다. 외부 요청은 글꼴 CDN만 허용합니다. 디자인은 판단하지 않습니다.
+`tools/check.py`는 Google OAuth 검증과 YouTube API 정책이 요구하는 항목(방침과 약관 링크, YouTube API Services 고지, 제한적 사용(Limited Use) 문장, 권한 취소 링크, 상표 문구 등), 두 언어의 구조가 같은지, 로컬 링크와 자산이 모두 있는지를 봅니다. 외부 요청은 글꼴 CDN만 허용합니다. 예시 쇼츠의 YouTube 플레이어는 HTML에 없고, 방문자가 재생을 누르면 `main.js`가 `youtube-nocookie.com` 플레이어를 그 카드에 넣습니다. 검사는 이 주소 말고 다른 플레이어가 없는지와 방침에 이 동작이 적혀 있는지를 봅니다. 디자인은 판단하지 않습니다.
 
 ## 초안 메모를 지우기 전에
 

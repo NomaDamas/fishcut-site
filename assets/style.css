@@ -468,7 +468,8 @@ h3 {
 
 .pill-btn svg,
 .motion-toggle svg,
-.phone-play svg {
+.phone-play svg,
+.window-play svg {
   width: 14px;
   height: 14px;
   fill: currentColor;
@@ -481,13 +482,17 @@ h3 {
 
 .how.is-user-paused [data-reel-play] .i-play,
 .phone-play .i-play,
-.demo-figure.is-playing .phone-play .i-pause {
+.demo-figure.is-playing .phone-play .i-pause,
+.window-play .i-play,
+.window.is-playing .window-play .i-pause {
   display: inline;
 }
 
 .how.is-user-paused [data-reel-play] .i-pause,
 .phone-play .i-pause,
-.demo-figure.is-playing .phone-play .i-play {
+.demo-figure.is-playing .phone-play .i-play,
+.window-play .i-pause,
+.window.is-playing .window-play .i-play {
   display: none;
 }
 
@@ -959,13 +964,63 @@ h3 {
   cursor: pointer;
 }
 
+/* the recording sits on its first frame; the video covers it once it has played */
+.window-screen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #0d0d10;
+}
+
+.window-screen img,
+.window-screen video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.window-screen video {
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.window.is-started .window-screen video {
+  opacity: 1;
+}
+
+.window-play {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 14px 0 12px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background: rgba(11, 11, 15, 0.86);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.window-play:hover {
+  border-color: var(--ink);
+}
+
 .demo-caps {
   margin-top: 20px;
 }
 
-.demo-caps p {
+.demo-caps > * {
   padding-top: 14px;
   border-top: 1px solid var(--line);
+}
+
+.demo-caps p {
   color: var(--ink-2);
   font-size: 15px;
   line-height: 1.65;
@@ -973,6 +1028,41 @@ h3 {
 
 .demo-caps strong {
   color: var(--ink);
+}
+
+/* Steps of the recording. While it plays, the step on screen is marked. */
+.edit-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edit-steps li {
+  padding-top: 10px;
+  border-top: 2px solid var(--line-2);
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.5;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.edit-steps.is-live li {
+  color: var(--ink-3);
+}
+
+.edit-steps li.is-current {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.es-t {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  font-size: 12px;
 }
 
 /* How it works: story reel */
@@ -1265,6 +1355,37 @@ h3 {
   max-width: none;
 }
 
+/* before and after: one image of two halves, labelled above so nothing covers the screens */
+.ba {
+  border-block: 1px solid var(--line);
+  background: #0d0d10;
+}
+
+.ba-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.ba-head span {
+  padding: 6px 12px;
+}
+
+.ba-head span + span {
+  border-left: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.ba img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .chat {
   padding: 14px 16px;
   border-block: 1px solid var(--line);
@@ -1278,6 +1399,13 @@ h3 {
   font-size: 13.5px;
   font-weight: 600;
   line-height: 1.5;
+}
+
+.chat-req .mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
 .chat-log {
@@ -1393,7 +1521,9 @@ h3 {
   line-height: 1.6;
 }
 
-/* Real shorts: three hairline cells, number above each poster */
+/* Real shorts: hairline cells, three per row, number above each poster.
+   "Play here" swaps the poster for the player. YouTube's player rules:
+   at least 200px wide, nothing drawn over it, one playing at a time. */
 
 .shorts-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1406,16 +1536,9 @@ h3 {
   padding: 28px 24px 30px;
 }
 
-.short-card a {
-  display: block;
+.short-inner {
   width: min(100%, 300px);
   margin-inline: auto;
-  color: inherit;
-  text-decoration: none;
-}
-
-.short-card a:focus-visible {
-  outline-offset: 8px;
 }
 
 .short-num {
@@ -1444,14 +1567,65 @@ h3 {
   pointer-events: none;
 }
 
-.short-card a:hover .short-media,
-.short-card a:focus-visible .short-media {
+.short-card:not(.is-embed) .short-media:hover,
+.short-card:not(.is-embed) .short-media:focus-within {
   transform: translateY(-6px);
 }
 
-.short-card a:hover .short-media::after,
-.short-card a:focus-visible .short-media::after {
+.short-card:not(.is-embed) .short-media:hover::after,
+.short-card:not(.is-embed) .short-media:focus-within::after {
   box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.short-play {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 16px 0 13px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.short-play svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.short-play:focus-visible {
+  outline-offset: 3px;
+}
+
+.short-player {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+/* the player owns the whole frame: no rounded clip, no ring, no lift */
+.short-card.is-embed .short-media {
+  border-radius: 0;
+  transform: none;
+}
+
+.short-card.is-embed .short-media::after {
+  display: none;
 }
 
 .short-media img,
@@ -1472,6 +1646,13 @@ h3 {
   opacity: 1;
 }
 
+/* the hover rule above hides every video in the frame; the player must stay visible */
+.short-media .short-player {
+  opacity: 1;
+  object-fit: contain;
+  transition: none;
+}
+
 .short-title {
   display: block;
   margin-top: 20px;
@@ -1482,16 +1663,32 @@ h3 {
 }
 
 .short-meta {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 4px 14px;
   margin-top: 10px;
   color: var(--ink-2);
   font-size: 14px;
   font-weight: 600;
 }
 
-.short-card a:hover .short-meta {
+.short-tpl {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.short-meta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.short-meta a:hover {
   color: var(--ink);
 }
 
@@ -2355,6 +2552,11 @@ h3 {
   .composer {
     margin-top: calc(var(--tile-h) * -0.3);
   }
+
+  /* keeps each poster, and the player that replaces it, at least 200px wide down to 761px */
+  .short-card {
+    padding-inline: 16px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -2530,36 +2732,80 @@ h3 {
     padding: 14px 16px;
   }
 
-  /* editor on top; the short and both captions share the row below */
+  /* the recording and its steps on top; the short and its caption share the row below */
   .demo-figure {
     display: grid;
     grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
     gap: 16px 14px;
   }
 
-  .demo-visual {
+  .demo-visual,
+  .demo-caps {
     display: contents;
   }
 
   .window {
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
+
+  .cap-editor {
+    grid-row: 2;
     grid-column: 1 / -1;
   }
 
   /* a longer caption beside it must not stretch the phone, or the play button drops below the screen */
   .phone {
+    grid-row: 3;
+    grid-column: 1;
     align-self: start;
   }
 
-  .demo-caps {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 14px;
+  .cap-phone {
+    grid-row: 3;
+    grid-column: 2;
     align-self: start;
-    margin-top: 0;
   }
 
   .demo-caps p {
     font-size: 14px;
     line-height: 1.6;
+  }
+
+  .edit-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .edit-steps li {
+    padding: 2px 0 2px 10px;
+    border-top: 0;
+    border-left: 2px solid var(--line-2);
+    font-size: 13.5px;
+  }
+
+  .edit-steps li.is-current {
+    border-left-color: var(--ink);
+  }
+
+  .es-t {
+    display: inline;
+    margin: 0 6px 0 0;
+  }
+
+  /* icon only: the window is small here, and the button's label stays in aria-label */
+  .window-play {
+    right: 8px;
+    bottom: 8px;
+    justify-content: center;
+    width: 36px;
+    min-height: 36px;
+    padding: 0;
+  }
+
+  .window-play span {
+    display: none;
   }
 
   .window-bar {
@@ -2736,12 +2982,14 @@ h3 {
   .short-media,
   .short-media::after,
   .how.is-enhanced .story,
-  .btn {
+  .btn,
+  .window-screen video,
+  .edit-steps li {
     transition: none;
   }
 
-  .short-card a:hover .short-media,
-  .short-card a:focus-visible .short-media {
+  .short-card:not(.is-embed) .short-media:hover,
+  .short-card:not(.is-embed) .short-media:focus-within {
     transform: none;
   }
 }

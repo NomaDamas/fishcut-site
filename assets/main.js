@@ -10,22 +10,30 @@
       pause: "멈춤",
       phonePlay: "완성 쇼츠 재생",
       phonePause: "완성 쇼츠 멈춤",
+      editPlay: "편집 녹화 재생",
+      editPause: "편집 녹화 멈춤",
       autoPlay: "자동 넘김 재생",
       autoPause: "자동 넘김 멈춤",
       step: (n, total, title) => `${total}단계 중 ${n}단계: ${title}`,
       copied: "복사했습니다",
       copyFailed: "직접 선택해 복사하세요",
+      ytPlayer: (title) => `YouTube 플레이어: ${title}`,
+      videoPlayer: (title) => `영상: ${title}`,
     },
     en: {
       play: "Play",
       pause: "Pause",
       phonePlay: "Play the finished short",
       phonePause: "Pause the finished short",
+      editPlay: "Play the editing recording",
+      editPause: "Pause the editing recording",
       autoPlay: "Resume auto-advance",
       autoPause: "Pause auto-advance",
       step: (n, total, title) => `Step ${n} of ${total}: ${title}`,
       copied: "Copied",
       copyFailed: "Select the text and copy it",
+      ytPlayer: (title) => `YouTube player: ${title}`,
+      videoPlayer: (title) => `Video: ${title}`,
     },
   };
   const t = TEXT[document.documentElement.lang] || TEXT.ko;
@@ -121,11 +129,78 @@
     window.setTimeout(step, 450);
   }
 
+  // Editing recording in the demo window: plays muted while the window is on
+  // screen, unless motion is reduced or the visitor paused it. The step list
+  // under it marks the step on screen once the recording has started.
+  function initEditDemo() {
+    const win = document.querySelector("[data-edit-demo]");
+    if (!win) return;
+    const video = win.querySelector("video");
+    const btn = win.querySelector("[data-edit-play]");
+    if (!video || !btn) return;
+    const label = btn.querySelector("span");
+    const list = document.querySelector("[data-edit-steps]");
+    const steps = list ? Array.from(list.children) : [];
+    let userPaused = reduced();
+    let onScreen = false;
+
+    const render = () => {
+      const on = !video.paused;
+      win.classList.toggle("is-playing", on);
+      label.textContent = on ? t.pause : t.play;
+      btn.setAttribute("aria-label", on ? t.editPause : t.editPlay);
+    };
+    const sync = () => {
+      if (onScreen && !userPaused && !document.hidden) play(video);
+      else if (!video.paused) video.pause();
+    };
+    const mark = () => {
+      let current = -1;
+      steps.forEach((li, i) => {
+        if (video.currentTime >= Number(li.dataset.t)) current = i;
+      });
+      steps.forEach((li, i) => {
+        li.classList.toggle("is-current", i === current);
+        if (i === current) li.setAttribute("aria-current", "step");
+        else li.removeAttribute("aria-current");
+      });
+    };
+
+    btn.hidden = false;
+    btn.addEventListener("click", () => {
+      userPaused = !video.paused;
+      if (userPaused) video.pause();
+      else play(video);
+    });
+    video.addEventListener("playing", () => {
+      win.classList.add("is-started");
+      if (list) list.classList.add("is-live");
+      render();
+    });
+    video.addEventListener("pause", render);
+    video.addEventListener("timeupdate", mark);
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        (entries) => {
+          onScreen = entries[entries.length - 1].isIntersecting;
+          sync();
+        },
+        { threshold: 0.4 },
+      ).observe(win);
+    }
+    document.addEventListener("visibilitychange", sync);
+    onMQChange(reduceMQ, () => {
+      if (reduced()) userPaused = true;
+      sync();
+    });
+  }
+
   // Phone in the demo: plays only when the visitor presses the button.
   function initPhone() {
     const fig = document.querySelector("[data-phone]");
     if (!fig) return;
-    const video = fig.querySelector("video");
+    const video = fig.querySelector(".phone video");
     const btn = fig.querySelector("[data-phone-play]");
     if (!video || !btn) return;
     const label = btn.querySelector("span");
@@ -144,25 +219,67 @@
     video.addEventListener("pause", render);
   }
 
-  // Real shorts: hover or keyboard focus previews the loop.
-  function initHoverPlay() {
-    for (const card of document.querySelectorAll("[data-hover-play]")) {
-      const video = card.querySelector("video");
-      if (!video) continue;
+  // Real shorts: hover or keyboard focus previews the silent loop. "Play here"
+  // puts the player in place of the poster, one card at a time. A YouTube card
+  // loads the privacy-enhanced player only after the click, so the page sends
+  // nothing to YouTube before it. Nothing is drawn over a player.
+  function initShorts() {
+    const cards = Array.from(document.querySelectorAll("[data-short]"));
+    const close = (card) => {
+      const player = card.querySelector("[data-player]");
+      if (!player) return;
+      player.remove();
+      card.classList.remove("is-embed");
+      card.querySelector("[data-short-play]").hidden = false;
+    };
+    for (const card of cards) {
+      const media = card.querySelector(".short-media");
+      const loop = media.querySelector("video");
+      const btn = card.querySelector("[data-short-play]");
+      const title = card.querySelector(".short-title").textContent;
       const start = () => {
-        if (!reduced()) play(video);
+        if (!reduced() && !card.classList.contains("is-embed")) play(loop);
       };
       const stop = () => {
-        video.pause();
+        loop.pause();
         card.classList.remove("is-playing");
       };
-      video.addEventListener("playing", () => card.classList.add("is-playing"));
+      loop.addEventListener("playing", () => card.classList.add("is-playing"));
       if (hoverMQ.matches) {
         card.addEventListener("mouseenter", start);
         card.addEventListener("mouseleave", stop);
       }
       card.addEventListener("focusin", start);
       card.addEventListener("focusout", stop);
+
+      btn.hidden = false;
+      btn.addEventListener("click", () => {
+        for (const other of cards) if (other !== card) close(other);
+        stop();
+        let player;
+        if (card.dataset.yt) {
+          player = document.createElement("iframe");
+          player.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(card.dataset.yt)}?autoplay=1&playsinline=1&rel=0`;
+          player.title = t.ytPlayer(title);
+          player.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+          player.allowFullscreen = true;
+          player.referrerPolicy = "strict-origin-when-cross-origin";
+        } else {
+          player = document.createElement("video");
+          player.src = card.dataset.src;
+          player.controls = true;
+          player.playsInline = true;
+          player.setAttribute("aria-label", t.videoPlayer(title));
+          const result = player.play();
+          if (result && result.catch) result.catch(() => {});
+        }
+        player.className = "short-player";
+        player.dataset.player = "";
+        media.append(player);
+        card.classList.add("is-embed");
+        btn.hidden = true;
+        player.focus();
+      });
     }
   }
 
@@ -513,8 +630,9 @@
   initScrollFade();
   initWall();
   initTyping();
+  initEditDemo();
   initPhone();
-  initHoverPlay();
+  initShorts();
   initReel();
   initCarousel();
   initCopy();
