@@ -64,10 +64,10 @@
       <article class="doc">
 <h1>Privacy Policy</h1>
 <p class="lede">This policy explains what information fishcut stores, where it stores it, and what it uses it for. fishcut is software that runs on your computer, and NomaDamas does not receive your data.</p>
-<p class="meta">Effective <time datetime="2026-10-20">2026-10-20</time> (draft) / Last updated <time datetime="2026-10-22">2026-10-22</time></p>
+<p class="meta">Effective <time datetime="2026-10-27">2026-10-27</time> / Last updated <time datetime="2026-10-27">2026-10-27</time></p>
 
-<aside class="note draft">
-	<p>Draft note: token revocation, the 30-day refresh, token encryption, and agreeing to the policy before connecting must be matched to the editor changes. This note will be removed before publishing. Confirm the English legal name of Markr before publishing.</p>
+<aside class="note">
+	<p>This policy describes the running version and its limits. Automatic deletion and Google checks cannot run on a stopped or sleeping computer. Publishing this policy does not mean that Google has approved the app or granted an exception to offline deletion deadlines. See section 7 for operating conditions and section 6 for storage protection.</p>
 </aside>
 
 <nav class="toc" aria-label="Contents of this page">
@@ -90,7 +90,7 @@
 </nav>
 
 <h2 id="scope">1. Where this policy applies</h2>
-<p>This policy applies to fishcut (the command-line tool and the local editor), an open source tool for making shorts that NomaDamas distributes, and to this website. NomaDamas is an AI open source hacker house operated by Markr.</p>
+<p>This policy applies to fishcut (the command-line tool and the local editor), a shorts tool that NomaDamas is preparing to release as open source, and to this website. NomaDamas is an AI open source hacker house operated by Markr.</p>
 <ul>
 	<li>fishcut runs on your computer. NomaDamas does not operate servers for fishcut, and it does not receive or keep the information that fishcut handles.</li>
 	<li>When you connect through the Google Cloud project that NomaDamas registered, the Google consent screen shows the app name fishcut, and this policy applies.</li>
@@ -107,9 +107,11 @@
 		<tr><th scope="col">Information</th><th scope="col">Source</th><th scope="col">Where it is stored</th></tr>
 	</thead>
 	<tbody>
-		<tr><td>Google OAuth tokens (access token, refresh token)</td><td>Issued by Google when you connect your Google account</td><td>The fishcut state folder on this computer</td></tr>
+		<tr><td>Google OAuth refresh token</td><td>Issued by Google when you connect your Google account</td><td>The fishcut state folder on this computer</td></tr>
+		<tr><td>Google OAuth access token</td><td>Issued by Google during connection or token refresh</td><td>Memory of the process handling the request. Not stored in the state database</td></tr>
 		<tr><td>ID and name of the connected YouTube channel</td><td>YouTube Data API (<code>youtube.readonly</code>)</td><td>Same folder</td></tr>
 		<tr><td>ID, visibility status, scheduled time, and upload progress of uploaded videos</td><td>YouTube Data API (<code>youtube.upload</code>, <code>youtube.readonly</code>)</td><td>Same folder</td></tr>
+		<tr><td>Upload session URL, duplicate-upload fingerprint, actual channel verification time, and pending revocation time</td><td>Google responses and local upload processing</td><td>Same folder</td></tr>
 		<tr><td>Upload settings (title, description, tags, visibility, category, made for kids, synthetic content, scheduled time)</td><td>Entered by you</td><td>Same folder</td></tr>
 		<tr><td>OAuth client file</td><td>Added by you</td><td>Same folder</td></tr>
 		<tr><td>Project files (scripts, voice, images, render output)</td><td>Made by you and the AI agents you connect</td><td>A work folder you choose</td></tr>
@@ -121,14 +123,14 @@
 <ul>
 	<li>It shows the name and ID of the channel you are about to upload to, so you can confirm that it is the right channel.</li>
 	<li>It uploads the video for which you pressed the confirm button to the connected channel, with the settings you chose.</li>
-	<li>After an upload, it checks that the video's visibility status and scheduled time match what you requested, and shows you the result.</li>
+	<li>After a scheduled upload, it checks the video's visibility status and scheduled time again and shows whether they match your request. For an unscheduled upload, it records the upload response as the result.</li>
 	<li>It lets the AI agents you connect over MCP read the name of the connected channel and the upload records, so they can help you plan videos and prepare uploads (section 5).</li>
 </ul>
 <p>fishcut does not use this information for advertising, profiling, sale, or credit assessment.</p>
 
 <h2 id="share">5. Sharing and transfer</h2>
 <ul>
-	<li>fishcut does not send the information above to NomaDamas or to any other company.</li>
+	<li>fishcut does not send the information above to NomaDamas. Requests to Google and transfers to AI agents and voice providers you connect are described below.</li>
 	<li>Channel checks and upload requests go directly from your computer to Google over HTTPS. There is no server in between.</li>
 	<li>AI agents that you connect over MCP (such as Claude Code or Codex) can read part of what the editor stores on your computer: video projects, channel settings (channel name, planning settings, upload defaults, default voice, publishing schedule, and the name of the connected YouTube channel), and upload records (channel name, time, visibility or schedule, video URL, title sent, and pinned comment). You decide which agents to connect, and the policies of those agent providers also apply. fishcut does not pass Google tokens or YouTube channel IDs over MCP.</li>
 	<li>If you choose a paid voice provider (such as Typecast or ElevenLabs) and approve it, the sentences to be voiced are sent to that provider with your API key. That provider's policies apply to this transfer. It contains no Google user data.</li>
@@ -137,28 +139,36 @@
 <h2 id="security">6. Where it is stored and how it is protected</h2>
 <ul>
 	<li>fishcut creates the state folder with permissions that let only the user who runs fishcut read and write it (0700 for the folder, 0600 for files). When you run fishcut with Docker, the folder is kept in that installation's <code>state</code> volume.</li>
+	<li>Refresh tokens are currently stored in the local SQLite database. fishcut does not yet provide its own encryption at rest or OS keychain storage. File permissions and encryption at rest are different protections.</li>
 	<li>All communication with Google is encrypted with HTTPS.</li>
 	<li>The local editor accepts connections only at this computer's address (<code>127.0.0.1</code>), and only a browser opened with the token issued at startup can use it.</li>
 </ul>
 
 <h2 id="retention">7. Retention period</h2>
+<p>fishcut stores information needed to check the connected YouTube channel and upload videos you approve on this computer. The automatic processing below runs only while the editor is running.</p>
 <table>
 	<thead>
 		<tr><th scope="col">Information</th><th scope="col">Retention period</th></tr>
 	</thead>
 	<tbody>
-		<tr><td>Google OAuth tokens</td><td>As long as you stay connected</td></tr>
-		<tr><td>Channel ID and name, status of uploaded videos</td><td>Up to 30 days. After 30 days, fishcut checks YouTube again and refreshes the information or deletes it.</td></tr>
-		<tr><td>Upload settings, OAuth client file, project files</td><td>Until you change or delete them</td></tr>
+		<tr><td>YouTube channel ID and name, OAuth refresh token</td><td>The connection is checked periodically and the actual successful verification time is recorded. Maintenance deletes information and tokens when 30 days have passed since that check. Failed checks and restarts do not extend the timestamp.</td></tr>
+		<tr><td>YouTube upload results, video ID and URL, upload session URL, duplicate-upload fingerprint</td><td>Maintenance deletes these records together when 30 days have passed since creation. Rechecking the channel does not extend their retention. Related records are deleted locally as soon as withdrawal is requested in the editor.</td></tr>
+		<tr><td>Refresh token retained after a failed Google revocation request</td><td>The connection is disabled and the token is used only for retries. Maintenance deletes it when 7 days have passed since withdrawal began. Local deletion does not mean that Google revocation succeeded.</td></tr>
+		<tr><td>User-written text, channel plans, upload drafts and selections, OAuth client file, project files</td><td>Kept until you change or delete them. Google revocation or API-record cleanup alone does not delete authored content or project files.</td></tr>
 	</tbody>
 </table>
+<p>Existing connections without a verification timestamp are not assigned a new retention period automatically. Automatic cleanup stops; a separate verification records the actual time only after Google confirms the same channel.</p>
+<p><strong>Operating conditions:</strong> Google checks and disk deletion cannot run while the editor is stopped or the computer is powered off or asleep. Retention is checked first on restart. Without a network connection, Google checks and revocation requests cannot complete. Because of these limits, the current local operating model does not guarantee calendar-day deletion deadlines across offline periods.</p>
 
 <h2 id="delete">8. Deletion and revoking access</h2>
 <ul>
-	<li>When you disconnect in the editor's channel management, fishcut immediately asks Google to revoke the token and deletes the related information on this computer within 7 days.</li>
-	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. In that case, fishcut finds that the token is invalid the next time you use it and deletes the related information within 30 days.</li>
-	<li>You can also delete the fishcut state folder yourself. NomaDamas does not hold this information, so deleting it on your computer completes the deletion right away.</li>
-	<li>Deleting information on this computer does not affect videos already uploaded to YouTube or data that YouTube stores. YouTube manages that data.</li>
+	<li>Disconnecting YouTube or deleting a connected profile in channel management first disables the connection and immediately requests Google token revocation. Other local profiles using the same YouTube channel or token are also disabled. Any upload in progress must finish before withdrawal can proceed.</li>
+	<li>A failed Google revocation request is not shown as success. The screen shows revocation pending and offers a retry; automatic retries also run while the editor is open. Google revocation and local deletion are distinct.</li>
+	<li>Withdrawal deletes related API results, upload session URLs and duplicate-upload fingerprints locally. User-written text, plans, drafts and project files are preserved.</li>
+	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. While running, the editor checks the connection periodically and deletes that connection and related API records when Google explicitly reports an invalid token. Network failures or incorrect configuration alone are not treated as withdrawal.</li>
+	<li>Deleting the state folder is a local deletion and does not send a revocation request to Google. To remove Google's grant too, use the permissions page above.</li>
+	<li>Local deletion or revoking app access does not delete videos already uploaded to YouTube. YouTube manages its own videos and data.</li>
+	<li>Automatic processing is subject to section 7's operating conditions. fishcut does not guarantee secure erasure of OS backups, snapshots or state-folder copies you made separately.</li>
 </ul>
 
 <h2 id="device">9. Device storage and cookies</h2>
@@ -185,7 +195,7 @@
 <p>fishcut is not a service made for children, and it does not knowingly collect information about children. Each time you upload, you set whether the video is made for kids.</p>
 
 <h2 id="changes">13. Changes to this policy</h2>
-<p>If this policy changes, the last updated date on this page is changed. If fishcut starts to handle information in a way or for a purpose that this policy did not cover, fishcut asks you inside the app to agree to the changed policy again.</p>
+<p>If this policy changes, the last updated date on this page is changed. The current editor does not have a separate screen for accepting or reaccepting this policy. New data uses or purposes must be introduced only after the necessary advance notices and consent process are in place.</p>
 
 <h2 id="contact">14. Contact</h2>
 <p>Send questions or complaints about how personal information is handled to <a href="mailto:nmdms.mkt@gmail.com">nmdms.mkt@gmail.com</a>. Operator: NomaDamas (legal entity: Markr).</p>
@@ -218,7 +228,7 @@
     </div>
     <div class="wrap footer-legal">
       <p>YouTube is a trademark of Google LLC. fishcut is not affiliated with or endorsed by YouTube or Google.</p>
-      <p>Updated 2026-10-21</p>
+      <p>Updated 2026-10-27</p>
     </div>
   </footer>
 </body>

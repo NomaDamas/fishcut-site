@@ -64,7 +64,7 @@
       <article class="doc">
 <h1>How uploads work</h1>
 <p class="lede">This page explains how fishcut connects to YouTube and uploads videos, what data it stores, and how to revoke access. It is gathered on one page for Google reviewers and for users connecting for the first time.</p>
-<p class="meta">Updated <time datetime="2026-10-20">2026-10-20</time></p>
+<p class="meta">Updated <time datetime="2026-10-27">2026-10-27</time></p>
 
 <nav class="toc" aria-label="Contents of this page">
 	<ol>
@@ -157,11 +157,11 @@
 	</li>
 	<li>
 		<h3>A person checks and uploads</h3>
-		<p>The review screen shows the final video, the channel, and the settings again, along with the YouTube Terms of Service notice. The upload with <code>youtube.upload</code> starts only when a person presses "확인했고, YouTube에 업로드" (Checked, upload to YouTube). The agent cannot press this button.</p>
+		<p>The review screen shows the final video, the channel, and the settings again. The upload with <code>youtube.upload</code> starts only when a person presses "확인했고, YouTube에 업로드" (Checked, upload to YouTube). The agent cannot press this button. The current review screen does not yet display the YouTube Terms of Service notice.</p>
 	</li>
 	<li>
 		<h3>Check the status after upload</h3>
-		<p>When the upload finishes, the editor uses <code>youtube.readonly</code> to read the video's visibility status and scheduled time again, and shows whether they match what you requested.</p>
+		<p>After a scheduled upload, the editor uses <code>youtube.readonly</code> to read the video's visibility status and scheduled time again and compares them with your request. For an unscheduled upload, it records the upload response as the result.</p>
 	</li>
 </ol>
 
@@ -172,39 +172,39 @@
 	</thead>
 	<tbody>
 		<tr><td><code>youtube.upload</code></td><td>Uploading the final video a person has checked to the connected channel, with the settings that person chose</td><td>Uploads that a person has not checked, changes to videos on other channels</td></tr>
-		<tr><td><code>youtube.readonly</code></td><td>Showing the name and ID of the channel to upload to, checking visibility status and scheduled time after an upload</td><td>Collecting watch history, subscriptions, or analytics data</td></tr>
+		<tr><td><code>youtube.readonly</code></td><td>Showing the name and ID of the channel to upload to, checking visibility status and scheduled time after a scheduled upload</td><td>Collecting watch history, subscriptions, or analytics data</td></tr>
 	</tbody>
 </table>
 <p>When fishcut uses information it receives from Google APIs, or transfers that information to another app, it follows the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
 <p lang="en">fishcut's use and transfer to any other app of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements.</p>
 
 <h2 id="data">4. Data fishcut stores</h2>
-<p>Every item is stored in the fishcut state folder on this computer. The folder is created with permissions that let only the user who runs fishcut read it (0700 for the folder, 0600 for files). When you run fishcut with Docker, it is kept in that installation's <code>state</code> volume.</p>
+<p>Access tokens are used only in memory during requests. The other items below are stored in the fishcut state folder on this computer. The folder is created with permissions that let only the user who runs fishcut read it (0700 for the folder, 0600 for files). When you run fishcut with Docker, it is kept in that installation's <code>state</code> volume. App-level token encryption at rest and OS keychain storage are not yet implemented.</p>
 <table>
 	<thead>
 		<tr><th scope="col">Data</th><th scope="col">Used for</th><th scope="col">Retention and deletion</th></tr>
 	</thead>
 	<tbody>
-		<tr><td>Google tokens (access token, refresh token)</td><td>Authenticating YouTube requests</td><td>Kept while you stay connected. When you disconnect, fishcut asks Google to revoke them and deletes them right away.</td></tr>
-		<tr><td>ID and name of the connected channel</td><td>Showing the channel to upload to</td><td>Checked again or deleted within 30 days. Deleted within 7 days after you disconnect.</td></tr>
-		<tr><td>Upload history (video ID, visibility status, scheduled time)</td><td>Checking upload results</td><td>Checked again or deleted within 30 days.</td></tr>
+		<tr><td>Google refresh token</td><td>Authenticating YouTube requests</td><td>Maintenance deletes it after 30 days without a successful connection check. After a failed revocation request, it is disabled for connection use and kept only for retries; maintenance deletes it after 7 days from withdrawal.</td></tr>
+		<tr><td>ID and name of the connected channel</td><td>Showing the channel to upload to</td><td>Checked periodically while running; maintenance deletes it after 30 days without successful verification. Withdrawal disables the connection.</td></tr>
+		<tr><td>Upload records, session URL and duplicate-upload fingerprint</td><td>Checking results and preventing duplicate uploads</td><td>Maintenance deletes these together after 30 days from creation. Requesting withdrawal in the editor deletes related records locally right away.</td></tr>
 		<tr><td>Upload settings (title, description, tags, visibility, and more)</td><td>Reusing what you entered for the next upload</td><td>Kept until you change or delete them.</td></tr>
 		<tr><td>OAuth client file</td><td>Connecting to Google</td><td>Kept until you change or delete it.</td></tr>
 	</tbody>
 </table>
-<aside class="note draft">
-	<p>Draft note: token revocation on disconnect, the 30-day recheck, and the notice right before upload describe how fishcut behaves after the editor changes land. Before publishing, compare them with the app again and remove this note.</p>
+<aside class="note">
+	<p>Google checks and disk deletion do not run while the editor is stopped or the computer is off or asleep. Calendar-day deletion across offline periods and deletion of backups are not guaranteed. The app also lacks a separate privacy-policy acceptance screen and the YouTube terms notice immediately before upload. This description is not Google compliance approval. See the <a href="../privacy/#retention">Privacy Policy's retention section</a> for the detailed rules.</p>
 </aside>
 
 <h2 id="revoke">5. Revoking access and deleting data</h2>
 <ol>
-	<li>Disconnect in the editor's channel management. The editor asks Google to revoke the token and deletes the token from this computer.</li>
-	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. In that case, the editor finds that the token is invalid on its next request and deletes the related data within 30 days.</li>
-	<li>Deleting the state folder removes all fishcut data from this computer. Videos already uploaded to YouTube and data that YouTube stores are not affected.</li>
+	<li>Disconnecting in channel management first disables the connection and asks Google to revoke the token. Failures are shown as pending and retried while the editor is running. Deleting local records is not the same as successful Google revocation.</li>
+	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. While running, the editor checks periodically and deletes the connection and related API records when Google explicitly reports an invalid token.</li>
+	<li>Deleting the state folder removes only the local data in that folder and does not send Google a revocation request. Separate project files, backups and videos already uploaded to YouTube are not affected.</li>
 </ol>
 
 <h2 id="quota">6. Upload limit</h2>
-<p>The YouTube Data API upload quota is 100 <code>videos.insert</code> calls per day for each Google Cloud project. If you use an OAuth client you created yourself, the quota counts against your own project. To raise the limit, you need to pass a YouTube API audit.</p>
+<p>The YouTube Data API <code>videos.insert</code> upload allowance applies to the Google Cloud project you use. Check that project's quota screen for its actual limit. Submitting fishcut's increase request does not mean approval or allocation, and this page does not guarantee a daily upload count.</p>
       </article>
     </div>
   </main>
@@ -234,7 +234,7 @@
     </div>
     <div class="wrap footer-legal">
       <p>YouTube is a trademark of Google LLC. fishcut is not affiliated with or endorsed by YouTube or Google.</p>
-      <p>Updated 2026-10-21</p>
+      <p>Updated 2026-10-27</p>
     </div>
   </footer>
 </body>
