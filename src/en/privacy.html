@@ -1,6 +1,6 @@
 <h1>Privacy Policy</h1>
 <p class="lede">This policy explains what information fishcut stores, where it stores it, and what it uses it for. fishcut is software that runs on your computer, and NomaDamas does not receive your data.</p>
-<p class="meta">Effective <time datetime="2026-10-27">2026-10-27</time> / Last updated <time datetime="2026-10-27">2026-10-27</time></p>
+<p class="meta">Effective <time datetime="2026-10-27">2026-10-27</time> / Last updated <time datetime="2026-10-28">2026-10-28</time></p>
 
 <aside class="note">
 	<p>This policy describes the running version and its limits. Automatic deletion and Google checks cannot run on a stopped or sleeping computer. Publishing this policy does not mean that Google has approved the app or granted an exception to offline deletion deadlines. See section 7 for operating conditions and section 6 for storage protection.</p>
@@ -50,6 +50,8 @@
 		<tr><td>Upload session URL, duplicate-upload fingerprint, actual channel verification time, and pending revocation time</td><td>Google responses and local upload processing</td><td>Same folder</td></tr>
 		<tr><td>Upload settings (title, description, tags, visibility, category, made for kids, synthetic content, scheduled time)</td><td>Entered by you</td><td>Same folder</td></tr>
 		<tr><td>OAuth client file</td><td>Added by you</td><td>Same folder</td></tr>
+		<tr><td>Policy-acceptance revision and time</td><td>Recorded when a person explicitly accepts in the editor</td><td>Publishing-state database in the same folder</td></tr>
+		<tr><td>Publishing-credential encryption key and random key identifier</td><td>Created when first storing protected credentials or converting explicitly approved existing state</td><td>Key in the OS credential store; identifier in the publishing-state database</td></tr>
 		<tr><td>Project files (scripts, voice, images, render output)</td><td>Made by you and the AI agents you connect</td><td>A work folder you choose</td></tr>
 	</tbody>
 </table>
@@ -75,7 +77,12 @@
 <h2 id="security">6. Where it is stored and how it is protected</h2>
 <ul>
 	<li>fishcut creates the state folder with permissions that let only the user who runs fishcut read and write it (0700 for the folder, 0600 for files). When you run fishcut with Docker, the folder is kept in that installation's <code>state</code> volume.</li>
-	<li>Refresh tokens are currently stored in the local SQLite database. fishcut does not yet provide its own encryption at rest or OS keychain storage. File permissions and encryption at rest are different protections.</li>
+	<li>Per-service publishing credentials such as refresh tokens, and resumable upload session URLs and transfer offsets, are encrypted with AES-256-GCM in the local SQLite database. The key is kept separately in the OS credential store; a random key identifier is kept in the database. File permissions and encryption at rest are different protections.</li>
+	<li>macOS uses Keychain. Linux requires an available Secret Service, and a Docker state volume alone does not supply a credential store. Verification on macOS does not establish behavior on Linux, Windows, a locked Keychain or after a reboot.</li>
+	<li>This is not whole-database encryption. Channel information, upload results and duplicate-upload fingerprints, authored content, project files, OAuth client files and other services' app-configuration files are outside this feature's encryption scope. Access tokens are used only in memory during requests.</li>
+	<li>Existing plaintext is not automatically converted or deleted on restart. All editors and publishers must be stopped, and a person must separately approve the target state and OS key use for an offline protection command. It preserves connections, verification times, upload records and authored data without reconnecting to Google or revoking access.</li>
+	<li>If a key is missing or locked, or data is damaged, operations using credentials and retention maintenance stop. The original key and state must be restored; fishcut does not bypass the problem by replacing the key or deleting connections. Metadata-only reads that do not need secrets do not access the key.</li>
+	<li>If database page compaction fails after encryption, keep the editor stopped while investigating. This conversion does not find and erase plaintext in older copies, OS backups or snapshots.</li>
 	<li>All communication with Google is encrypted with HTTPS.</li>
 	<li>The local editor accepts connections only at this computer's address (<code>127.0.0.1</code>), and only a browser opened with the token issued at startup can use it.</li>
 </ul>
@@ -91,9 +98,12 @@
 		<tr><td>YouTube upload results, video ID and URL, upload session URL, duplicate-upload fingerprint</td><td>Maintenance deletes these records together when 30 days have passed since creation. Rechecking the channel does not extend their retention. Related records are deleted locally as soon as withdrawal is requested in the editor.</td></tr>
 		<tr><td>Refresh token retained after a failed Google revocation request</td><td>The connection is disabled and the token is used only for retries. Maintenance deletes it when 7 days have passed since withdrawal began. Local deletion does not mean that Google revocation succeeded.</td></tr>
 		<tr><td>User-written text, channel plans, upload drafts and selections, OAuth client file, project files</td><td>Kept until you change or delete them. Google revocation or API-record cleanup alone does not delete authored content or project files.</td></tr>
+		<tr><td>Policy-acceptance revision and time</td><td>Kept in the publishing-state database and updated when you accept a different revision. Accepting the same revision again does not change its original acceptance time. Disconnecting Google alone does not delete it; deleting the state folder does.</td></tr>
+		<tr><td>Encryption key and key identifier</td><td>Needed to read protected credentials and sessions. fishcut does not automatically replace or delete keys. Deleting the state folder removes the database identifier but leaves the key in the OS credential store.</td></tr>
 	</tbody>
 </table>
 <p>Existing connections without a verification timestamp are not assigned a new retention period automatically. Automatic cleanup stops; a separate verification records the actual time only after Google confirms the same channel.</p>
+<p>Existing plaintext or unreadable protected state described in section 6 also stops credential use and retention maintenance. Protection errors or encryption conversion do not reset retention timestamps. This stop does not constitute an approved exception to deletion deadlines.</p>
 <p><strong>Operating conditions:</strong> Google checks and disk deletion cannot run while the editor is stopped or the computer is powered off or asleep. Retention is checked first on restart. Without a network connection, Google checks and revocation requests cannot complete. Because of these limits, the current local operating model does not guarantee calendar-day deletion deadlines across offline periods.</p>
 
 <h2 id="delete">8. Deletion and revoking access</h2>
@@ -102,7 +112,7 @@
 	<li>A failed Google revocation request is not shown as success. The screen shows revocation pending and offers a retry; automatic retries also run while the editor is open. Google revocation and local deletion are distinct.</li>
 	<li>Withdrawal deletes related API results, upload session URLs and duplicate-upload fingerprints locally. User-written text, plans, drafts and project files are preserved.</li>
 	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. While running, the editor checks the connection periodically and deletes that connection and related API records when Google explicitly reports an invalid token. Network failures or incorrect configuration alone are not treated as withdrawal.</li>
-	<li>Deleting the state folder is a local deletion and does not send a revocation request to Google. To remove Google's grant too, use the permissions page above.</li>
+	<li>Deleting the state folder is a local deletion; it does not send a revocation request to Google or remove the key in the OS credential store. To remove Google's grant too, use the permissions page above.</li>
 	<li>Local deletion or revoking app access does not delete videos already uploaded to YouTube. YouTube manages its own videos and data.</li>
 	<li>Automatic processing is subject to section 7's operating conditions. fishcut does not guarantee secure erasure of OS backups, snapshots or state-folder copies you made separately.</li>
 </ul>
@@ -131,7 +141,9 @@
 <p>fishcut is not a service made for children, and it does not knowingly collect information about children. Each time you upload, you set whether the video is made for kids.</p>
 
 <h2 id="changes">13. Changes to this policy</h2>
-<p>If this policy changes, the last updated date on this page is changed. The current editor does not have a separate screen for accepting or reaccepting this policy. New data uses or purposes must be introduced only after the necessary advance notices and consent process are in place.</p>
+<p>If this policy changes, the last updated date on this page is changed. The editor shows links to the fishcut Privacy Policy, fishcut Terms of Service, YouTube Terms of Service and Google's permission-revocation page. A person explicitly accepts all three policies and terms by selecting the initially unchecked checkbox and pressing a separate acceptance button. The accepted revision and time are recorded in local publishing state; an agent cannot accept on your behalf.</p>
+<p>An existing Google connection is not treated as policy acceptance, and a connected channel can accept separately without reconnecting. The server checks the current accepted revision before Google connection and upload review or transmission. Draft editing and saving, disconnection and revocation retries are separate from policy acceptance, but storage-protection errors can still stop operations as described in section 6.</p>
+<p>When the app changes the revision it requires, acceptance is required again. Changing only this webpage's last-updated date does not automatically change the app's acceptance revision. New data uses or purposes must be introduced only after the necessary advance notices and consent process are in place.</p>
 
 <h2 id="contact">14. Contact</h2>
 <p>Send questions or complaints about how personal information is handled to <a href="mailto:nmdms.mkt@gmail.com">nmdms.mkt@gmail.com</a>. Operator: NomaDamas (legal entity: Markr).</p>
