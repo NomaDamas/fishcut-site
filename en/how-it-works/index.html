@@ -64,7 +64,7 @@
       <article class="doc">
 <h1>How uploads work</h1>
 <p class="lede">This page explains how fishcut connects to YouTube and uploads videos, what data it stores, and how to revoke access. It is gathered on one page for Google reviewers and for users connecting for the first time.</p>
-<p class="meta">Updated <time datetime="2026-10-27">2026-10-27</time></p>
+<p class="meta">Updated <time datetime="2026-10-28">2026-10-28</time></p>
 
 <nav class="toc" aria-label="Contents of this page">
 	<ol>
@@ -137,10 +137,11 @@
 	</li>
 	<li>
 		<h3>Connect with Google</h3>
-		<p>In channel management, press "Google로 연결" (Connect with Google), and the Google consent screen opens in your system's default browser. fishcut does not use a browser built into the app. When you check the app name and the two permissions on the consent screen and allow them, the editor receives the result at a temporary address on this computer (PKCE, state check).</p>
+		<p>First, a person reviews the fishcut Privacy Policy, fishcut Terms of Service and YouTube Terms of Service in channel management, selects the initially unchecked checkbox, and presses the separate acceptance button. The accepted revision and time are stored in this computer's publishing state. An existing Google connection does not imply acceptance, and an already connected channel does not need to reconnect. An agent cannot accept on your behalf.</p>
+		<p>Then press "Google로 연결" (Connect with Google), and the Google consent screen opens in your system's default browser. fishcut does not use a browser built into the app. When you check the app name and the two permissions on the consent screen and allow them, the editor receives the result at a temporary address on this computer (PKCE, state check). This Google authorization is separate from accepting the editor's policy.</p>
 		<figure>
 			<img src="../../assets/shots/channel-connect-dark.webp" width="2000" height="1250" alt="The channel management window. Below the example channel's profile, the Google connection section has 'Connect with Google' and 'Refresh connection status' buttons and a note to add an OAuth client first." loading="lazy" />
-			<figcaption>Google connection in channel management. Until you add an OAuth client, "Google로 연결" (Connect with Google) is turned off.</figcaption>
+			<figcaption>This channel-management example predates the policy-acceptance screen. The current version also requires the separate acceptance described above. Until you add an OAuth client, "Google로 연결" (Connect with Google) is turned off.</figcaption>
 		</figure>
 	</li>
 	<li>
@@ -150,6 +151,7 @@
 	<li>
 		<h3>Review the upload settings</h3>
 		<p>Set the title, description, tags, visibility (public, unlisted, private), category, made for kids, realistic synthetic content, and scheduled time. Your channel defaults are filled in first, but you can change them for each video, and the editor does not add any other text after what you enter.</p>
+		<p>The server checks acceptance of its current policy revision again before preparing a review and sending an upload. It does not send without the required acceptance. Editing and saving drafts are separate from policy acceptance, as are disconnecting and retrying revocation. Operations that use credentials still stop if protected data or its key cannot be read.</p>
 		<figure>
 			<img src="../../assets/shots/upload-settings-dark.webp" width="2000" height="1250" alt="The YouTube upload window. The example channel is on the left. On the right are fields for video title, description, tags, visibility, category, made for kids, synthetic content, and scheduled publish time, with a 'Review upload settings' button." loading="lazy" />
 			<figcaption>YouTube upload settings. If you leave the scheduled time empty, the video is uploaded right away with the visibility you chose.</figcaption>
@@ -157,7 +159,7 @@
 	</li>
 	<li>
 		<h3>A person checks and uploads</h3>
-		<p>The review screen shows the final video, the channel, and the settings again. The upload with <code>youtube.upload</code> starts only when a person presses "확인했고, YouTube에 업로드" (Checked, upload to YouTube). The agent cannot press this button. The current review screen does not yet display the YouTube Terms of Service notice.</p>
+		<p>The review screen shows the final video, the channel, and the settings again. For both ordinary and scheduled uploads, the final button is accompanied by the notice about complying with the YouTube Terms of Service and Community Guidelines and respecting copyright and privacy rights. The upload with <code>youtube.upload</code> starts only when a person presses "확인했고, YouTube에 업로드" (Checked, upload to YouTube). The agent cannot press this button.</p>
 	</li>
 	<li>
 		<h3>Check the status after upload</h3>
@@ -179,7 +181,9 @@
 <p lang="en">fishcut's use and transfer to any other app of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements.</p>
 
 <h2 id="data">4. Data fishcut stores</h2>
-<p>Access tokens are used only in memory during requests. The other items below are stored in the fishcut state folder on this computer. The folder is created with permissions that let only the user who runs fishcut read it (0700 for the folder, 0600 for files). When you run fishcut with Docker, it is kept in that installation's <code>state</code> volume. App-level token encryption at rest and OS keychain storage are not yet implemented.</p>
+<p>Access tokens are used only in memory during requests. Publishing credentials such as refresh tokens, and resumable upload session URLs and transfer offsets, are encrypted with AES-256-GCM in the state folder's SQLite database. The key is kept separately in the OS credential store; only a random key identifier is kept in the database. macOS uses Keychain, and Linux requires an available Secret Service.</p>
+<p>Folder and file permissions (0700 and 0600) are separate protections. This feature does not encrypt all channel information, upload records, authored content, projects or OAuth client files. A Docker <code>state</code> volume alone does not supply a credential store. If a key is missing or locked, or data is damaged, operations stop rather than replacing the key or deleting the connection.</p>
+<p>Existing plaintext is not converted merely by restarting. All editors and publishers must be stopped, and a person must separately approve the target state and OS key use for an offline protection command. Conversion preserves connections, verification times, upload records and authored data; it does not reconnect to Google or revoke access. If database page compaction fails, keep the editor stopped while investigating. Erasure of plaintext in older copies and backups is not guaranteed.</p>
 <table>
 	<thead>
 		<tr><th scope="col">Data</th><th scope="col">Used for</th><th scope="col">Retention and deletion</th></tr>
@@ -190,17 +194,18 @@
 		<tr><td>Upload records, session URL and duplicate-upload fingerprint</td><td>Checking results and preventing duplicate uploads</td><td>Maintenance deletes these together after 30 days from creation. Requesting withdrawal in the editor deletes related records locally right away.</td></tr>
 		<tr><td>Upload settings (title, description, tags, visibility, and more)</td><td>Reusing what you entered for the next upload</td><td>Kept until you change or delete them.</td></tr>
 		<tr><td>OAuth client file</td><td>Connecting to Google</td><td>Kept until you change or delete it.</td></tr>
+		<tr><td>Policy-acceptance revision and time, key identifier</td><td>Checking human acceptance and locating the encryption key</td><td>Kept in local publishing state. Accepting a different revision updates the acceptance record. Keys are not automatically replaced or deleted, and deleting the state folder does not remove OS keys.</td></tr>
 	</tbody>
 </table>
 <aside class="note">
-	<p>Google checks and disk deletion do not run while the editor is stopped or the computer is off or asleep. Calendar-day deletion across offline periods and deletion of backups are not guaranteed. The app also lacks a separate privacy-policy acceptance screen and the YouTube terms notice immediately before upload. This description is not Google compliance approval. See the <a href="../privacy/#retention">Privacy Policy's retention section</a> for the detailed rules.</p>
+	<p>Google checks and disk deletion do not run while the editor is stopped or the computer is off or asleep. Existing plaintext or unreadable protected state also stops credential use and retention maintenance. Adding encryption and separate acceptance does not guarantee calendar-day deletion across offline periods or deletion of backups. This description is not Google compliance approval. See the <a href="../privacy/#retention">Privacy Policy's retention section</a> for the detailed rules.</p>
 </aside>
 
 <h2 id="revoke">5. Revoking access and deleting data</h2>
 <ol>
 	<li>Disconnecting in channel management first disables the connection and asks Google to revoke the token. Failures are shown as pending and retried while the editor is running. Deleting local records is not the same as successful Google revocation.</li>
 	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. While running, the editor checks periodically and deletes the connection and related API records when Google explicitly reports an invalid token.</li>
-	<li>Deleting the state folder removes only the local data in that folder and does not send Google a revocation request. Separate project files, backups and videos already uploaded to YouTube are not affected.</li>
+	<li>Deleting the state folder removes only the local data in that folder and does not send Google a revocation request. Keys in the OS credential store, separate project files, backups and videos already uploaded to YouTube are not affected.</li>
 </ol>
 
 <h2 id="quota">6. Upload limit</h2>
@@ -234,7 +239,7 @@
     </div>
     <div class="wrap footer-legal">
       <p>YouTube is a trademark of Google LLC. fishcut is not affiliated with or endorsed by YouTube or Google.</p>
-      <p>Updated 2026-10-27</p>
+      <p>Updated 2026-10-28</p>
     </div>
   </footer>
 </body>
