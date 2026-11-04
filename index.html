@@ -65,11 +65,20 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-head">
         <h1 id="hero-title">
-          <span class="l1"><span class="nowrap">AI 에이전트가</span> <span class="nowrap">만들고</span></span>
+          <span class="l1"><span class="sr-only">AI 에이전트가</span><span class="agent-word key nowrap" aria-hidden="true" data-agent-word><img class="agent-logo" src="assets/agents/claude.svg" width="24" height="24" alt=""><span class="agent-type"><span data-agent-name>Claude가</span><span class="caret"></span></span></span> <span class="nowrap">만들고</span></span>
           <span class="l2"><em class="key nowrap">사람이 다듬는</em> <span class="nowrap">쇼츠 에디터</span></span>
         </h1>
-        <p class="hero-en" lang="en">Agentic Shorts editor for Claude Code and Codex</p>
-        <p class="hero-body">Claude Code나 Codex에 주제를 한 문장으로 맡기면, 잘 터진 쇼츠에서 뽑은 템플릿으로 대본, 음성, 자막, 렌더까지 초안이 나옵니다. 사람은 에디터에서 고치고, 직접 확인한 영상만 YouTube에 올립니다.</p>
+        <p class="hero-en" lang="en">Agentic Shorts editor for coding agents</p>
+        <p class="hero-body">쓰던 코딩 에이전트에 주제를 한 문장으로 맡기면, 잘 터진 쇼츠에서 뽑은 템플릿으로 대본, 음성, 자막, 렌더까지 초안이 나옵니다. 사람은 에디터에서 고치고, 직접 확인한 영상만 YouTube에 올립니다.</p>
+        <div class="agent-strip">
+          <p class="agent-strip-label">쓰던 에이전트에서 시작합니다.</p>
+          <ul class="agent-logos">
+            <li data-agent="claude"><img src="assets/agents/claude.svg" width="18" height="18" alt="">Claude Code</li>
+            <li data-agent="openai"><img src="assets/agents/openai.svg" width="18" height="18" alt="">Codex</li>
+            <li data-agent="cursor"><img src="assets/agents/cursor.svg" width="18" height="18" alt="">Cursor</li>
+            <li data-agent="gemini"><img src="assets/agents/gemini.svg" width="18" height="18" alt="">Gemini</li>
+          </ul>
+        </div>
       </div>
 
       <div class="stage" data-wall>
@@ -98,7 +107,7 @@
         <figure class="composer" aria-labelledby="composer-label">
           <div class="composer-head">
             <p class="composer-label" id="composer-label"><span class="prompt-ico" aria-hidden="true">&gt;_</span> 한 문장 요청 <span class="tag-ex">예시</span></p>
-            <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span></p>
+            <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span><span class="chip">Cursor</span><span class="chip">Gemini</span></p>
           </div>
           <p class="composer-text">
             <span class="ghost" aria-hidden="true"><span class="tpl">dev-demo</span> 템플릿으로 <span class="nowrap">"Anthropic이 Git 대신</span> <span class="nowrap">Scion을 쓰는 이유"</span> 쇼츠 한 편 만들어 줘. 채널은 <span class="nowrap">노마다마스.<span class="caret"></span></span></span>
@@ -115,7 +124,7 @@
           <div class="track">
             <div class="tile"><video muted loop playsinline preload="none" poster="assets/shorts/code-video-model.jpg" tabindex="-1"><source src="assets/shorts/code-video-model.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="assets/shorts/rea-reverse-engineer-en.jpg" width="720" height="1280" alt="쇼츠 포스터: Reverse Engineer Anything (영어)"></div>
-            <div class="tile tile-s"><span class="ts-k">한 문장</span><span class="ts-big">요청</span><span class="ts-s">Claude Code, Codex</span></div>
+            <div class="tile tile-s"><span class="ts-k">한 문장</span><span class="ts-big">요청</span><span class="ts-s">쓰던 에이전트에서</span></div>
             <div class="tile"><img src="assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="쇼츠 포스터: 그림판 낙서로 조회수 800만, 클로드 코드로 따라 만드는 법"></div>
             <div class="tile"><video muted loop playsinline preload="none" poster="assets/shorts/browser-journey-ko.jpg" tabindex="-1"><source src="assets/shorts/browser-journey-ko.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="쇼츠 포스터: 사진 한 장이 걸어 다니는 3D 공간이 됨"></div>
@@ -124,7 +133,7 @@
             <!-- second copy for a seamless loop -->
             <div class="tile"><video muted loop playsinline preload="none" poster="assets/shorts/code-video-model.jpg" tabindex="-1"><source src="assets/shorts/code-video-model.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="assets/shorts/rea-reverse-engineer-en.jpg" width="720" height="1280" alt="쇼츠 포스터: Reverse Engineer Anything (영어)"></div>
-            <div class="tile tile-s"><span class="ts-k">한 문장</span><span class="ts-big">요청</span><span class="ts-s">Claude Code, Codex</span></div>
+            <div class="tile tile-s"><span class="ts-k">한 문장</span><span class="ts-big">요청</span><span class="ts-s">쓰던 에이전트에서</span></div>
             <div class="tile"><img src="assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="쇼츠 포스터: 그림판 낙서로 조회수 800만, 클로드 코드로 따라 만드는 법"></div>
             <div class="tile"><video muted loop playsinline preload="none" poster="assets/shorts/browser-journey-ko.jpg" tabindex="-1"><source src="assets/shorts/browser-journey-ko.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="쇼츠 포스터: 사진 한 장이 걸어 다니는 3D 공간이 됨"></div>
@@ -279,7 +288,7 @@
             </figure>
             <p class="story-group">묶음 1. 맡기기</p>
             <h3>한 문장으로 요청하기</h3>
-            <p class="story-text">Claude Code나 Codex에 주제를 한 문장으로 말합니다. 템플릿을 정하지 않으면 에이전트가 원문을 읽고 추천하고, 사람이 고릅니다.</p>
+            <p class="story-text">쓰던 에이전트에 주제를 한 문장으로 말합니다. 템플릿을 정하지 않으면 에이전트가 원문을 읽고 추천하고, 사람이 고릅니다.</p>
           </li>
           <li class="story g2" id="step-4">
             <span class="story-num" aria-hidden="true">04</span>
@@ -629,7 +638,7 @@
           </div>
           <div class="faq-item">
             <h3>어떤 에이전트와 쓰나요?</h3>
-            <p>Claude Code와 Codex입니다. 에디터가 열려 있으면 MCP로 같은 초안을 읽고 고칩니다.</p>
+            <p>Claude Code, Codex, Cursor, Gemini처럼 명령을 실행하고 스킬을 읽는 에이전트면 됩니다. fishcut은 CLI와 스킬로 호출합니다. Claude Code와 Codex는 에디터가 열려 있으면 MCP로 같은 초안을 읽고 고칩니다.</p>
           </div>
           <div class="faq-item">
             <h3>어떤 컴퓨터에서 도나요?</h3>
@@ -664,7 +673,7 @@
       </div>
     </div>
     <div class="wrap footer-legal">
-      <p>YouTube는 Google LLC의 상표입니다. fishcut은 YouTube, Google과 제휴하거나 보증받지 않았습니다.</p>
+      <p>YouTube는 Google LLC의 상표입니다. fishcut은 YouTube, Google과 제휴하거나 보증받지 않았습니다. Claude(Anthropic), Codex(OpenAI), Cursor(Anysphere), Gemini(Google)의 이름과 로고는 각 회사의 것이며, fishcut은 이들과도 제휴하지 않았습니다.</p>
       <p>갱신일 2026-10-28</p>
     </div>
   </footer>

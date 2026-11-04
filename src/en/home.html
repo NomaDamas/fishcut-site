@@ -2,11 +2,20 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-head">
         <h1 id="hero-title">
-          <span class="l1"><span class="nowrap">AI agents</span> <span class="nowrap">draft shorts.</span></span>
+          <span class="l1"><span class="sr-only">An AI agent</span><span class="agent-word key nowrap" aria-hidden="true" data-agent-word><img class="agent-logo" src="{{root}}assets/agents/claude.svg" width="24" height="24" alt=""><span class="agent-type"><span data-agent-name>Claude</span><span class="caret"></span></span></span> <span class="nowrap">drafts shorts.</span></span>
           <span class="l2"><em class="key nowrap">You finish them.</em></span>
         </h1>
-        <p class="hero-en" lang="en">Agentic Shorts editor for Claude Code and Codex</p>
-        <p class="hero-body">Give Claude Code or Codex a topic in one sentence, and it drafts the script, voice, captions, and render with a template drawn from shorts that took off. You fix the draft in the editor and upload to YouTube only the videos you have checked yourself.</p>
+        <p class="hero-en" lang="en">Agentic Shorts editor for coding agents</p>
+        <p class="hero-body">Give your coding agent a topic in one sentence, and it drafts the script, voice, captions, and render with a template drawn from shorts that took off. You fix the draft in the editor and upload to YouTube only the videos you have checked yourself.</p>
+        <div class="agent-strip">
+          <p class="agent-strip-label">Start from the agent you already use.</p>
+          <ul class="agent-logos">
+            <li data-agent="claude"><img src="{{root}}assets/agents/claude.svg" width="18" height="18" alt="">Claude Code</li>
+            <li data-agent="openai"><img src="{{root}}assets/agents/openai.svg" width="18" height="18" alt="">Codex</li>
+            <li data-agent="cursor"><img src="{{root}}assets/agents/cursor.svg" width="18" height="18" alt="">Cursor</li>
+            <li data-agent="gemini"><img src="{{root}}assets/agents/gemini.svg" width="18" height="18" alt="">Gemini</li>
+          </ul>
+        </div>
       </div>
 
       <div class="stage" data-wall>
@@ -35,7 +44,7 @@
         <figure class="composer" aria-labelledby="composer-label">
           <div class="composer-head">
             <p class="composer-label" id="composer-label"><span class="prompt-ico" aria-hidden="true">&gt;_</span> One-sentence request <span class="tag-ex">Example</span></p>
-            <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span></p>
+            <p class="agent-chips"><span class="chip">Claude Code</span><span class="chip">Codex</span><span class="chip">Cursor</span><span class="chip">Gemini</span></p>
           </div>
           <p class="composer-text">
             <span class="ghost" aria-hidden="true">Use the <span class="tpl">dev-demo</span> template to make a short on <span class="nowrap">"Why Anthropic swapped</span> <span class="nowrap">Git for Scion."</span> Channel: <span class="nowrap">NomaDamas.<span class="caret"></span></span></span>
@@ -52,7 +61,7 @@
           <div class="track">
             <div class="tile"><video muted loop playsinline preload="none" poster="{{root}}assets/shorts/code-video-model.jpg" tabindex="-1"><source src="{{root}}assets/shorts/code-video-model.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="{{root}}assets/shorts/rea-reverse-engineer-en.jpg" width="720" height="1280" alt="Shorts poster: Reverse Engineer Anything"></div>
-            <div class="tile tile-s"><span class="ts-k">One sentence</span><span class="ts-big">Ask</span><span class="ts-s">Claude Code, Codex</span></div>
+            <div class="tile tile-s"><span class="ts-k">One sentence</span><span class="ts-big">Ask</span><span class="ts-s">In the agent you use</span></div>
             <div class="tile"><img src="{{root}}assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: 8 million views with MS Paint doodles, and how to copy it with Claude Code"></div>
             <div class="tile"><video muted loop playsinline preload="none" poster="{{root}}assets/shorts/browser-journey-ko.jpg" tabindex="-1"><source src="{{root}}assets/shorts/browser-journey-ko.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="{{root}}assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: One photo becomes a 3D space you can walk through"></div>
@@ -61,7 +70,7 @@
             <!-- second copy for a seamless loop -->
             <div class="tile"><video muted loop playsinline preload="none" poster="{{root}}assets/shorts/code-video-model.jpg" tabindex="-1"><source src="{{root}}assets/shorts/code-video-model.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="{{root}}assets/shorts/rea-reverse-engineer-en.jpg" width="720" height="1280" alt="Shorts poster: Reverse Engineer Anything"></div>
-            <div class="tile tile-s"><span class="ts-k">One sentence</span><span class="ts-big">Ask</span><span class="ts-s">Claude Code, Codex</span></div>
+            <div class="tile tile-s"><span class="ts-k">One sentence</span><span class="ts-big">Ask</span><span class="ts-s">In the agent you use</span></div>
             <div class="tile"><img src="{{root}}assets/shorts/faceless-paint-channel.jpg" width="720" height="1280" alt="Shorts poster: 8 million views with MS Paint doodles, and how to copy it with Claude Code"></div>
             <div class="tile"><video muted loop playsinline preload="none" poster="{{root}}assets/shorts/browser-journey-ko.jpg" tabindex="-1"><source src="{{root}}assets/shorts/browser-journey-ko.mp4" type="video/mp4"></video></div>
             <div class="tile"><img src="{{root}}assets/shorts/image-blaster-3d.jpg" width="720" height="1280" alt="Shorts poster: One photo becomes a 3D space you can walk through"></div>
@@ -216,7 +225,7 @@
             </figure>
             <p class="story-group">Group 1. Hand off</p>
             <h3>Ask in one sentence</h3>
-            <p class="story-text">Tell Claude Code or Codex the topic in one sentence. If you don't name a template, the agent reads the source and suggests one, and you choose.</p>
+            <p class="story-text">Tell your agent the topic in one sentence. If you don't name a template, the agent reads the source and suggests one, and you choose.</p>
           </li>
           <li class="story g2" id="step-4">
             <span class="story-num" aria-hidden="true">04</span>
@@ -566,7 +575,7 @@
           </div>
           <div class="faq-item">
             <h3>Which agents does it work with?</h3>
-            <p>Claude Code and Codex. While the editor is open, they read and edit the same draft over MCP.</p>
+            <p>Any agent that can run commands and read skills, such as Claude Code, Codex, Cursor, or Gemini. fishcut is called through its CLI and skills. While the editor is open, Claude Code and Codex read and edit the same draft over MCP.</p>
           </div>
           <div class="faq-item">
             <h3>What computers does it run on?</h3>
