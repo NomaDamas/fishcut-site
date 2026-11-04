@@ -43,7 +43,7 @@ https://fishcut.nomadamas.org
 - 방침 동의는 앱의 명시적인 버전과 연결됩니다. 웹페이지 갱신일만 바꾸면 자동으로 재동의를 요구한다고 약속하지 않습니다. 공개 문구의 변경은 완성된 diff를 승인받은 뒤 발행합니다. 이전 화면 이미지는 캡션에서 현재 동의 UI 추가 전의 예시임을 밝힙니다.
 - 운영자는 2026-11-04부터 개인사업자 에이든(NomaDamas 이름으로 공개)입니다(사용자 결정 "마커 말고 내 개인사업자 에이든으로 사이트 수정해야함"). 영어 표기 "Aiden, sole proprietor"는 사업자 등록의 영문명을 확인한 값이 아니므로, 등록 영문명이 있으면 `src/strings.json`과 `src/en/*.html`을 그 이름으로 바꿉니다.
 - 개인정보처리방침 5절은 MCP로 AI 에이전트가 연결한 YouTube 채널 이름과 업로드 기록(영상 주소 포함)을 읽는 지금 동작을 그대로 적었습니다. 이 동작을 유지할지 에디터 쪽에서 정한 뒤 문장을 맞춥니다.
-- 히어로와 자주 묻는 질문의 에이전트 표기(Claude Code, Codex, Cursor, Gemini)는 fishcut이 CLI와 스킬로 호출된다는 구조를 근거로 합니다(2026-11-04 사용자 결정 "어차피 cli + skills 호출인데 무슨 지원을 안해"). MCP 문장은 Claude Code와 Codex만 가리킵니다. 로고는 simple-icons 15.22.0(CC0)을 `assets/agents/`에 넣었고 외부에서 불러오지 않습니다.
+- 히어로와 자주 묻는 질문의 에이전트 표기(Claude Code, Codex, Cursor, Gemini, Pi)는 fishcut이 CLI와 스킬로 호출된다는 구조를 근거로 합니다(2026-11-04 사용자 결정 "어차피 cli + skills 호출인데 무슨 지원을 안해", "pi도 추가해 그럼"). MCP 문장은 Claude Code와 Codex만 가리킵니다. 로고는 simple-icons 15.22.0(CC0)을 `assets/agents/`에 넣었고 외부에서 불러오지 않습니다. simple-icons에 없는 Pi는 `pi.dev/favicon.svg`의 도형을 흰색 단색으로 옮겼습니다.
 - GitHub 링크는 공개용 소개 저장소 `github.com/NomaDamas/fishcut`입니다. `src/strings.json`의 `github` 값이 한국어와 영어의 모든 GitHub 링크에 적용됩니다. 현재 공개 범위는 README이며 개발 코드나 레퍼런스 자료는 포함하지 않습니다.
 - 홈의 설치 구역은 지금 "곧 공개합니다" 안내입니다. 실제 코드와 설치 방법을 공개하면 설치 카드 두 개(에이전트에게 보낼 문장, 직접 실행 명령)를 되살립니다. README만 공개한 상태에서는 설치 안내를 유지합니다. 원본은 커밋 9efcde6의 `src/ko/home.html` 설치 구역이고, 영어도 같은 구조로 넣습니다. 코드 공개 후 히어로의 "공개 준비 중"과 자주 묻는 질문의 "공개할 예정입니다"도 함께 고칩니다.
 
