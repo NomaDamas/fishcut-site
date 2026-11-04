@@ -30,7 +30,7 @@
       "youtube_channel": "YouTube 채널",
       "contact": "문의",
       "operator": "운영: 개인사업자 에이든(NomaDamas). MIT License.",
-      "trademark": "YouTube는 Google LLC의 상표입니다. fishcut은 YouTube, Google과 제휴하거나 보증받지 않았습니다.",
+      "trademark": "YouTube는 Google LLC의 상표입니다. fishcut은 YouTube, Google과 제휴하거나 보증받지 않았습니다. Claude(Anthropic), Codex(OpenAI), Cursor(Anysphere), Gemini(Google)의 이름과 로고는 각 회사의 것이며, fishcut은 이들과도 제휴하지 않았습니다.",
       "updated_label": "갱신일",
       "not_found": "페이지를 찾을 수 없습니다"
     },
@@ -59,7 +59,7 @@
       "youtube_channel": "YouTube channel",
       "contact": "Contact",
       "operator": "Operator: Aiden, sole proprietor (NomaDamas). MIT License.",
-      "trademark": "YouTube is a trademark of Google LLC. fishcut is not affiliated with or endorsed by YouTube or Google.",
+      "trademark": "YouTube is a trademark of Google LLC. fishcut is not affiliated with or endorsed by YouTube or Google. The names and logos of Claude (Anthropic), Codex (OpenAI), Cursor (Anysphere), and Gemini (Google) belong to their owners, and fishcut is not affiliated with them either.",
       "updated_label": "Updated",
       "not_found": "Page not found"
     }

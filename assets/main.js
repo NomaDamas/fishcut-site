@@ -19,6 +19,7 @@
       copyFailed: "직접 선택해 복사하세요",
       ytPlayer: (title) => `YouTube 플레이어: ${title}`,
       videoPlayer: (title) => `영상: ${title}`,
+      agentWord: (name) => `${name}가`,
     },
     en: {
       play: "Play",
@@ -34,6 +35,7 @@
       copyFailed: "Select the text and copy it",
       ytPlayer: (title) => `YouTube player: ${title}`,
       videoPlayer: (title) => `Video: ${title}`,
+      agentWord: (name) => name,
     },
   };
   const t = TEXT[document.documentElement.lang] || TEXT.ko;
@@ -99,6 +101,100 @@
     if (toggle) toggle.addEventListener("change", schedule);
     document.addEventListener("visibilitychange", schedule);
     onMQChange(reduceMQ, schedule);
+  }
+
+  // Hero headline: type one agent name after another. Without this script, or with
+  // reduced motion, the first name stays. The headline's text for screen readers
+  // is a hidden sentence, so none of this is read aloud.
+  function initAgentWord() {
+    const el = document.querySelector("[data-agent-word]");
+    if (!el) return;
+    const AGENTS = [
+      { key: "claude", name: "Claude" },
+      { key: "openai", name: "Codex" },
+      { key: "cursor", name: "Cursor" },
+      { key: "gemini", name: "Gemini" },
+    ];
+    const logo = el.querySelector(".agent-logo");
+    const box = el.querySelector(".agent-type");
+    const out = el.querySelector("[data-agent-name]");
+    const hero = el.closest(".hero");
+    const toggle = document.querySelector(".motion-input");
+    const items = new Map(
+      Array.from(document.querySelectorAll(".agent-logos [data-agent]")).map((li) => [li.dataset.agent, li]),
+    );
+    const words = AGENTS.map((a) => t.agentWord(a.name));
+
+    const mark = (key) => {
+      items.forEach((li, k) => {
+        li.classList.toggle("is-current", k === key);
+      });
+    };
+    mark(AGENTS[0].key);
+    if (reduced()) return;
+
+    let index = 0;
+    let shown = words[0].length;
+    let erasing = false;
+
+    // Reserve the widest name so the rest of the line stays put while typing.
+    const reserve = () => {
+      const text = out.textContent;
+      box.style.minWidth = "";
+      const width = Math.max(
+        ...words.map((word) => {
+          out.textContent = word;
+          return box.getBoundingClientRect().width;
+        }),
+      );
+      out.textContent = text;
+      box.style.minWidth = `${Math.ceil(width)}px`;
+    };
+    reserve();
+    window.addEventListener("resize", reserve);
+    if (document.fonts) document.fonts.ready.then(reserve);
+
+    const canMove = () =>
+      !reduced() &&
+      !(toggle && toggle.checked) &&
+      !document.hidden &&
+      !(hero && hero.classList.contains("is-offscreen"));
+
+    const tick = () => {
+      if (!canMove()) {
+        // Paused: never leave a half-typed name on screen.
+        if (!erasing && shown < words[index].length) {
+          shown = words[index].length;
+          out.textContent = words[index];
+        }
+        window.setTimeout(tick, 500);
+        return;
+      }
+      const word = words[index];
+      if (erasing) {
+        shown -= 1;
+        out.textContent = word.slice(0, shown);
+        if (shown > 0) {
+          window.setTimeout(tick, 42);
+          return;
+        }
+        erasing = false;
+        index = (index + 1) % AGENTS.length;
+        logo.src = logo.src.replace(/[^/]+\.svg/, `${AGENTS[index].key}.svg`);
+        mark(AGENTS[index].key);
+        window.setTimeout(tick, 160);
+        return;
+      }
+      if (shown < word.length) {
+        shown += 1;
+        out.textContent = word.slice(0, shown);
+        window.setTimeout(tick, 78);
+        return;
+      }
+      erasing = true;
+      window.setTimeout(tick, 1900);
+    };
+    window.setTimeout(tick, 1900);
   }
 
   // Composer: type the example sentence once. Screen readers get the full
@@ -629,6 +725,7 @@
   markCurrent();
   initScrollFade();
   initWall();
+  initAgentWord();
   initTyping();
   initEditDemo();
   initPhone();

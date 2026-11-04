@@ -559,6 +559,66 @@ h2:has(.key) {
   font-size: clamp(16px, 0.25vw + 15px, 18px);
 }
 
+/* Hero headline: the agent name types itself; the reserved width keeps the line still */
+.agent-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22em;
+}
+
+.agent-logo {
+  flex: none;
+  width: 0.86em;
+  height: 0.86em;
+}
+
+.agent-type {
+  display: inline-block;
+  text-align: left;
+}
+
+/* The agents fishcut can be started from; the one in the headline is the bright one */
+.agent-strip {
+  margin-top: 22px;
+}
+
+.agent-strip-label {
+  color: var(--ink-3);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.agent-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.agent-logos li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.62;
+  transition: opacity 0.25s ease;
+}
+
+.agent-logos li.is-current {
+  color: var(--accent-text);
+  opacity: 1;
+}
+
+.agent-logos img {
+  width: 18px;
+  height: 18px;
+}
+
 .stage {
   --tile-w: clamp(104px, 6vw + 68px, 156px);
   --tile-h: calc(var(--tile-w) * 16 / 9);
@@ -2984,6 +3044,7 @@ h2:has(.key) {
     animation: none;
   }
 
+  .agent-logos li,
   .short-media,
   .short-media::after,
   .how.is-enhanced .story,
