@@ -105,6 +105,14 @@ def page(cfg: dict, code: str, name: str, live: list[str]) -> str:
         f'  <meta property="og:description" content="{esc(description)}">',
         f'  <meta property="og:url" content="{canonical}">',
         f'  <meta property="og:locale" content="{esc(lang["og_locale"])}">',
+        f'  <meta property="og:image" content="{site}/{lang["og_image"]}">',
+        '  <meta property="og:image:width" content="1200">',
+        '  <meta property="og:image:height" content="630">',
+        f'  <meta property="og:image:alt" content="{esc(lang["og_image_alt"])}">',
+        '  <meta name="twitter:card" content="summary_large_image">',
+        f'  <meta name="twitter:title" content="{esc(title)}">',
+        f'  <meta name="twitter:description" content="{esc(description)}">',
+        f'  <meta name="twitter:image" content="{site}/{lang["og_image"]}">',
     ]
     switch = "\n".join(
         f'          <li class="nav-lang"><a href="{root}{url_of(cfg["langs"][o], name)}" hreflang="{o}" lang="{o}">{esc(cfg["langs"][o]["name"])}</a></li>'
