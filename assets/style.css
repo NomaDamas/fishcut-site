@@ -1,25 +1,26 @@
-/* fishcut landing (design C1: one accent). Dark only.
-   The accent shows in four places only: one key phrase per heading (.key),
-   the filled primary button, big numbers, and body links. One accent band
-   (install) and the thin top band carry it as a surface. Everything else is
-   gray steps. Corners: 0 (hairline cells, bands), 12px (screens, cards), pill. */
+/* fishcut landing. Follows the editor design system (AS-01, NomaDamas/fishcut-dev
+   editor/docs/01-productization/07-design-system.md): achromatic surfaces, no brand color.
+   Emphasis is brightness only: a muted heading with a bright key phrase (.key), a filled
+   light primary button, bright big numbers and body links. One light band (install) and the
+   thin top band carry that light fill as a surface. Everything else is gray steps. Dark only.
+   Corners: 5px small items, 7px controls, 13px panels, as in the editor. */
 
 :root {
   color-scheme: dark;
-  --accent: #c8ff3d;
-  --accent-ink: #0b0b0f;
-  --accent-text: #c8ff3d;
-  --bg: #0b0b0f;
-  --bg-1: #141419;
+  --accent: #e8e8e8;
+  --accent-ink: #242424;
+  --accent-text: #ffffff;
+  --bg: #191919;
+  --bg-1: #222222;
   --line: rgba(255, 255, 255, 0.1);
   --line-2: rgba(255, 255, 255, 0.22);
-  --ink: #f5f5f7;
-  --ink-2: #babac4;
-  --ink-3: #9a9aa6;
-  --font-ko: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  --ink: #ededed;
+  --ink-2: #bdbdbd;
+  --ink-3: #9a9a9a;
+  --font-ko: "Geist", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --r: 12px;
-  --r-pill: 999px;
+  --r: 13px;
+  --r-pill: 7px;
   --h1: clamp(34px, 3.2vw + 18px, 64px);
   --h2: clamp(28px, 1.6vw + 20px, 44px);
   --h3: 20px;
@@ -148,7 +149,7 @@ code {
   margin-inline: auto;
 }
 
-/* Title rule: Pretendard 700, -0.02em, 1.2. One key phrase per h1 and h2 in the accent. */
+/* Title rule: Geist and Pretendard 700, -0.02em, 1.2. A heading with a key phrase is muted and the phrase is bright. */
 
 h1,
 h2 {
@@ -163,6 +164,11 @@ h3 {
   font-weight: 700;
   line-height: 1.4;
   letter-spacing: -0.01em;
+}
+
+h1:has(.key),
+h2:has(.key) {
+  color: var(--ink-3);
 }
 
 .key {
@@ -236,17 +242,16 @@ h3 {
   gap: 10px;
   color: var(--ink);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
   text-decoration: none;
 }
 
 .wordmark .mark {
-  width: 16px;
+  width: 28px;
   height: 28px;
   flex: none;
-  color: var(--accent);
 }
 
 .site-nav {
@@ -1509,7 +1514,7 @@ h3 {
   width: 24px;
   height: 24px;
   fill: #fff;
-  stroke: #0b0b0f;
+  stroke: #191919;
   stroke-width: 1.4;
   stroke-linejoin: round;
 }

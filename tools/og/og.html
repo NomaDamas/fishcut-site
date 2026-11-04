@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fishcut og-image source</title>
+<!-- Source of assets/og-image*.png (1200x630). Render with: python3 -I tools/og.py -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  /* Tokens from the editor design system (AS-01): achromatic, 13px panels, 7px controls. */
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    background: linear-gradient(145deg, #292929 0%, #202020 42%, #191919 100%);
+    color: #ededed;
+    font-family: "Geist", "Pretendard Variable", Pretendard, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+  .brand { position: absolute; left: 72px; top: 64px; display: flex; align-items: center; gap: 18px; }
+  .brand svg { width: 64px; height: 64px; }
+  .brand span { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  h1 {
+    position: absolute; left: 72px; top: 196px; width: 600px;
+    font-size: 72px; font-weight: 700; line-height: 1.14; letter-spacing: -0.03em; color: #9a9a9a;
+  }
+  h1 b { display: block; color: #fff; font-weight: 700; }
+  .sub { position: absolute; left: 72px; bottom: 64px; width: 580px; font-size: 26px; line-height: 1.4; color: #bdbdbd; }
+  .stage { position: absolute; right: 56px; top: 56px; width: 460px; height: 518px; }
+  .card {
+    position: absolute; width: 196px; height: 349px; border-radius: 13px; overflow: hidden;
+    background: #262626; border: 1px solid #454545;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 40%), 0 2px 6px rgb(0 0 0 / 20%);
+  }
+  .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .c1 { left: 0; top: 112px; }
+  .c2 { left: 132px; top: 28px; z-index: 2; }
+  .c3 { left: 264px; top: 140px; z-index: 1; }
+  .dim { filter: brightness(0.82); }
+</style>
+</head>
+<body>
+<div class="brand">
+  <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="1" y="1" width="62" height="62" rx="14" fill="#18181b" stroke="#3f3f46" stroke-width="2"/><path d="M23 25C33 16 46 21 53 32C46 43 33 48 23 39L12 46V18L23 25Z" fill="#fafafa"/><path d="M31 21L26 43" stroke="#18181b" stroke-width="4" stroke-linecap="round"/><circle cx="43" cy="30" r="2.5" fill="#18181b"/></svg>
+  <span>fishcut</span>
+</div>
+<h1 id="h1"></h1>
+<div class="sub" id="sub"></div>
+<div class="stage">
+  <div class="card c1 dim"><img src="../../assets/shorts/ollama-local-models.jpg" alt=""></div>
+  <div class="card c3 dim"><img src="../../assets/shorts/code-video-model.jpg" alt=""></div>
+  <div class="card c2"><img id="hero" src="../../assets/shorts/browser-journey-ko.jpg" alt=""></div>
+</div>
+<script>
+  const T = {
+    en: { l1: "AI agents draft shorts.", l2: "You finish them.", sub: "Claude Code and Codex draft. You edit and upload only what you checked.", hero: "rea-reverse-engineer-en.jpg" },
+    ko: { l1: "AI 에이전트가 만들고", l2: "사람이 다듬는 쇼츠", sub: "Claude Code와 Codex가 초안을 만들고, 직접 확인한 영상만 올립니다.", hero: "browser-journey-ko.jpg" },
+  };
+  const lang = new URLSearchParams(location.search).get("lang") === "ko" ? "ko" : "en";
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.getElementById("h1").innerHTML = `${t.l1}<b>${t.l2}</b>`;
+  document.getElementById("sub").textContent = t.sub;
+  document.getElementById("hero").src = "../../assets/shorts/" + t.hero;
+</script>
+</body>
+</html>

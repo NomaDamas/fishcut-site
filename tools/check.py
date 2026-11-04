@@ -69,6 +69,7 @@ class Page(html.parser.HTMLParser):
         self.lang = ""
         self.canonical = ""
         self.alternates: dict[str, str] = {}
+        self.meta: dict[str, str] = {}
         self.drafts = 0
         self.iframes = 0
         self.skip = 0
@@ -91,6 +92,8 @@ class Page(html.parser.HTMLParser):
                     self.external.append(value)
             elif tag != "a":
                 self.refs.append(value.split()[0])
+        if tag == "meta" and (a.get("property") or a.get("name")):
+            self.meta[a.get("property") or a["name"]] = a.get("content", "")
         if tag == "link" and a.get("rel") == "canonical":
             self.canonical = a.get("href", "")
         if tag == "link" and a.get("rel") == "alternate" and a.get("hreflang"):
@@ -116,6 +119,17 @@ class Page(html.parser.HTMLParser):
     def handle_data(self, data):
         if not self.skip:
             self.text.append(data)
+
+
+def png_size(path: pathlib.Path) -> tuple[int, int] | None:
+    """Width and height from the PNG header, or None if the file is not a PNG."""
+    try:
+        head = path.read_bytes()[:24]
+    except OSError:
+        return None
+    if head[:8] != b"\x89PNG\r\n\x1a\n" or head[12:16] != b"IHDR":
+        return None
+    return int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
 
 
 def parse(path: pathlib.Path) -> tuple[Page, str]:
@@ -183,6 +197,11 @@ def check_site(publish: bool) -> list[tuple[str, str, bool]]:
             add("canonical is the page's own address", page.canonical == f"{cfg['site']}/{rel}")
             if len(live) > 1:
                 add("hreflang for every language and x-default", all(o in page.alternates for o in live) and "x-default" in page.alternates)
+            share = page.meta.get("og:image", "")
+            png = ROOT / share.removeprefix(cfg["site"] + "/") if share.startswith(cfg["site"] + "/") else None
+            add("og:image is a 1200x630 PNG of this site", png is not None and png_size(png) == (1200, 630))
+            add("og:image size, alt and twitter card match", page.meta.get("og:image:width") == "1200" and page.meta.get("og:image:height") == "630"
+                and bool(page.meta.get("og:image:alt")) and page.meta.get("twitter:card") == "summary_large_image" and page.meta.get("twitter:image") == share)
             add("app name fishcut, no other casing", "fishcut" in text and not re.search(r"Fishcut|FishCut|FISHCUT", text))
             add("privacy link in header (III.A.2.a)", has_link(page, r"(^|/)privacy/$", "header"))
             add("privacy, terms, how-it-works links in footer", all(has_link(page, rf"(^|/){d}/$", "footer") for d in DOCS))
