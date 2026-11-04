@@ -114,6 +114,7 @@
       { key: "openai", name: "Codex" },
       { key: "cursor", name: "Cursor" },
       { key: "gemini", name: "Gemini" },
+      { key: "pi", name: "Pi" },
     ];
     const logo = el.querySelector(".agent-logo");
     const box = el.querySelector(".agent-type");
