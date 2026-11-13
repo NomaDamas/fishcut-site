@@ -2,8 +2,7 @@
 
 Writes assets/og-image.png (en) and assets/og-image-ko.png (ko), both 1200x630. The
 source is tools/og/og.html (read the language from ?lang=). The favicons and
-assets/apple-touch-icon.png are not made here: they are resized from the TikTok app
-icon tools/og/app-icon-1024.png (the site icon must match the app icon).
+assets/apple-touch-icon.png are not made here: they are resized from the app icon tools/og/app-icon-1024.png (copy of fishcut apps/desktop/build/icon.png, the same image as the TikTok app icon).
 The pages need the web fonts, so this needs network access. GitHub Pages serves
 the committed PNGs as they are; run this only when the sources change.
 
