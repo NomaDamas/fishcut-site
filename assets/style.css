@@ -1,15 +1,23 @@
 /* fishcut landing. Follows the editor design system (AS-01, NomaDamas/fishcut-dev
-   editor/docs/01-productization/07-design-system.md): achromatic surfaces, no brand color.
-   Emphasis is brightness only: a muted heading with a bright key phrase (.key), a filled
-   light primary button, bright big numbers and body links. One light band (install) and the
-   thin top band carry that light fill as a surface. Everything else is gray steps. Dark only.
+   editor/docs/01-productization/07-design-system.md): gray surfaces and the fin blue as the one
+   accent. The accent tokens are the dark-theme values of apps/web/src/shared/ui/tokens.css in
+   the fishcut repo (--accent #58a1e4, --accent-ink #0a1d3d, --accent-text #8ec5f3). A muted
+   heading with an accent key phrase (.key), a filled accent primary button, accent big numbers
+   and body links. The install band and the thin top band carry the accent fill as a surface.
+   Everything else is gray steps. Dark only.
    Corners: 5px small items, 7px controls, 13px panels, as in the editor. */
 
 :root {
   color-scheme: dark;
-  --accent: #e8e8e8;
-  --accent-ink: #242424;
-  --accent-text: #ffffff;
+  --accent: #58a1e4;
+  --accent-strong: #8ec5f3;
+  --accent-ink: #0a1d3d;
+  --accent-soft: rgb(88 161 228 / 0.2);
+  --accent-softer: rgb(88 161 228 / 0.12);
+  --accent-line: rgb(88 161 228 / 0.5);
+  --accent-text: #8ec5f3;
+  --selection: #2263d2;
+  --btn-bg: #2263d2;
   --bg: #191919;
   --bg-1: #222222;
   --line: rgba(255, 255, 255, 0.1);
