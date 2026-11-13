@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-	<title>fishcut</title>
-	<rect x="1" y="1" width="62" height="62" rx="14" fill="#18181b" stroke="#3f3f46" stroke-width="2" />
-	<path d="M23 25C33 16 46 21 53 32C46 43 33 48 23 39L12 46V18L23 25Z" fill="#fafafa" />
-	<path d="M31 21L26 43" stroke="#18181b" stroke-width="4" stroke-linecap="round" />
-	<circle cx="43" cy="30" r="2.5" fill="#18181b" />
-</svg>
