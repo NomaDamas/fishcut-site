@@ -551,6 +551,12 @@ h2:has(.key) {
   display: block;
 }
 
+/* The hero headline keeps white key words (the rotating agent name and the key phrase);
+   the accent colour is for the other headings. */
+.hero h1 .key {
+  color: #ffffff;
+}
+
 .hero-en {
   margin-top: 16px;
   text-wrap: balance;
