@@ -1,6 +1,6 @@
 # fishcut-site
 
-fishcut 랜딩 페이지입니다. fishcut은 AI 에이전트가 쇼츠 초안을 만들고 사람이 다듬어 YouTube에 올리는, 내 컴퓨터에서 도는 쇼츠 에디터입니다. 이 페이지는 Google OAuth 동의 화면의 홈, 개인정보처리방침, 이용약관 주소이기도 합니다.
+fishcut 랜딩 페이지입니다. fishcut은 잘 터진 쇼츠에서 뽑은 템플릿으로 AI 에이전트가 초안을 만들고 사람이 다듬어 YouTube에 올리는, 내 컴퓨터에서 도는 AI 네이티브 바이럴 쇼츠 생성기입니다. 이 페이지는 Google OAuth 동의 화면의 홈, 개인정보처리방침, 이용약관 주소이기도 합니다.
 
 https://fishcut.nomadamas.org
 
