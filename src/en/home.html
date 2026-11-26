@@ -5,8 +5,8 @@
           <span class="l1"><span class="sr-only">An AI agent</span><span class="agent-word key nowrap" aria-hidden="true" data-agent-word><img class="agent-logo" src="{{root}}assets/agents/claude.svg" width="24" height="24" alt=""><span class="agent-type"><span data-agent-name>Claude</span><span class="caret"></span></span></span> <span class="nowrap">drafts shorts.</span></span>
           <span class="l2"><em class="key nowrap">You finish them.</em></span>
         </h1>
-        <p class="hero-en" lang="en">AI-native viral shorts generator</p>
-        <p class="hero-body">Give your coding agent a topic in one sentence, and it drafts the script, voice, captions, and render with a template drawn from shorts that took off. You fix the draft in the editor and upload to YouTube only the videos you have checked yourself.</p>
+        <p class="hero-en" lang="en">CapCut-compatible open source video editor</p>
+        <p class="hero-body">fishcut is an Apache-2.0 open source macOS desktop editor that opens CapCut (international) drafts and renders them the same way. AI coding agents edit through the same CLI commands and undo history that a person uses in the app. Once you have checked a finished video, you publish it to your connected YouTube, Instagram and TikTok accounts, and see how it performed on the Metrics screen.</p>
         <div class="agent-strip">
           <p class="agent-strip-label">Start from the agent you already use.</p>
           <ul class="agent-logos">
@@ -88,9 +88,9 @@
       </div>
 
       <ul class="hero-facts">
-        <li><span>A local editor that runs on your computer (<code>127.0.0.1</code>)</span></li>
+        <li><span>A macOS Apple Silicon desktop app, with your data stored on your computer</span></li>
         <li>You approve saves, paid voices, and uploads</li>
-        <li>MIT-licensed open source, coming soon</li>
+        <li>Apache-2.0 open source</li>
       </ul>
     </section>
 
@@ -137,6 +137,42 @@
             </div>
             <p class="cap-phone"><strong>Finished short.</strong> Why the company that made Claude doesn't use Git. Made with the <span class="nowrap">dev-demo</span> template and uploaded to the NomaDamas channel on October 14, 2026. It had over 17,000 views as of October 22.</p>
           </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Product: what fishcut is today -->
+    <section class="section data" id="product" aria-labelledby="product-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="product-title">Open a CapCut draft and <em class="key">edit it with the same commands</em></h2>
+          <p class="section-desc">fishcut is an open source editor that opens, renders and saves the plain-text drafts of CapCut (international). The screen and the CLI share one daemon, so a person and an AI agent edit the same video document.</p>
+        </div>
+        <ul class="data-cards">
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M2 19.5h20"/><path d="M10 8.5v4l3.5-2z"/></svg>
+            <h3>CapCut draft compatibility</h3>
+            <p>The goal is to open CapCut (international) drafts and render them the same way, and the supported range keeps growing. Unknown fields are preserved and saved back, and resources that are not supported are reported with the reason. Encrypted drafts are not opened.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="8" height="7" rx="2"/><rect x="13" y="13" width="8" height="7" rx="2"/><path d="M11 7.5h3.5a2 2 0 0 1 2 2V13M13 16.5H9.5a2 2 0 0 1-2-2V11"/></svg>
+            <h3>One edit for screen and CLI</h3>
+            <p>Edits a person makes on the canvas and timeline and edits an agent such as Claude Code, Codex, Cursor, Gemini or Pi makes through the CLI use the same commands and the same undo history.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2.5"/><path d="M9.5 8h5M9.5 12h5M9.5 16h3"/></svg>
+            <h3>Templates and shorts</h3>
+            <p>Start a 9:16 short from a screen frame and a script style template, then continue in the same project with reference analysis, voice, captions, sound effects, render and review.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M2 19.5h20"/><rect x="9.5" y="9.5" width="5" height="3.8" rx=".8"/><path d="M10.6 9.5V8.3a1.4 1.4 0 0 1 2.8 0v1.2"/></svg>
+            <h3>Runs on your computer</h3>
+            <p>Projects and tokens are stored on this computer. External services such as voices are ones you choose and connect, and editing and rendering work without them.</p>
+          </li>
+        </ul>
+        <figure class="app-shot">
+          <img src="{{root}}assets/shots/app-home.webp" width="1200" height="750" loading="lazy" alt="The home screen of the fishcut app. The left sidebar has Home, All videos, Find references and Metrics, and the main area has a New video button, two projects under Continue, and a list of templates.">
+          <figcaption>The home screen of the current fishcut app. The Metrics item in the sidebar is the screen for the performance of published videos.</figcaption>
         </figure>
       </div>
     </section>
@@ -269,7 +305,7 @@
             </figure>
             <p class="story-group">Group 3. Refine and upload (human)</p>
             <h3>Fix it in the editor</h3>
-            <p class="story-text">Change text, position, and size on the canvas, and move and trim clips on the layer timeline. Your edits go straight into the draft on the local editor server, and you can undo them. While the editor is open, Claude Code and Codex also read and edit the same draft over MCP.</p>
+            <p class="story-text">Change text, position, and size on the canvas, and move and trim clips on the layer timeline. Your edits go straight into the draft that the daemon holds, and you can undo them. An agent edits the same draft through the CLI with the same commands, and its edits land in the same undo history.</p>
           </li>
           <li class="story g3" id="step-8">
             <span class="story-num" aria-hidden="true">08</span>
@@ -279,7 +315,7 @@
             </figure>
             <p class="story-group">Group 3. Refine and upload (human)</p>
             <h3>Check and upload to YouTube</h3>
-            <p class="story-text">Connect the channel with your Google account, then review the title, description, tags, visibility (public, unlisted, private), made for kids, synthetic content, and scheduled time. A person presses the final upload button. The agent only prepares things up to the upload settings review.</p>
+            <p class="story-text">Connect the channel with your Google account, then review the title, description, tags, visibility (public, unlisted, private), made for kids, synthetic content, and scheduled time. A person presses the final upload button. The agent only prepares things up to the upload settings review. Instagram and TikTok accounts are published through the same review.</p>
           </li>
           </ol>
         </div>
@@ -446,7 +482,7 @@
       <div class="wrap behind-head">
         <div class="section-head">
           <h2 id="behind-title"><em class="key">Editor screens</em> behind the shorts</h2>
-          <p class="section-desc">Every screen was taken in a separately launched editor with a copy of a published short's project open. The channel profile values are examples. Shorts Studio in the app header and the ./shorts command are pre-release names.</p>
+          <p class="section-desc">Every screen was taken in a separately launched editor with a copy of a published short's project open. The channel profile values are examples. These screens were taken in an earlier version of the editor, so they differ from the app today. Shorts Studio in the app header and the ./shorts command are earlier names. The current app screen is in the app introduction above.</p>
         </div>
         <div class="carousel-btns" data-carousel-ui hidden>
           <button class="icon-btn" type="button" data-carousel-prev aria-label="Previous screen"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
@@ -469,6 +505,57 @@
       </div>
     </section>
 
+    <!-- Publishing and metrics -->
+    <section class="section data" id="publish" aria-labelledby="publish-title">
+      <div class="wrap">
+        <div class="data-grid">
+          <div class="data-intro">
+            <p class="calm-label">Publishing and metrics</p>
+            <h2 id="publish-title">Publish, then <em class="key">see how it performed</em></h2>
+            <p>When creators connect their own YouTube, Instagram and TikTok accounts to fishcut, they can publish finished videos from it. Publishing sends only a video that a person has checked and approved on the review screen. The Metrics screen shows how each published video performed.</p>
+            <p class="yt-note">fishcut reads only the TikTok metrics of the connected account itself, and only after the account owner authorizes it on TikTok's consent screen. fishcut is not affiliated with or endorsed by TikTok, Instagram, Meta, YouTube or Google.</p>
+          </div>
+          <div class="table-box">
+            <table class="scope-table">
+              <caption>What the Metrics screen reads</caption>
+              <thead>
+                <tr><th scope="col">Service</th><th scope="col">Metrics read</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">TikTok</th><td>The profile metrics and video metrics (views, likes, comments, shares) of the connected account itself. When the account owner has authorized access through the TikTok API for Business (Accounts API), it also reads video insights such as average watch time, completion rate and traffic sources.</td></tr>
+                <tr><th scope="row">YouTube</th><td>The connected channel's list of videos with views, likes, comment counts, average watch time and audience retention.</td></tr>
+                <tr><th scope="row">Instagram</th><td>Likes, comment counts, views, reach and average watch time of the connected account's posts and reels.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <ul class="data-cards">
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            <h3>Read only after you authorize</h3>
+            <p>TikTok metrics are read only after the account owner authorizes it. From TikTok, fishcut does not read accounts you have not connected or other people's accounts.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M2 19.5h20"/><rect x="9.5" y="9.5" width="5" height="3.8" rx=".8"/><path d="M10.6 9.5V8.3a1.4 1.4 0 0 1 2.8 0v1.2"/></svg>
+            <h3>Stored only on this computer</h3>
+            <p>Tokens are stored in the macOS Keychain on this computer and metrics in a folder on this computer. There is no fishcut server that receives and stores metrics. The auth relay only exchanges login codes for tokens and refreshes and revokes TikTok tokens, and it does not store tokens.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m6 6 12 12"/></svg>
+            <h3>No sale, no sharing</h3>
+            <p>The data is not sold or shared with third parties, not combined across users, and not used for creator discovery, ranking or advertising.</p>
+          </li>
+          <li class="data-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="13" width="10" height="6" rx="3" transform="rotate(-45 8 16)"/><rect x="11" y="5" width="10" height="6" rx="3" transform="rotate(-45 16 8)"/><path d="m14.4 14.4 1.6 1.6M8 8l1.6 1.6"/></svg>
+            <h3>Revoke at any time</h3>
+            <p>Disconnecting in fishcut deletes the tokens and asks TikTok to revoke. You can also revoke in <a href="https://www.tiktok.com/setting" target="_blank" rel="noopener">TikTok settings</a>, or in the TikTok app under Settings, Security, Manage app permissions.</p>
+          </li>
+        </ul>
+        <p class="publish-more"><a href="{{home}}how-it-works/#tiktok">See how TikTok and Instagram connection and metrics work</a>, <a href="{{home}}privacy/#meta-tiktok">see the TikTok section of the Privacy Policy</a></p>
+      </div>
+    </section>
+
     <!-- YouTube connection and data: calm, review-friendly -->
     <section class="section data" id="data" aria-labelledby="data-title">
       <div class="wrap">
@@ -488,6 +575,7 @@
               <tbody>
                 <tr><th scope="row"><code>youtube.upload</code></th><td>Used only to upload the final video a person has checked to the connected channel, with the title, description, and visibility that person set.</td></tr>
                 <tr><th scope="row"><code>youtube.readonly</code></th><td>Used to show the name and ID of the channel you will upload to, and to check the visibility status and scheduled time again after an upload.</td></tr>
+                <tr><th scope="row"><code>yt-analytics.readonly</code></th><td>Used only to show the metrics of the connected channel itself (views, average watch time, audience retention, impressions) on the Metrics screen.</td></tr>
               </tbody>
             </table>
           </div>
@@ -497,7 +585,7 @@
           <li class="data-card">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M2 19.5h20"/><rect x="9.5" y="9.5" width="5" height="3.8" rx=".8"/><path d="M10.6 9.5V8.3a1.4 1.4 0 0 1 2.8 0v1.2"/></svg>
             <h3>Stored only on this computer</h3>
-            <p>Google tokens, the connected channel's name and ID, and upload history are stored only in the state folder on this computer. They are not sent to a NomaDamas server. NomaDamas does not receive this data.</p>
+            <p>Google tokens, the connected channel's name and ID, and upload history are stored only in the state folder on this computer. They are not sent to the operator's server. The operator does not receive this data.</p>
           </li>
           <li class="data-card">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10.2l7.4 2.9L13.3 21z"/><path d="m10.4 13.1 4.4-4.4"/></svg>
@@ -538,8 +626,8 @@
       <div class="wrap install-grid">
         <div class="install-main">
           <div class="section-head">
-            <h2 id="install-title">Coming soon</h2>
-            <p class="section-desc">fishcut is getting ready for its public release. When the repository goes public, install steps will appear here. We will announce the release on GitHub and our YouTube channel.</p>
+            <h2 id="install-title">macOS app</h2>
+            <p class="section-desc">fishcut is a desktop app for macOS on Apple Silicon, and it is open source under the Apache-2.0 license. You can read about the project and follow news in its GitHub repository, and questions about installing and using it are welcome at <a href="mailto:{{email}}">{{email}}</a>.</p>
           </div>
           <a class="btn btn-band" href="{{github}}" target="_blank" rel="noopener">View on GitHub</a>
         </div>
@@ -564,7 +652,7 @@
         <div class="faq-grid">
           <div class="faq-item">
             <h3>Where do my videos and tokens go?</h3>
-            <p>They stay on this computer. When you upload, the video file and settings go directly from this computer to YouTube. NomaDamas does not receive any data.</p>
+            <p>They stay on this computer. When you upload, the video file and settings go directly from this computer to YouTube, Instagram or TikTok. The operator does not receive videos, tokens or metrics. Only when you log in to TikTok or Instagram, and when a TikTok token is refreshed or revoked, does a request pass through the auth relay, which does not store tokens.</p>
           </div>
           <div class="faq-item">
             <h3>Will the agent upload on its own?</h3>
@@ -572,15 +660,23 @@
           </div>
           <div class="faq-item">
             <h3>Is it free?</h3>
-            <p>fishcut will be released as MIT-licensed open source. You can make a short from start to finish with free local voices, and paid voice APIs are used only when you add your own key and approve.</p>
+            <p>fishcut is open source under the Apache-2.0 license. You can make a short from start to finish with free local voices, and paid voice APIs are used only when you add your own key and approve.</p>
           </div>
           <div class="faq-item">
             <h3>Which agents does it work with?</h3>
-            <p>Any agent that can run commands and read skills, such as Claude Code, Codex, Cursor, Gemini, or Pi. fishcut is called through its CLI and skills. While the editor is open, Claude Code and Codex read and edit the same draft over MCP.</p>
+            <p>Any agent that can run commands and read skills, such as Claude Code, Codex, Cursor, Gemini, or Pi. fishcut is called through its CLI and skills, and an agent's edits land in the same undo history as the edits a person makes in the app.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How is TikTok data used?</h3>
+            <p>It is used only to show the profile metrics and video metrics of the connected account itself on the Metrics screen. It is read only after the account owner authorizes it, stored only on this computer, and never sold, shared or combined across users. You can revoke access in TikTok settings at any time.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Who operates it?</h3>
+            <p>It is operated by 에이든 (Aiden), a sole proprietorship represented by 안승원 (Seungwon Ahn). Business details are on the <a href="https://www.aidenahn.com/business" target="_blank" rel="noopener">operator page</a>, and questions are welcome at <a href="mailto:{{email}}">{{email}}</a>.</p>
           </div>
           <div class="faq-item">
             <h3>What computers does it run on?</h3>
-            <p>It is developed and tested on macOS with Apple Silicon. You can also run it with Docker.</p>
+            <p>It runs on macOS with Apple Silicon.</p>
           </div>
         </div>
       </div>
