@@ -151,7 +151,7 @@
 	<li>
 		<h3>Connect with Google</h3>
 		<p>First, a person reviews the fishcut Privacy Policy, fishcut Terms of Service and YouTube Terms of Service in channel management, selects the initially unchecked checkbox, and presses the separate acceptance button. The accepted revision and time are stored in this computer's publishing state. An existing Google connection does not imply acceptance, and an already connected channel does not need to reconnect. An agent cannot accept on your behalf.</p>
-		<p>Then press "Google로 연결" (Connect with Google), and the Google consent screen opens in your system's default browser. fishcut does not use a browser built into the app. When you check the app name and the two permissions on the consent screen and allow them, the editor receives the result at a temporary address on this computer (PKCE, state check). This Google authorization is separate from accepting the editor's policy.</p>
+		<p>Then press "Google로 연결" (Connect with Google), and the Google consent screen opens in your system's default browser. fishcut does not use a browser built into the app. When you check the app name and the permissions listed in section 3 on the consent screen and allow them, the editor receives the result at a temporary address on this computer (PKCE, state check). This Google authorization is separate from accepting the editor's policy.</p>
 		<figure>
 			<img src="../../assets/shots/channel-connect-dark.webp" width="2000" height="1250" alt="The channel management window. Below the example channel's profile, the Google connection section has 'Connect with Google' and 'Refresh connection status' buttons and a note to add an OAuth client first." loading="lazy" />
 			<figcaption>This channel-management example predates the policy-acceptance screen. The current version also requires the separate acceptance described above. Until you add an OAuth client, "Google로 연결" (Connect with Google) is turned off.</figcaption>
@@ -203,7 +203,7 @@
 	<tbody>
 		<tr><td>Google refresh token</td><td>Authenticating YouTube requests</td><td>Maintenance deletes it after 30 days without a successful connection check. After a failed revocation request, it is disabled for connection use and kept only for retries; maintenance deletes it after 7 days from withdrawal.</td></tr>
 		<tr><td>ID and name of the connected channel</td><td>Showing the channel to upload to</td><td>Checked periodically while running; maintenance deletes it after 30 days without successful verification. Withdrawal disables the connection.</td></tr>
-		<tr><td>Upload records, session URL and duplicate-upload fingerprint</td><td>Checking results and preventing duplicate uploads</td><td>Maintenance deletes these together after 30 days from creation. Requesting withdrawal in the editor deletes related records locally right away.</td></tr>
+		<tr><td>Upload records, session URL and duplicate-upload fingerprint</td><td>Checking results and preventing duplicate uploads</td><td>Maintenance deletes these together after 30 days from creation. Requesting withdrawal in the editor deletes related records locally within 7 days.</td></tr>
 		<tr><td>Upload settings (title, description, tags, visibility, and more)</td><td>Reusing what you entered for the next upload</td><td>Kept until you change or delete them.</td></tr>
 		<tr><td>OAuth client file</td><td>Connecting to Google</td><td>Kept until you change or delete it.</td></tr>
 		<tr><td>TikTok and Instagram tokens</td><td>Authenticating upload and metric-reading requests</td><td>Deleted from the Keychain right away when you disconnect.</td></tr>
@@ -230,7 +230,7 @@
 <ol class="steps">
 	<li>
 		<h3>Connect an account</h3>
-		<p>When you press connect for TikTok or Instagram in channel management, the service's consent screen opens in your default browser, and the account owner allows the permissions personally. fishcut does not press login or consent for you. The login result returns to a one-time address on this computer (<code>127.0.0.1</code>). The code exchange, which needs an app secret, is done by the auth relay (<code>auth.fishcut.aidenahn.com</code>) that the operator runs, and that server does not store tokens. Tokens are stored only in the macOS Keychain on this computer.</p>
+		<p>When you press connect for TikTok or Instagram in channel management, the service's consent screen opens in your default browser, and the account owner allows the permissions personally. fishcut does not press login or consent for you. The login result returns to a one-time address on this computer (<code>127.0.0.1</code>). The code exchange, and the refreshing and revoking of TikTok tokens, which need an app secret, are done by the auth relay (<code>auth.fishcut.aidenahn.com</code>) that the operator runs, and that server does not store tokens. Tokens are stored only in the macOS Keychain on this computer.</p>
 	</li>
 	<li>
 		<h3>Review and upload</h3>

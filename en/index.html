@@ -600,12 +600,12 @@
           <li class="data-card">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
             <h3>Read only after you authorize</h3>
-            <p>TikTok metrics are read only after the account owner authorizes it. Accounts you have not connected and other people's accounts are never read.</p>
+            <p>TikTok metrics are read only after the account owner authorizes it. From TikTok, fishcut does not read accounts you have not connected or other people's accounts.</p>
           </li>
           <li class="data-card">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="11.5" rx="2"/><path d="M2 19.5h20"/><rect x="9.5" y="9.5" width="5" height="3.8" rx=".8"/><path d="M10.6 9.5V8.3a1.4 1.4 0 0 1 2.8 0v1.2"/></svg>
             <h3>Stored only on this computer</h3>
-            <p>Tokens are stored in the macOS Keychain on this computer and metrics in a folder on this computer. There is no fishcut server that receives and stores metrics. The auth relay only exchanges login codes for tokens and does not store tokens.</p>
+            <p>Tokens are stored in the macOS Keychain on this computer and metrics in a folder on this computer. There is no fishcut server that receives and stores metrics. The auth relay only exchanges login codes for tokens and refreshes and revokes TikTok tokens, and it does not store tokens.</p>
           </li>
           <li class="data-card">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m6 6 12 12"/></svg>
@@ -718,7 +718,7 @@
         <div class="faq-grid">
           <div class="faq-item">
             <h3>Where do my videos and tokens go?</h3>
-            <p>They stay on this computer. When you upload, the video file and settings go directly from this computer to YouTube, Instagram or TikTok. The operator does not receive videos, tokens or metrics. Only when you log in to TikTok or Instagram does the auth relay exchange the login code for a token.</p>
+            <p>They stay on this computer. When you upload, the video file and settings go directly from this computer to YouTube, Instagram or TikTok. The operator does not receive videos, tokens or metrics. Only when you log in to TikTok or Instagram, and when a TikTok token is refreshed or revoked, does a request pass through the auth relay, which does not store tokens.</p>
           </div>
           <div class="faq-item">
             <h3>Will the agent upload on its own?</h3>

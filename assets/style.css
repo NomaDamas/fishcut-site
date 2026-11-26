@@ -2462,6 +2462,14 @@ h2:has(.key) {
   line-height: 1.45;
 }
 
+/* a subsection heading that follows a paragraph or list (the steps lists put h3 first in an li) */
+.doc h2 + p + h3,
+.doc p + h3,
+.doc ul + h3,
+.doc table + h3 {
+  margin-top: 36px;
+}
+
 .doc p,
 .doc ul,
 .doc ol,
