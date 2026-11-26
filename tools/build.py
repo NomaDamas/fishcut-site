@@ -62,6 +62,7 @@ def assemble(cfg: dict, code: str, main: str, values: dict[str, str], top_band: 
         "github": esc(cfg["github"]),
         "youtube": esc(cfg["youtube"]),
         "email": esc(cfg["email"]),
+        "operator_url": esc(cfg["operator_url"]),
         "updated": esc(cfg["updated"]),
         **{f"s.{k}": esc(v) for k, v in lang.items() if isinstance(v, str)},
         **values,

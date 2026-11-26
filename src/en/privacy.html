@@ -1,6 +1,6 @@
 <h1>Privacy Policy</h1>
-<p class="lede">This policy explains what information fishcut stores, where it stores it, and what it uses it for. fishcut is software that runs on your computer, and NomaDamas does not receive your data.</p>
-<p class="meta">Effective <time datetime="2026-10-27">2026-10-27</time> / Last updated <time datetime="2026-11-04">2026-11-04</time></p>
+<p class="lede">This policy explains what information fishcut stores, where it stores it, and what it uses it for. fishcut is software that runs on your computer, and the operator does not store your videos, tokens or metrics.</p>
+<p class="meta">Effective <time datetime="2026-10-27">2026-10-27</time> / Last updated <time datetime="2026-11-27">2026-11-27</time></p>
 
 <aside class="note">
 	<p>This policy describes the running version and its limits. Automatic deletion and Google checks cannot run on a stopped or sleeping computer. Publishing this policy does not mean that Google, Meta or TikTok has approved the app or granted an exception to offline deletion deadlines. See section 8 for operating conditions and section 7 for storage protection.</p>
@@ -27,11 +27,11 @@
 </nav>
 
 <h2 id="scope">1. Where this policy applies</h2>
-<p>This policy applies to fishcut (the command-line tool and the local editor), a shorts tool that NomaDamas is preparing to release as open source, and to this website. fishcut is operated by 에이든 (Aiden), a sole proprietorship represented by 안승원 (Seungwon An).</p>
+<p>This policy applies to fishcut (the desktop app and the command-line tool), an Apache-2.0 open source macOS desktop video editor, and to this website. fishcut is operated by 에이든 (Aiden), a sole proprietorship represented by 안승원 (Seungwon Ahn). Business details are on the <a href="https://www.aidenahn.com/business" target="_blank" rel="noopener">operator page</a>.</p>
 <ul>
-	<li>fishcut runs on your computer. NomaDamas does not operate servers for fishcut, and it does not receive or keep the information that fishcut handles.</li>
-	<li>When you connect through the Google Cloud project that NomaDamas registered, the Google consent screen shows the app name fishcut, and this policy applies.</li>
-	<li>Instagram and TikTok connections use a Meta app and a TikTok app that NomaDamas registered, or apps you registered yourself and entered in fishcut. The consent screens of those services show the app's name, and this policy applies.</li>
+	<li>fishcut runs on your computer. Your videos, projects, tokens and metrics are stored on this computer and are not sent to the operator's servers. The only server the operator runs is the auth relay used to connect Instagram and TikTok, described in section 3.</li>
+	<li>When you connect through the Google Cloud project that the operator registered, the Google consent screen shows the app name fishcut, and this policy applies.</li>
+	<li>Instagram and TikTok connections use a Meta app and a TikTok app that the operator registered, or apps you registered yourself and entered in fishcut. The consent screens of those services show the app's name, and this policy applies.</li>
 	<li>When you connect with an OAuth client you created yourself, you manage that Google Cloud project. In that case too, the fishcut software handles information in the way this policy describes.</li>
 </ul>
 
@@ -39,33 +39,54 @@
 <p>fishcut uses YouTube API Services to check the YouTube channel you connected and to upload the videos you have checked. When you use the YouTube features, the <a href="https://www.google.com/policies/privacy" target="_blank" rel="noopener">Google Privacy Policy</a> also applies. The YouTube Terms of Service are covered in the <a href="{{home}}terms/">Terms of Service</a>.</p>
 
 <h2 id="meta-tiktok">3. Use of Instagram, Facebook and TikTok APIs</h2>
-<p>Instagram and TikTok upload are optional. If you do not connect these accounts, fishcut does not handle the information below. fishcut uses the Instagram API with Facebook Login for Business to post a reel to an Instagram professional account you connect, and the TikTok Content Posting API (Upload) to send a draft video to the inbox of a TikTok account you connect. When you use these features, the <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Meta Privacy Policy</a> and the <a href="https://www.tiktok.com/legal/page/row/privacy-policy/en" target="_blank" rel="noopener">TikTok Privacy Policy</a> also apply, together with each platform's terms for developers.</p>
-<p>Permissions fishcut asks for:</p>
+<p>Instagram and TikTok connections are optional. If you do not connect these accounts, fishcut does not handle the information below. When you connect one, fishcut posts the videos you have checked to that account, and reads the performance of the videos you posted and of the account to show it on the Metrics screen. When you use these features, the <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Meta Privacy Policy</a> and the <a href="https://www.tiktok.com/legal/page/row/privacy-policy/en" target="_blank" rel="noopener">TikTok Privacy Policy</a> also apply, together with each platform's terms for developers.</p>
+
+<h3 id="tiktok-data">TikTok</h3>
+<p>fishcut uses TikTok for two things: uploading and reading metrics.</p>
 <ul>
-	<li>Instagram and Facebook: <code>instagram_basic</code>, <code>instagram_content_publish</code>, <code>pages_read_engagement</code> and <code>pages_show_list</code>. fishcut uses them to find the Facebook Pages you manage and the Instagram professional accounts linked to them, and to post the reels you approve.</li>
-	<li>TikTok: <code>user.info.basic</code> (the name and ID of your account) and <code>video.upload</code> (sending drafts to your inbox).</li>
+	<li>Upload: it sends the video for which you pressed the confirm button to the connected account through the TikTok Content Posting API. The default is to send it to your TikTok inbox as a draft (<code>video.upload</code>). It posts directly to your profile (<code>video.publish</code>) only if you turned that on separately when you connected, and in that case you choose who can see the video yourself, with no default. You finish an inbox draft in the TikTok app, where you set the caption and who can see it.</li>
+	<li>Reading metrics: the Metrics screen reads and shows only the metrics of the connected TikTok account itself. Through the TikTok Display API it reads the account's follower count, following count, total likes and video count, and each video's views, likes, comments and shares. When the account owner has authorized access through the TikTok API for Business (Accounts API), it also reads the profile metrics and video insights of that same account (views, likes, comments, shares, average watch time, completion rate and traffic sources) through that API. That access starts only after the account owner authorizes it on TikTok's consent screen, and the owner can revoke it on TikTok at any time.</li>
 </ul>
+<p>Permissions fishcut asks TikTok for:</p>
+<ul>
+	<li><code>user.info.basic</code>: to show the name and ID of your account.</li>
+	<li><code>user.info.stats</code>: to show the follower count, following count, total likes and video count on the Metrics screen.</li>
+	<li><code>video.list</code>: to read the account's list of videos and each video's numbers for the Metrics screen.</li>
+	<li><code>video.upload</code>: to send drafts to your inbox.</li>
+	<li><code>video.publish</code>: requested only if you turn on direct posting when you connect.</li>
+</ul>
+<p>fishcut does not read information that needs the <code>user.info.profile</code> permission, such as the profile bio, or TikTok messages or other people's account information.</p>
+
+<h3 id="instagram-data">Instagram and Facebook</h3>
+<ul>
+	<li>Upload: it posts the video you have checked as a reel to the Instagram professional account you connect, using the Instagram API with Facebook Login for Business. A reel is public as soon as it is published. Instagram does not accept a direct file transfer for reels longer than about 50 seconds, so only if you connected Google Drive, fishcut uploads the video to your Google Drive (<code>drive.file</code>), shares it so that anyone with the link can view it, and sends that address to Instagram.</li>
+	<li>Reading metrics: it reads the connected account's list of posts with likes, comment counts and follower count, and the insights of reels and of the account (views, reach, average watch time and so on). If you allowed the comment-reading permission, it also reads the text of comments on your posts, and it neither reads nor stores the names of the people who wrote them.</li>
+	<li>Permissions: <code>instagram_basic</code>, <code>instagram_content_publish</code>, <code>pages_read_engagement</code> and <code>pages_show_list</code> are used to find the Facebook Pages you manage and the Instagram accounts linked to them, and to post reels. <code>instagram_manage_insights</code> and <code>instagram_manage_comments</code> are optional permissions used to read metrics.</li>
+	<li>fishcut does not read your Facebook or Instagram messages, friends or other people's account information.</li>
+</ul>
+
+<h3 id="relay">Information stored and the auth relay</h3>
 <table>
 	<thead>
 		<tr><th scope="col">Information</th><th scope="col">Source</th><th scope="col">Where it is stored</th></tr>
 	</thead>
 	<tbody>
-		<tr><td>Facebook Page ID and name, and the ID and username of the linked Instagram account</td><td>Meta Graph API, after you log in with Facebook</td><td>The fishcut state folder on this computer</td></tr>
-		<tr><td>Facebook Page access token</td><td>Issued by Meta from your login. It does not expire on its own</td><td>Same folder, encrypted (section 7)</td></tr>
-		<tr><td>Facebook user token from your login</td><td>The address you paste into fishcut after logging in</td><td>Used once, in memory, to look up your Pages. Not stored</td></tr>
-		<tr><td>TikTok access token, refresh token, account ID (open ID), refresh token expiry time and display name</td><td>Issued by TikTok when you connect, and the TikTok user info API</td><td>Same folder, tokens encrypted (section 7)</td></tr>
-		<tr><td>Meta app and TikTok app credentials</td><td>Added by you, or taken from environment variables you set</td><td>Same folder (app configuration files), or your environment</td></tr>
-		<tr><td>Upload settings (the caption and other fields you enter) and upload results (status and post address)</td><td>Entered by you, and the responses from Meta and TikTok</td><td>Same folder</td></tr>
+		<tr><td>TikTok access token, refresh token (in the form sealed by the auth relay), account ID (open ID) and display name</td><td>Issued by TikTok when you connect, and the TikTok user info API</td><td>Tokens in the macOS Keychain; account ID and display name in the fishcut state folder on this computer</td></tr>
+		<tr><td>TikTok account metrics (follower count, following count, total likes, video count) and video metrics (title, description, posted time, views, likes, comments, shares, insights)</td><td>TikTok APIs. The Business API only when the account owner has authorized it</td><td>The state folder on this computer</td></tr>
+		<tr><td>Facebook Page ID and name, and the ID and username of the linked Instagram account</td><td>Meta Graph API, after you log in with Facebook</td><td>The state folder on this computer</td></tr>
+		<tr><td>Facebook Page access token (long-lived token)</td><td>Issued by Meta from your login</td><td>macOS Keychain</td></tr>
+		<tr><td>Instagram posts, metrics and, if you allowed it, comment text</td><td>Meta Graph API</td><td>The state folder on this computer</td></tr>
+		<tr><td>Meta app and TikTok app credentials (if you use your own app client)</td><td>Added by you, or taken from environment variables you set</td><td>App secrets in the macOS Keychain; other values in the state folder or your environment</td></tr>
+		<tr><td>Upload settings (the caption and other fields you enter) and upload results (status and post address)</td><td>Entered by you, and the responses from Meta and TikTok</td><td>The state folder on this computer</td></tr>
 	</tbody>
 </table>
-<p>fishcut does not read your Facebook or Instagram messages, comments, followers, friends or insights, or your TikTok videos, followers or messages. After it posts a reel, it reads the ID, caption, address and time of the recent posts of that Instagram account to confirm that the post exists.</p>
 <ul>
-	<li>It shows the name of the Instagram or TikTok account you are about to send to, so you can confirm that it is the right account.</li>
-	<li>Instagram: it uploads the video for which you pressed the confirm button and publishes it as a reel with the caption you chose. A reel is public as soon as it is published.</li>
-	<li>TikTok: it sends the video for which you pressed the confirm button to your TikTok inbox as a draft. fishcut does not post to your TikTok profile. You finish and post the draft in the TikTok app, where you set the caption and who can see it.</li>
-	<li>Requests go directly from your computer to Meta (<code>graph.facebook.com</code>, <code>rupload.facebook.com</code>) and TikTok (<code>open.tiktokapis.com</code>) over HTTPS. There is no server in between, and fishcut does not send this information to NomaDamas or any other company.</li>
-	<li>The AI agents you connect over MCP can read upload records and channel names as described in section 6. fishcut does not pass access tokens or refresh tokens over MCP.</li>
-	<li>fishcut does not use this information for advertising, profiling, sale, credit assessment, or training AI or machine learning models.</li>
+	<li>While fishcut is running, it reads the metrics of the connected accounts every 6 hours, and right away when you press the sync button on the Metrics screen. When you disconnect a TikTok or Instagram account, it stops reading.</li>
+	<li>Requests to upload videos and to read metrics go directly from your computer to Meta (<code>graph.facebook.com</code>, <code>rupload.facebook.com</code>) and TikTok (<code>open.tiktokapis.com</code>) over HTTPS. Videos and metrics do not pass through the operator's servers.</li>
+	<li>Auth relay (<code>auth.fishcut.aidenahn.com</code>): the client secrets of the TikTok and Instagram apps cannot be put in the app, so this server, run by the operator, only exchanges the login code for tokens and refreshes and revokes TikTok tokens when you connect. It seals the TikTok refresh token before returning it, so only the sealed value is stored on your computer. This server does not store tokens, login codes, videos, metrics or personal information, and it does not log the content of requests. All it keeps is the number of requests per path with the result code, and pseudonymous account and device IDs used to stop abuse, for 3 months. In the advanced settings you can connect with an app client you registered yourself and skip this server.</li>
+	<li>fishcut does not sell the information it reads from TikTok, Instagram or Facebook, and does not share it with third parties. The operator does not receive it, so it is not combined across users, and it is not used for creator discovery, ranking, advertising, profiling, credit assessment, or training AI or machine learning models. Metrics are used only to show them on the Metrics screen to the owner of the connected account.</li>
+	<li>If you have an AI agent read the metrics, the service of that agent's provider may receive what it reads. You decide which agent to use and whether to have it read metrics (section 6). fishcut does not pass tokens to agents.</li>
+	<li>You can revoke TikTok access directly on TikTok. Remove fishcut in <a href="https://www.tiktok.com/setting" target="_blank" rel="noopener">TikTok settings</a>, or in the TikTok app under Settings, Security, Manage app permissions. Deletion and revocation are described in section 9.</li>
 </ul>
 <p>Retention is described in section 8, and deletion and revoking access in section 9.</p>
 
@@ -76,81 +97,78 @@
 		<tr><th scope="col">Information</th><th scope="col">Source</th><th scope="col">Where it is stored</th></tr>
 	</thead>
 	<tbody>
-		<tr><td>Google OAuth refresh token</td><td>Issued by Google when you connect your Google account</td><td>The fishcut state folder on this computer</td></tr>
-		<tr><td>Google OAuth access token</td><td>Issued by Google during connection or token refresh</td><td>Memory of the process handling the request. Not stored in the state database</td></tr>
-		<tr><td>ID and name of the connected YouTube channel</td><td>YouTube Data API (<code>youtube.readonly</code>)</td><td>Same folder</td></tr>
+		<tr><td>Google OAuth tokens (refresh token, access token)</td><td>Issued by Google when you connect your Google account</td><td>macOS Keychain</td></tr>
+		<tr><td>ID and name of the connected YouTube channel</td><td>YouTube Data API (<code>youtube.readonly</code>)</td><td>The fishcut state folder on this computer</td></tr>
 		<tr><td>ID, visibility status, scheduled time, and upload progress of uploaded videos</td><td>YouTube Data API (<code>youtube.upload</code>, <code>youtube.readonly</code>)</td><td>Same folder</td></tr>
+		<tr><td>YouTube metrics (list of videos, views, likes, comment counts, average watch time, audience retention, subscriber count)</td><td>YouTube Data API and YouTube Analytics API (<code>youtube.readonly</code>, <code>yt-analytics.readonly</code>)</td><td>Same folder</td></tr>
 		<tr><td>Upload session URL, duplicate-upload fingerprint, actual channel verification time, and pending revocation time</td><td>Google responses and local upload processing</td><td>Same folder</td></tr>
 		<tr><td>Upload settings (title, description, tags, visibility, category, made for kids, synthetic content, scheduled time)</td><td>Entered by you</td><td>Same folder</td></tr>
 		<tr><td>OAuth client file</td><td>Added by you</td><td>Same folder</td></tr>
-		<tr><td>Policy-acceptance revision and time</td><td>Recorded when a person explicitly accepts in the editor</td><td>Publishing-state database in the same folder</td></tr>
-		<tr><td>Publishing-credential encryption key and random key identifier</td><td>Created when first storing protected credentials or converting explicitly approved existing state</td><td>Key in the OS credential store; identifier in the publishing-state database</td></tr>
+		<tr><td>Policy-acceptance revision and time</td><td>Recorded when a person explicitly accepts in the editor</td><td>Same folder</td></tr>
 		<tr><td>Project files (scripts, voice, images, render output)</td><td>Made by you and the AI agents you connect</td><td>A work folder you choose</td></tr>
 	</tbody>
 </table>
-<p>fishcut does not read your Google account password, watch history, subscriptions, comments, contacts, or YouTube Analytics data.</p>
+<p>fishcut does not read your Google account password, watch history, subscriptions or contacts. It reads the metrics of the connected YouTube channel itself in order to show them on the Metrics screen, and stores them only on this computer. It reads revenue reports only if you chose that separately when you connected.</p>
 
 <h2 id="use">5. How fishcut uses the information</h2>
 <ul>
-	<li>It shows the name and ID of the channel you are about to upload to, so you can confirm that it is the right channel.</li>
-	<li>It uploads the video for which you pressed the confirm button to the connected channel, with the settings you chose.</li>
+	<li>It shows the name of the channel or account you are about to upload to, so you can confirm that it is the right one.</li>
+	<li>It uploads the video for which you pressed the confirm button to the connected channel (YouTube, Instagram or TikTok), with the settings you chose.</li>
 	<li>After a scheduled upload, it checks the video's visibility status and scheduled time again and shows whether they match your request. For an unscheduled upload, it records the upload response as the result.</li>
-	<li>It lets the AI agents you connect over MCP read the name of the connected channel and the upload records, so they can help you plan videos and prepare uploads (section 6).</li>
+	<li>It reads the metrics of the videos you posted and of the connected accounts and shows them on the Metrics screen, so you can see how your videos performed.</li>
+	<li>It lets the AI agents you call through the fishcut CLI and skills read the name of the connected channel and the upload records, so they can help you plan videos and prepare uploads (section 6).</li>
 </ul>
 <p>fishcut does not use this information for advertising, profiling, sale, or credit assessment.</p>
 
 <h2 id="share">6. Sharing and transfer</h2>
 <ul>
-	<li>fishcut does not send the information above to NomaDamas. Requests to Google and transfers to AI agents and voice providers you connect are described below.</li>
-	<li>Channel checks and upload requests go directly from your computer to Google over HTTPS. There is no server in between.</li>
-	<li>AI agents that you connect over MCP (such as Claude Code or Codex) can read part of what the editor stores on your computer: video projects, channel settings (channel name, planning settings, upload defaults, default voice, publishing schedule, and the name of the connected YouTube channel), and upload records (channel name, time, visibility or schedule, video URL, title sent, and pinned comment). You decide which agents to connect, and the policies of those agent providers also apply. fishcut does not pass Google tokens or YouTube channel IDs over MCP.</li>
+	<li>fishcut does not send the information above to the operator's servers. Logins through the auth relay in section 3, requests to Google, Meta and TikTok, and transfers to AI agents and voice providers you connect are described below.</li>
+	<li>YouTube channel checks, uploads and metric reads go directly from your computer to Google over HTTPS. There is no server in between.</li>
+	<li>Instagram and TikTok uploads and metric reads also go directly from your computer to Meta and TikTok. Only the login connection and the refreshing and revoking of TikTok tokens pass through the auth relay in section 3.</li>
+	<li>AI agents that you call through the fishcut CLI and skills (such as Claude Code or Codex) can read part of what is stored on your computer: video projects, channel settings (channel name, planning settings, upload defaults, default voice, publishing schedule, and the name of the connected channel), upload records (channel name, time, visibility or schedule, video address, the title sent, and pinned comment), and the metrics you have the agent read. You decide which agent to connect, and that agent provider's policies also apply. fishcut does not pass tokens to agents, and it does not give Instagram comment text to agents.</li>
 	<li>If you choose a paid voice provider (such as Typecast or ElevenLabs) and approve it, the sentences to be voiced are sent to that provider with your API key. That provider's policies apply to this transfer. It contains no Google user data.</li>
 </ul>
 
 <h2 id="security">7. Where it is stored and how it is protected</h2>
 <ul>
-	<li>fishcut creates the state folder with permissions that let only the user who runs fishcut read and write it (0700 for the folder, 0600 for files). When you run fishcut with Docker, the folder is kept in that installation's <code>state</code> volume.</li>
-	<li>Per-service publishing credentials such as Google and TikTok refresh tokens and Instagram Page tokens, and resumable upload session URLs and transfer offsets, are encrypted with AES-256-GCM in the local SQLite database. The key is kept separately in the OS credential store; a random key identifier is kept in the database. File permissions and encryption at rest are different protections.</li>
-	<li>macOS uses Keychain. Linux requires an available Secret Service, and a Docker state volume alone does not supply a credential store. Verification on macOS does not establish behavior on Linux, Windows, a locked Keychain or after a reboot.</li>
-	<li>This is not whole-database encryption. Channel information, upload results and duplicate-upload fingerprints, authored content, project files, OAuth client files and other services' app-configuration files are outside this feature's encryption scope. Access tokens are used only in memory during requests.</li>
-	<li>Existing plaintext is not automatically converted or deleted on restart. All editors and publishers must be stopped, and a person must separately approve the target state and OS key use for an offline protection command. It preserves connections, verification times, upload records and authored data without reconnecting to Google or revoking access.</li>
-	<li>If a key is missing or locked, or data is damaged, operations using credentials and retention maintenance stop. The original key and state must be restored; fishcut does not bypass the problem by replacing the key or deleting connections. Metadata-only reads that do not need secrets do not access the key.</li>
-	<li>If database page compaction fails after encryption, keep the editor stopped while investigating. This conversion does not find and erase plaintext in older copies, OS backups or snapshots.</li>
-	<li>All communication with Google is encrypted with HTTPS.</li>
-	<li>The local editor accepts connections only at this computer's address (<code>127.0.0.1</code>), and only a browser opened with the token issued at startup can use it.</li>
+	<li>fishcut creates the state folder with permissions that let only the user who runs fishcut read and write it (0700 for the folder, 0600 for files).</li>
+	<li>Google, TikTok and Instagram tokens and app secrets are stored in the macOS Keychain and are not kept in files in the state folder. When fishcut writes to the Keychain, it passes the value on standard input so that it does not appear on the command line.</li>
+	<li>Channel information, publishing records, metrics, content you wrote and project files are stored as files in the state folder and work folder, and fishcut does not encrypt them separately.</li>
+	<li>All communication with Google, Meta and TikTok is encrypted with HTTPS.</li>
+	<li>By default the local editor and daemon accept connections only at this computer's address (<code>127.0.0.1</code>), and only a window or browser opened with the token issued at startup can use them. If you turn on remote access yourself, that setting applies.</li>
 </ul>
 
 <h2 id="retention">8. Retention period</h2>
-<p>fishcut stores information needed to check the connected YouTube channel and upload videos you approve on this computer. The automatic processing below runs only while the editor is running.</p>
+<p>fishcut stores on this computer the information needed to check connected channels, upload videos you approve, and show the Metrics screen. The automatic processing below runs only while fishcut is running.</p>
 <table>
 	<thead>
 		<tr><th scope="col">Information</th><th scope="col">Retention period</th></tr>
 	</thead>
 	<tbody>
-		<tr><td>YouTube channel ID and name, OAuth refresh token</td><td>The connection is checked periodically and the actual successful verification time is recorded. Maintenance deletes information and tokens when 30 days have passed since that check. Failed checks and restarts do not extend the timestamp.</td></tr>
-		<tr><td>Instagram Page token, TikTok tokens, and the account IDs and names saved with them</td><td>Kept until you disconnect the channel or delete the state folder. The 30-day automatic checks in this section apply to YouTube only. TikTok decides how long its refresh token is valid, and fishcut keeps the expiry time that TikTok reports.</td></tr>
-		<tr><td>YouTube upload results, video ID and URL, upload session URL, duplicate-upload fingerprint</td><td>Maintenance deletes these records together when 30 days have passed since creation. Rechecking the channel does not extend their retention. Related records are deleted locally as soon as withdrawal is requested in the editor.</td></tr>
+		<tr><td>YouTube channel ID and name, OAuth refresh token</td><td>The connection is checked periodically and the actual successful verification time is recorded. Maintenance deletes information and tokens when 30 days have passed since that check. Failed checks or restarts do not extend the verification time.</td></tr>
+		<tr><td>YouTube upload results, video ID and URL, upload session URL, duplicate-upload fingerprint</td><td>Maintenance deletes these records together when 30 days have passed since creation. Rechecking the channel does not extend their retention. Related records are deleted locally right away when you withdraw the connection in the editor.</td></tr>
+		<tr><td>YouTube metrics</td><td>Metrics read more than 30 days ago are deleted while fishcut is running. When you disconnect, they are deleted within 7 days.</td></tr>
 		<tr><td>Refresh token retained after a failed Google revocation request</td><td>The connection is disabled and the token is used only for retries. Maintenance deletes it when 7 days have passed since withdrawal began. Local deletion does not mean that Google revocation succeeded.</td></tr>
+		<tr><td>Instagram Page token, TikTok tokens, and the account IDs and names saved with them</td><td>Kept until you disconnect the channel or delete them from the Keychain. Disconnecting deletes the tokens right away. A TikTok refresh token stops working when the validity period TikTok sets (up to 365 days after issue) ends.</td></tr>
+		<tr><td>TikTok and Instagram publishing records, metrics and channel analysis</td><td>Kept until you delete them while the account is connected. When you disconnect, they are gathered separately on this computer and kept for 30 days only, and reconnecting the same account attaches them again. After 30 days they are deleted while fishcut is running. Instagram comment text is deleted immediately on disconnect.</td></tr>
 		<tr><td>User-written text, channel plans, upload drafts and selections, OAuth client file, project files</td><td>Kept until you change or delete them. Google revocation or API-record cleanup alone does not delete authored content or project files.</td></tr>
-		<tr><td>Policy-acceptance revision and time</td><td>Kept in the publishing-state database and updated when you accept a different revision. Accepting the same revision again does not change its original acceptance time. Disconnecting Google alone does not delete it; deleting the state folder does.</td></tr>
-		<tr><td>Encryption key and key identifier</td><td>Needed to read protected credentials and sessions. fishcut does not automatically replace or delete keys. Deleting the state folder removes the database identifier but leaves the key in the OS credential store.</td></tr>
+		<tr><td>Policy-acceptance revision and time</td><td>Kept in the state folder and updated when you accept a different revision. Accepting the same revision again does not change its original acceptance time. Deleting the state folder removes it.</td></tr>
 	</tbody>
 </table>
 <p>Existing connections without a verification timestamp are not assigned a new retention period automatically. Automatic cleanup stops; a separate verification records the actual time only after Google confirms the same channel.</p>
-<p>Existing plaintext or unreadable protected state described in section 7 also stops credential use and retention maintenance. Protection errors or encryption conversion do not reset retention timestamps. This stop does not constitute an approved exception to deletion deadlines.</p>
-<p><strong>Operating conditions:</strong> Google checks and disk deletion cannot run while the editor is stopped or the computer is powered off or asleep. Retention is checked first on restart. Without a network connection, Google checks and revocation requests cannot complete. Because of these limits, the current local operating model does not guarantee calendar-day deletion deadlines across offline periods.</p>
+<p><strong>Operating conditions:</strong> Google checks and disk deletion cannot run while fishcut is stopped or the computer is powered off or asleep. Retention is checked first on restart. Without a network connection, Google checks and revocation requests cannot complete. Because of these limits, the current local way of running does not guarantee calendar-based deletion deadlines that include offline periods.</p>
 
 <h2 id="delete">9. Deletion and revoking access</h2>
 <ul>
-	<li>Disconnecting YouTube or deleting a connected profile in channel management first disables the connection and immediately requests Google token revocation. Other local profiles using the same YouTube channel or token are also disabled. Any upload in progress must finish before withdrawal can proceed.</li>
-	<li>A failed Google revocation request is not shown as success. The screen shows revocation pending and offers a retry; automatic retries also run while the editor is open. Google revocation and local deletion are distinct.</li>
+	<li>Disconnecting YouTube or deleting a connected profile in channel management first disables the connection and immediately requests Google token revocation. Other local profiles using the same YouTube channel or token are also disabled. Any upload in progress must first have its completion status confirmed.</li>
+	<li>A failed Google revocation request is not shown as success. The screen shows revocation pending and offers a retry; automatic retries also run while the editor is open. Google revocation and local information deletion are kept separate.</li>
 	<li>Withdrawal deletes related API results, upload session URLs and duplicate-upload fingerprints locally. User-written text, plans, drafts and project files are preserved.</li>
-	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. While running, the editor checks the connection periodically and deletes that connection and related API records when Google explicitly reports an invalid token. Network failures or incorrect configuration alone are not treated as withdrawal.</li>
-	<li>Deleting the state folder is a local deletion; it does not send a revocation request to Google or remove the key in the OS credential store. To remove Google's grant too, use the permissions page above.</li>
+	<li>You can also revoke access on the <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google Account permissions</a> page. While running, the editor checks the connection periodically, and if Google explicitly reports the token as invalid, it deletes that connection and its related API records. It does not assume access was revoked just because of a network failure or a wrong setting.</li>
+	<li>Deleting the state folder is a local deletion; it does not send a revocation request to Google or remove the tokens in the Keychain. To remove Google's grant too, use the permissions page above.</li>
 	<li>Local deletion or revoking app access does not delete videos already uploaded to YouTube. YouTube manages its own videos and data.</li>
-	<li>Disconnecting an Instagram or TikTok channel, or deleting its profile, in channel management immediately deletes that connection and its tokens from this computer. fishcut does not ask Meta or TikTok to revoke the app's access when you do this.</li>
-	<li>To end the app's access on the service itself, remove it in Facebook's <a href="https://www.facebook.com/settings?tab=business_tools" target="_blank" rel="noopener">Business Integrations</a> settings (this ends access to your Pages and Instagram account) or in the app permission settings of your TikTok account.</li>
-	<li>Data deletion instructions for Facebook and Instagram: NomaDamas does not hold a copy of the information that fishcut receives from Meta, so there is nothing to delete on the NomaDamas side. To delete what fishcut holds, disconnect the channel as described above or delete the fishcut state folder, and remove the app in Business Integrations to end its access. For questions, write to the address in section 15.</li>
+	<li>Disconnecting a TikTok channel in channel management deletes its tokens from the Keychain, asks TikTok to revoke the token, and stops reading TikTok metrics. That channel's publishing records and metrics are kept separately on this computer for the 30 days in section 8, then deleted. To remove kept data right away, delete the fishcut state folder. To end access on TikTok itself, remove fishcut in <a href="https://www.tiktok.com/setting" target="_blank" rel="noopener">TikTok settings</a>, or in the TikTok app under Settings, Security, Manage app permissions.</li>
+	<li>Disconnecting an Instagram channel in channel management deletes its tokens from the Keychain and stops reading metrics. fishcut does not ask Meta to revoke the app's permission, so to end the app's access on the service itself, remove it in Facebook's <a href="https://www.facebook.com/settings?tab=business_tools" target="_blank" rel="noopener">Business Integrations</a> settings (access to the Page and the Instagram account ends).</li>
+	<li>Data deletion instructions for Facebook and Instagram: the operator does not hold a copy of the information that fishcut receives from Meta, so there is nothing to delete on the operator's side. To delete what fishcut holds, disconnect the channel or delete the fishcut state folder as described above, and remove the app in Business Integrations to end its access. Send questions to the address in section 15.</li>
 	<li>Deleting local information does not delete reels already posted to Instagram, or drafts and posts on TikTok. Those are managed by the services.</li>
 	<li>Automatic processing is subject to section 8's operating conditions. fishcut does not guarantee secure erasure of OS backups, snapshots or state-folder copies you made separately.</li>
 </ul>
@@ -171,7 +189,7 @@
 <p lang="en">fishcut's use and transfer to any other app of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements.</p>
 <ul>
 	<li>fishcut uses Google user data only for the features in section 5 above.</li>
-	<li>NomaDamas does not receive Google user data, so no one at NomaDamas reads it.</li>
+	<li>The operator does not receive Google user data, so the operator does not read it.</li>
 	<li>fishcut does not use Google user data to train AI or machine learning models, and it does not sell Google user data or use it for advertising.</li>
 </ul>
 
@@ -185,4 +203,4 @@
 <p>When the app changes the revision it requires, acceptance is required again. Changing only this webpage's last-updated date does not automatically change the app's acceptance revision. New data uses or purposes must be introduced only after the necessary advance notices and consent process are in place.</p>
 
 <h2 id="contact">15. Contact</h2>
-<p>Send questions or complaints about how personal information is handled to <a href="mailto:hello@aidenahn.com">hello@aidenahn.com</a>. Operator: 에이든 (Aiden), sole proprietor (NomaDamas).</p>
+<p>Send questions or complaints about how personal information is handled to <a href="mailto:hello@aidenahn.com">hello@aidenahn.com</a>. Operator: 에이든 (Aiden), sole proprietor (Seungwon Ahn, NomaDamas). Business details are on the <a href="https://www.aidenahn.com/business" target="_blank" rel="noopener">operator page</a>.</p>

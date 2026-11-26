@@ -1975,6 +1975,40 @@ h2:has(.key) {
   line-height: 1.68;
 }
 
+/* The product section: the current app screen under the four cards */
+.app-shot {
+  max-width: 920px;
+  margin: clamp(32px, 4vw, 48px) auto 0;
+}
+
+.app-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+
+.app-shot figcaption {
+  margin-top: 14px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.publish-more {
+  margin-top: 28px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+.publish-more a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* shares the bottom line of the cells above it */
 .limited {
   display: grid;

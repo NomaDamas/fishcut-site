@@ -1,6 +1,6 @@
 <h1>업로드 동작 설명</h1>
-<p class="lede">fishcut이 YouTube에 연결하고 영상을 올리는 과정, 저장하는 데이터, 권한을 취소하는 방법입니다. Google 검증 담당자와 처음 연결하는 사용자를 위해 한 페이지에 모았습니다.</p>
-<p class="meta">갱신일 <time datetime="2026-10-28">2026-10-28</time></p>
+<p class="lede">fishcut이 YouTube, TikTok, Instagram에 연결하고 영상을 올리는 과정, 올린 영상의 지표를 읽는 방법, 저장하는 데이터, 권한을 취소하는 방법입니다. 플랫폼 검증 담당자와 처음 연결하는 사용자를 위해 한 페이지에 모았습니다.</p>
+<p class="meta">갱신일 <time datetime="2026-11-27">2026-11-27</time></p>
 
 <nav class="toc" aria-label="이 페이지의 목차">
 	<ol>
@@ -10,12 +10,13 @@
 		<li><a href="#data">저장하는 데이터</a></li>
 		<li><a href="#revoke">권한 취소와 삭제</a></li>
 		<li><a href="#quota">업로드 한도</a></li>
+		<li><a href="#tiktok">TikTok과 Instagram 연결과 지표</a></li>
 	</ol>
 </nav>
 
 <h2 id="architecture">1. 구조</h2>
-<p>fishcut 에디터는 사용자의 컴퓨터에서 실행되는 로컬 웹 앱입니다. 브라우저는 이 컴퓨터의 주소(<code>127.0.0.1</code>)로 에디터를 열고, 에디터는 Google 계정 연결과 YouTube 업로드 요청을 Google로 바로 보냅니다. 중간에 NomaDamas 서버가 없어서 NomaDamas는 토큰, 채널 정보, 영상을 받지 않습니다.</p>
-<div class="diagram" role="img" aria-label="구조도: Claude Code나 Codex는 MCP로, 사람은 브라우저로 이 컴퓨터의 fishcut 에디터를 씁니다. 에디터는 Google OAuth와 YouTube Data API로 바로 요청합니다. 중간 서버는 없습니다.">
+<p>fishcut 에디터는 사용자의 컴퓨터에서 실행되는 데스크톱 앱입니다. 화면과 명령줄(CLI)은 이 컴퓨터의 주소(<code>127.0.0.1</code>)에서 도는 데몬 하나를 함께 씁니다. 에디터는 Google 계정 연결과 YouTube 업로드 요청을 Google로 바로 보냅니다. 아래 구조도는 YouTube 연결을 보여 줍니다. YouTube 연결과 업로드에는 중간 서버가 없어서 운영자는 YouTube 토큰, 채널 정보, 영상을 받지 않습니다. TikTok과 Instagram 연결은 7절에서 설명합니다.</p>
+<div class="diagram" role="img" aria-label="구조도: Claude Code나 Codex는 명령줄(CLI)로, 사람은 데스크톱 앱 화면으로 이 컴퓨터의 fishcut 에디터를 씁니다. 에디터는 Google OAuth와 YouTube Data API로 바로 요청합니다. YouTube 연결에는 중간 서버가 없습니다.">
 	<svg viewBox="0 0 760 330" width="760" height="330" xmlns="http://www.w3.org/2000/svg" font-size="13" fill="none" stroke="currentColor">
 		<defs>
 			<marker id="hiw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -50,7 +51,7 @@
 		</g>
 		<g class="edge">
 			<path d="M200 76 C 245 76, 250 130, 283 138" marker-end="url(#hiw-arrow)" />
-			<text x="214" y="66" fill="currentColor" stroke="none" opacity=".75">MCP</text>
+			<text x="214" y="66" fill="currentColor" stroke="none" opacity=".75">CLI</text>
 			<path d="M200 236 C 245 236, 250 186, 283 176" marker-end="url(#hiw-arrow)" />
 			<text x="206" y="264" fill="currentColor" stroke="none" opacity=".75">화면, 승인</text>
 			<path d="M485 138 C 520 130, 525 76, 563 76" marker-end="url(#hiw-arrow)" />
@@ -60,7 +61,7 @@
 		</g>
 		<g class="nobox" opacity=".75">
 			<rect x="285" y="262" width="200" height="44" rx="12" stroke-dasharray="5 5" />
-			<text x="385" y="289" text-anchor="middle" fill="currentColor" stroke="none">NomaDamas 서버: 없음</text>
+			<text x="385" y="289" text-anchor="middle" fill="currentColor" stroke="none">중간 서버: 없음</text>
 		</g>
 	</svg>
 </div>
@@ -110,16 +111,15 @@
 	</thead>
 	<tbody>
 		<tr><td><code>youtube.upload</code></td><td>사람이 확인한 최종 영상을 사람이 정한 설정으로 연결한 채널에 올릴 때</td><td>사람의 확인 없는 업로드, 다른 채널의 영상 변경</td></tr>
-		<tr><td><code>youtube.readonly</code></td><td>업로드할 채널의 이름과 ID 표시, 예약 업로드 뒤 공개 상태와 예약 시각 확인</td><td>시청 기록, 구독 목록, 분석 데이터 수집</td></tr>
+		<tr><td><code>youtube.readonly</code></td><td>업로드할 채널의 이름과 ID 표시, 예약 업로드 뒤 공개 상태와 예약 시각 확인</td><td>시청 기록, 구독 목록 수집</td></tr>
+		<tr><td><code>yt-analytics.readonly</code></td><td>연결한 채널 자신의 영상 지표(조회수, 평균 시청, 시청 유지율, 노출 수)를 지표 화면에 보여 줄 때</td><td>다른 채널의 데이터 수집, 광고, 판매</td></tr>
 	</tbody>
 </table>
 <p>fishcut이 Google API에서 받은 정보를 사용하고 다른 앱으로 보내는 방식은 제한적 사용 요구사항을 포함한 <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API 서비스 사용자 데이터 정책</a>을 따릅니다.</p>
 <p lang="en">fishcut's use and transfer to any other app of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements.</p>
 
 <h2 id="data">4. 저장하는 데이터</h2>
-<p>접근 토큰은 요청 처리 중 메모리에서만 씁니다. 갱신 토큰 등 게시 인증 정보와 재개용 업로드 세션 URL/전송 위치는 상태 폴더의 SQLite DB에 AES-256-GCM으로 암호화해 저장합니다. 키는 OS 자격 증명 저장소에 별도로 두고 DB에는 임의 키 식별자만 둡니다. macOS에서는 Keychain을 쓰며, Linux는 사용할 수 있는 Secret Service가 필요합니다.</p>
-<p>폴더와 파일 권한(0700, 0600)은 암호화와 별개입니다. 채널 정보, 업로드 기록, 사용자 작성 자료, 프로젝트와 OAuth 클라이언트 파일 전체를 암호화하는 기능은 아닙니다. Docker의 <code>state</code> 볼륨만으로는 키 저장소가 제공되지 않습니다. 키가 없거나 잠겼거나 데이터가 손상되면 새 키로 바꾸거나 연결을 지우지 않고 중단합니다.</p>
-<p>기존 평문 상태는 재시작만으로 변환하지 않습니다. 모든 편집기와 게시기를 멈춘 뒤 대상 상태와 OS 키 사용을 사람이 별도로 승인한 오프라인 보호 명령으로 변환해야 합니다. 연결, 확인 시각, 업로드 기록과 작성 자료를 보존하며, Google에 재연결하거나 권한을 취소하는 작업은 아닙니다. DB 잔여 페이지 정리가 실패하면 편집기를 멈춘 상태로 원인을 확인합니다. 이전 복제본과 백업의 평문까지 지운다고 보장하지 않습니다.</p>
+<p>Google, TikTok, Instagram 토큰과 앱 비밀은 macOS Keychain에 저장하고 상태 폴더의 파일에는 두지 않습니다. 상태 폴더와 그 파일은 fishcut을 실행한 사용자만 읽고 쓸 수 있는 권한(0700, 0600)으로 만듭니다. 채널 정보, 업로드 기록, 지표, 사용자 작성 자료, 프로젝트와 OAuth 클라이언트 파일은 상태 폴더와 작업 폴더의 파일로 저장하며 따로 암호화하지 않습니다.</p>
 <table>
 	<thead>
 		<tr><th scope="col">데이터</th><th scope="col">쓰는 곳</th><th scope="col">보관과 삭제</th></tr>
@@ -130,11 +130,13 @@
 		<tr><td>업로드 기록, 세션 URL과 중복 전송 확인용 해시</td><td>업로드 결과 확인과 중복 전송 방지</td><td>생성부터 30일이 지나면 유지보수 시 함께 삭제합니다. 편집기에서 연결을 철회하면 관련 기록을 즉시 로컬에서 삭제합니다.</td></tr>
 		<tr><td>업로드 설정(제목, 설명, 태그, 공개 범위 등)</td><td>사용자가 입력한 값을 다음 업로드에 다시 쓰기</td><td>사용자가 바꾸거나 지울 때까지 보관합니다.</td></tr>
 		<tr><td>OAuth 클라이언트 파일</td><td>Google 연결</td><td>사용자가 바꾸거나 지울 때까지 보관합니다.</td></tr>
-		<tr><td>방침 동의 버전과 시각, 키 식별자</td><td>사람의 동의 확인과 암호화 키 연결</td><td>로컬 게시 상태에 보관합니다. 다른 버전에 다시 동의하면 동의 기록을 갱신합니다. 키를 자동 교체하거나 삭제하지 않으며, 상태 폴더 삭제도 OS 키를 지우지는 않습니다.</td></tr>
+		<tr><td>TikTok과 Instagram 토큰</td><td>업로드와 지표 읽기 요청 인증</td><td>연결을 해제하면 Keychain에서 바로 지웁니다.</td></tr>
+		<tr><td>TikTok과 Instagram의 게시 기록과 지표</td><td>지표 화면</td><td>연결하는 동안 사용자가 지울 때까지 보관합니다. 연결을 해제하면 30일 동안만 따로 보관한 뒤 지웁니다.</td></tr>
+		<tr><td>방침 동의 버전과 시각</td><td>사람의 동의 확인</td><td>로컬 게시 상태에 보관합니다. 다른 버전에 다시 동의하면 동의 기록을 갱신합니다.</td></tr>
 	</tbody>
 </table>
 <aside class="note">
-	<p>편집기 종료, 컴퓨터 종료나 절전 중에는 Google 확인과 디스크 삭제가 실행되지 않습니다. 기존 평문이나 읽을 수 없는 암호화 상태가 있으면 인증 정보 사용과 보관기한 정리도 중단합니다. 암호화와 별도 동의가 추가됐어도 오프라인 기간의 달력 기준 삭제 기한과 백업 삭제를 보장하지 않습니다. 이 설명은 Google의 준법 승인이 아닙니다. 자세한 기준은 <a href="{{home}}privacy/#retention">개인정보처리방침의 보관 기간</a>에 있습니다.</p>
+	<p>편집기 종료, 컴퓨터 종료나 절전 중에는 Google 확인과 디스크 삭제가 실행되지 않습니다. 오프라인 기간의 달력 기준 삭제 기한과 백업 삭제를 보장하지 않습니다. 이 설명은 Google의 준법 승인이 아닙니다. 자세한 기준은 <a href="{{home}}privacy/#retention">개인정보처리방침의 보관 기간</a>에 있습니다.</p>
 </aside>
 
 <h2 id="revoke">5. 권한 취소와 삭제</h2>
@@ -146,3 +148,24 @@
 
 <h2 id="quota">6. 업로드 한도</h2>
 <p>YouTube Data API의 <code>videos.insert</code> 업로드 한도는 사용하는 Google Cloud 프로젝트에 적용됩니다. 실제 한도는 그 프로젝트의 할당량 화면에서 확인해야 합니다. fishcut의 증액 요청 제출은 승인이나 적용 완료를 뜻하지 않으며, 이 페이지는 하루 업로드 가능 횟수를 보장하지 않습니다.</p>
+
+<h2 id="tiktok">7. TikTok과 Instagram 연결과 지표</h2>
+<p>YouTube 외에 TikTok과 Instagram 계정도 연결할 수 있습니다. 이 연결은 선택입니다. 처리 방식의 전체 설명은 <a href="{{home}}privacy/#meta-tiktok">개인정보처리방침의 3절</a>에 있고, 여기서는 흐름만 설명합니다.</p>
+<ol class="steps">
+	<li>
+		<h3>계정 연결</h3>
+		<p>채널 관리에서 TikTok이나 Instagram 연결을 누르면 시스템 기본 브라우저에서 그 서비스의 동의 화면이 열리고, 계정 소유자가 직접 권한을 허용합니다. fishcut은 로그인과 동의를 대신 누르지 않습니다. 로그인 결과는 이 컴퓨터의 일회용 주소(<code>127.0.0.1</code>)로 돌아옵니다. 앱 비밀이 필요한 코드 교환은 운영자가 운영하는 인증 중계 서버(<code>auth.fishcut.aidenahn.com</code>)가 하며, 이 서버는 토큰을 저장하지 않습니다. 토큰은 이 컴퓨터의 macOS Keychain에만 저장됩니다.</p>
+	</li>
+	<li>
+		<h3>검토와 업로드</h3>
+		<p>검토 화면에서 영상, 대상 계정, 공개 범위를 확인하고 사람이 승인해야 영상을 보냅니다. 영상은 이 컴퓨터에서 서비스로 바로 갑니다. TikTok은 기본으로 받은편지함에 초안을 보내고, 사용자가 TikTok 앱에서 캡션과 공개 범위를 정해 게시합니다. 연결할 때 바로 게시를 따로 켠 경우에만 사용자가 고른 공개 범위로 프로필에 게시합니다.</p>
+	</li>
+	<li>
+		<h3>지표 읽기</h3>
+		<p>지표 화면은 올린 영상이 어떤 성과를 냈는지 보여 줍니다. fishcut이 실행 중이면 6시간마다, 동기화 버튼을 누르면 바로 읽습니다. TikTok은 연결한 계정 자신의 프로필 지표(팔로워 수, 팔로잉 수, 전체 좋아요 수, 영상 수)와 영상 지표(조회수, 좋아요, 댓글, 공유)를 TikTok API로 읽습니다. 계정 소유자가 TikTok API for Business(Accounts API) 접근을 승인한 경우에는 평균 시청 시간, 완주율, 유입 경로 같은 영상 인사이트도 읽습니다. 읽은 값은 이 컴퓨터에만 저장하고 지표 화면에서 계정 소유자에게 보여 주는 데만 씁니다. 판매, 제3자 공유, 사용자 간 결합, 크리에이터 탐색, 순위, 광고에 쓰지 않습니다.</p>
+	</li>
+	<li>
+		<h3>연결 해제와 권한 취소</h3>
+		<p>채널 관리에서 연결을 해제하면 토큰을 Keychain에서 지우고 지표 읽기를 멈춥니다. TikTok은 토큰 폐기도 요청합니다. 그 계정의 게시 기록과 지표는 30일 동안만 이 컴퓨터에 따로 보관한 뒤 지웁니다. TikTok에서 직접 끝내려면 <a href="https://www.tiktok.com/setting" target="_blank" rel="noopener">TikTok 설정</a>이나 TikTok 앱의 설정, 보안, 앱 권한 관리에서 fishcut을 제거합니다. Instagram은 Facebook의 <a href="https://www.facebook.com/settings?tab=business_tools" target="_blank" rel="noopener">비즈니스 통합</a> 설정에서 앱을 제거합니다.</p>
+	</li>
+</ol>
